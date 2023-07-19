@@ -1,9 +1,9 @@
-import React from 'react';
 import { Link } from "react-router-dom";
+import styles from './Nav.module.css'
 
 function Nav() {
     return (
-        <div>
+        <div className={styles.nav}>
             <Link to="/">Home</Link>
             <Link to="recipes">Recipes</Link>
         </div>

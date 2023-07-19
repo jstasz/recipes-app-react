@@ -1,5 +1,4 @@
-import React from "react";
-import AboutApp from "../components/About-app";
+import AboutApp from "../components/AboutApp";
 
 function HomePage() {
     return (
