@@ -1,0 +1,74 @@
+# General files and directories
+node_modules/
+build/
+dist/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# macOS
+.DS_Store
+
+# VSC
+.vscode/
+*.code-workspace
+
+# VSC Generated files
+/.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-snippets
+
+# Cache and local VSC data
+.vscode/*
+.history/
+
+# Yarn cache 
+.yarn/cache
+
+# Yarn v2 state
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+
+# Pnpm-store
+pnpm-lock.yaml
+.pnpm
+
+# Configuration files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Temporary files
+*.tmp
+
+# Test coverage directory
+coverage/
+
+# Configuration files (IntelliJ, RubyMine, etc.)
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# Yarn package manager directory
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+
+# Npm debug log directory
+npm-debug.log*
+
+# Production files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
