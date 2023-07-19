@@ -1,18 +1,12 @@
-import Button from './Button';
+import { ReactNode } from 'react';
 import styles from './HeroImage.module.css';
 
-const HeroImage = () => {
+const HeroImage: React.FC<{children: ReactNode}> = (props) => {
     return (
         <>
             <div className={styles['image-box']}>
 				<div className={styles['image-content']}>
-					<h1>Recipes App</h1>
-					<p>get inspired with our</p>
-                    <Button>Recipes List</Button>
-                    <p>or</p>
-                    <Button>Login</Button>
-					<p>to add your own recipes</p>
-					<p>and create a shopping list</p>
+					{props.children}
 				</div>
 				<div className={styles['image-bg']}></div>	
 			</div>

@@ -1,9 +1,9 @@
-import HeroImage from "../components/HeroImage";
+import MainPage from '../components/MainPage'
 
 function HomePage() {
     return (
         <>
-         <HeroImage />
+         <MainPage />
         </> 
     );
 };
