@@ -1,8 +1,10 @@
-import AboutApp from "../components/AboutApp";
+import MainPage from '../components/MainPage'
 
 function HomePage() {
     return (
-        <AboutApp />
+        <>
+         <MainPage />
+        </> 
     );
 };
 
