@@ -1,8 +1,10 @@
-import AboutApp from "../components/AboutApp";
+import HeroImage from "../components/HeroImage";
 
 function HomePage() {
     return (
-        <AboutApp />
+        <>
+         <HeroImage />
+        </> 
     );
 };
 

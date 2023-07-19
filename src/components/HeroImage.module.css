@@ -1,0 +1,54 @@
+.image-box {
+    height: 100vh;
+    width: 100vw;
+    background-image: url(https://asianinspirations.com.au/wp-content/uploads/2019/07/Chinese-Cooking-Hacks.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    position: absolute;
+    top: 0;
+    z-index: -10;
+}
+
+.image-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 10px;
+    color: white;
+    font-size: 1.8rem;
+}
+
+.image-content h1 {
+    color:  rgb(169, 169, 255);
+    padding: 1em 0;
+    margin-bottom: 1em;
+}
+
+.image-bg {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.87);
+}
+
+@media (min-width: 576px) {
+    .image-content {
+        font-size: 2rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    .image-content {
+        font-size: 2.5rem;
+    }
+}
