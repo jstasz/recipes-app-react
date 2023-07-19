@@ -1,11 +1,17 @@
-import { Link } from "react-router-dom";
+import { NavLink} from "react-router-dom";
 import styles from './Nav.module.css'
 
-function Nav() {
+const Nav: React.FC = () => {
+
+    const navLinkClasses = `material-symbols-outlined ${styles['nav-link']}`
+
     return (
         <div className={styles.nav}>
-            <Link to="/">Home</Link>
-            <Link to="recipes">Recipes</Link>
+            <div className={styles['nav-links']}>
+                <NavLink to="/" className={({isActive}) => isActive ? `${navLinkClasses} ${styles.active}` :    navLinkClasses} end>home</NavLink>
+                <NavLink to="recipes" className={({isActive}) => isActive ? `${navLinkClasses} ${styles.active}` :    navLinkClasses}>ramen_dining</NavLink>
+                <NavLink to="/auth" className={({isActive}) => isActive ? `${navLinkClasses} ${styles.active}` :    navLinkClasses}>account_circle</NavLink>
+            </div>
         </div>
     );
 };

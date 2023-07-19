@@ -1,0 +1,46 @@
+.nav {
+    padding: 1.2em;
+    background-color: rgb(35, 35, 35);
+}
+
+.nav-links {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: white;
+}
+
+.nav-link.active {
+    color: rgb(169, 169, 255);
+}
+
+@media (min-width: 576px) {
+    .nav-links {
+        margin: 0 auto;
+        width: 80%;
+    }
+}
+
+@media (min-width: 768px) {
+    .nav-links {
+        width: 70%;
+    }
+
+    .nav-link {
+        font-size: 2.7rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    .nav-links {
+        width: 50%;
+    }
+
+    .nav-link {
+        font-size: 3rem;
+    }
+}
