@@ -1,23 +1,16 @@
-import { Link } from "react-router-dom";
-import HamburgerButton from "./Hamburger";
-import { useState } from "react";
+import { NavLink} from "react-router-dom";
 import styles from './Nav.module.css'
 
 const Nav: React.FC = () => {
-    const [activeMenu, setActiveMenu] = useState(false);
 
-    const toggleMenuHandler = () => {
-        setActiveMenu((prevState) => !prevState);
-    };
+    const navLinkClasses = `material-symbols-outlined ${styles['nav-link']}`
 
     return (
-        <div className={`${styles.nav} ${activeMenu && styles['active']}`}>
-            <div className={styles.hamburger}>
-                <HamburgerButton activeMenu={activeMenu} onActiveHamburger={toggleMenuHandler}/>
-            </div>
+        <div className={styles.nav}>
             <div className={styles['nav-links']}>
-                <Link to="/" className={styles['nav-link']}>Home</Link>
-                <Link to="recipes" className={styles['nav-link']}>Recipes</Link>
+                <NavLink to="/" className={({isActive}) => isActive ? `${navLinkClasses} ${styles.active}` :    navLinkClasses} end>home</NavLink>
+                <NavLink to="recipes" className={({isActive}) => isActive ? `${navLinkClasses} ${styles.active}` :    navLinkClasses}>ramen_dining</NavLink>
+                <NavLink to="/auth" className={({isActive}) => isActive ? `${navLinkClasses} ${styles.active}` :    navLinkClasses}>account_circle</NavLink>
             </div>
         </div>
     );
