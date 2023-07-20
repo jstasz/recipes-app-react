@@ -31,10 +31,18 @@ function RecipesList() {
 	        const data = await response.json();
             const loadedRecipes = [];
 
-            console.log(data)
-
 
             for(const key in data.results) {
+
+                const ingredientsList: string[] = [];
+
+                const ingredientsComponent = data.results[key].sections[0].components
+                console.log(ingredientsComponent)
+                ingredientsComponent.forEach((el: {raw_text: string}) => {
+                    const ingredient = el.raw_text;
+                    ingredientsList.push(ingredient)
+                })
+
                 loadedRecipes.push({
                     id: data.results[key].id,
                     name: data.results[key].name,
@@ -43,7 +51,7 @@ function RecipesList() {
                     prepTime: data.results[key].cook_time_minutes,
                     imageUrl: data.results[key].thumbnail_url,
                     yields: data.results[key].num_servings,
-                    ingredients: data.results[key].sections[0].components
+                    ingredients: ingredientsList
                 })
             };
 
