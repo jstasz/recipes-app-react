@@ -1,10 +1,10 @@
 import { ReactNode } from 'react';
 import styles from './HeroImage.module.css';
 
-const HeroImage: React.FC<{children: ReactNode}> = (props) => {
+const HeroImage: React.FC<{children: ReactNode, imageUrl: string}> = (props) => {
     return (
         <>
-            <div className={styles['image-box']}>
+            <div className={styles['image-box']} style={{backgroundImage: `url(${props.imageUrl})`}}>
 				<div className={styles['image-content']}>
 					{props.children}
 				</div>

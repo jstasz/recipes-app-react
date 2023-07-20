@@ -10,7 +10,7 @@ const MainPage = () => {
     };
 
     return (
-        <HeroImage>
+        <HeroImage imageUrl="https://asianinspirations.com.au/wp-content/uploads/2019/07/Chinese-Cooking-Hacks.jpg">
             <h1>Recipes App</h1>
             <p>get inspired with our</p>
             <Button onNavigate={() => navigateToPathHandler('/recipes')}>Recipes List</Button>
