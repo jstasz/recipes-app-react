@@ -1,11 +1,12 @@
 interface Recipe {
-    id: string,
+    id: number,
     name: string,
     description: string,
-    instruction: [],
+    instruction: string,
     prepTime: number,
     imageUrl: string,
     yields: string,
+    ingredients: string[]
 };
 
 export default Recipe;
