@@ -1,8 +1,8 @@
-import Recipes from "../components/Recipes";
+import RecipesList from "../components/RecipesList";
 
 function RecipesPage() {
     return (
-        <Recipes />
+        <RecipesList />
     );
 };
 
