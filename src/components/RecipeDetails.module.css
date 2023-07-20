@@ -5,8 +5,15 @@
     height: 400px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    background-color: rgb(1, 1, 1);
+    padding: 1em;
 }
 
 .add-to-list {
     font-size: 1.3rem;
+}
+
+.button-new {
+    font-size: 1.8rem;
+    margin-top: 5em;
 }
