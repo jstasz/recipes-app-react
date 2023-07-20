@@ -1,0 +1,33 @@
+.recipe {
+    margin: 1em;
+    overflow: hidden;
+    cursor: pointer;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+    width: 200px;
+    height: 200px;
+    position: relative;
+}
+
+.recipe-img {
+    width: 100%;
+    height: 100%;
+    background-size: 225% 150%;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: brightness(0.7);
+}
+
+.recipe-name {
+    background-color: rgba(5, 5, 5, 0.8);
+    font-size: 1.5rem;
+    position: absolute;
+    bottom: 5%;
+    width: 100%;
+    padding: 0.5em;
+    height: auto;
+}
+
+.recipe:hover .recipe-img {
+    filter: brightness(0.2);
+} 

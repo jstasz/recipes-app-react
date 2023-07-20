@@ -63,23 +63,29 @@ function RecipesList() {
     
     return (
         <div>
+        <div className={styles.wrapper}>
             {error && <p>{error}</p>}
             {isLoadingData && <p>loading...</p>}
-            {!isLoadingData && <ul className={styles.list}>
-            {recipes.map(recipe => {
-                return <RecipeItem 
-                            key={recipe.id} 
-                            id={recipe.id} 
-                            name={recipe.name} 
-                            description={recipe.description} 
-                            instruction={recipe.instruction} 
-                            prepTime={recipe.prepTime}
-                            imageUrl={recipe.imageUrl}
-                            yields={recipe.yields}
-                        />
-                    }
-                )}
-            </ul>}
+            {!isLoadingData && 
+            
+            <div className={styles.recipes}>
+                <p className={styles.icon}><span className="material-symbols-outlined">arrow_back_ios</span></p>
+                <ul className={styles['recipes-list']}>
+                {recipes.map(recipe => {
+                    return <RecipeItem 
+                                key={recipe.id} 
+                                id={recipe.id} 
+                                name={recipe.name}  
+                                prepTime={recipe.prepTime}
+                                imageUrl={recipe.imageUrl}
+                                yields={recipe.yields}
+                            />
+                        }
+                    )}
+                </ul>
+                <p className={styles.icon}><span className="material-symbols-outlined">arrow_forward_ios</span></p>
+            </div>}
+        </div>
         </div>
     );
 

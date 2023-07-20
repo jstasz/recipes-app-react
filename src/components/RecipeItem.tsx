@@ -1,15 +1,19 @@
-const RecipeItem: React.FC<{id: string, name: string, description: string, instruction: [], prepTime: number, yields: string, imageUrl: string}> = (props) => {
+import styles from './RecipeItem.module.css';
+
+const RecipeItem: React.FC<{
+        id: string, 
+        name: string, 
+        prepTime: number, 
+        yields: string, 
+        imageUrl: string}> = (props) => {
     return (
-        <li key={props.id}>
-            <p>{props.id}</p>
-            <p>{props.name}</p>
-            <p>{props.description}</p>
-            <p>{props.instruction}</p>
-            <p>{props.prepTime}</p>
-            <p>{props.yields}</p>
-            <img src={props.imageUrl} alt={`${props.name}`}></img>
+        <li key={props.id} className={styles.recipe}>
+            <div className={styles['recipe-img']} style={{backgroundImage: `url(${props.imageUrl})`}}></div>
+            <div className={styles['recipe-name']}>
+                <p>{props.name.length > 20 ? `${props.name.slice(0, 20)}...` : props.name}</p>
+            </div>
         </li>
     )
-};
+}
 
 export default RecipeItem;
