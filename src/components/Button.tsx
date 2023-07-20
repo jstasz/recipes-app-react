@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import styles from './Button.module.css';
 
-const Button: React.FC<{children: ReactNode, onNavigate?: () => void}> = (props) => {
+const Button: React.FC<{children: ReactNode, className?: string; onNavigate?: () => void}> = (props) => {
 
     const navigateHandler = () => {
         if(props.onNavigate) {
@@ -10,7 +10,7 @@ const Button: React.FC<{children: ReactNode, onNavigate?: () => void}> = (props)
     };
 
     return (
-        <button className={styles.button} onClick={navigateHandler}>
+        <button className={`${styles.button} ${props.className}`} onClick={navigateHandler}>
             {props.children}
         </button>
     );
