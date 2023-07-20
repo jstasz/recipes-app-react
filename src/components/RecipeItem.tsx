@@ -6,6 +6,7 @@ const RecipeItem: React.FC<{
         prepTime: number, 
         yields: string, 
         imageUrl: string}> = (props) => {
+
     return (
         <li key={props.id} className={styles.recipe}>
             <div className={styles['recipe-img']} style={{backgroundImage: `url(${props.imageUrl})`}}></div>
