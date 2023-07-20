@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import styles from './RecipesList.module.css'
 import Recipe from "../models/recipe";
+import RecipeItem from "./RecipeItem";
 
 function RecipesList() {
     const [recipes, setRecipes] = useState<Recipe[]>([]);
@@ -29,7 +30,6 @@ function RecipesList() {
 
 	        const data = await response.json();
             const loadedRecipes = [];
-            console.log(data.results)
 
             for(const key in data.results) {
                 loadedRecipes.push({
@@ -38,7 +38,7 @@ function RecipesList() {
                     description: data.results[key].description,
                     instruction: data.results[key].instruction,
                     prepTime: data.results[key].prep_time_minutes,
-                    image: data.results[key].thumbnail_url,
+                    imageUrl: data.results[key].thumbnail_url,
                     yields: data.results[key].yields,
                 })
             };
@@ -67,18 +67,18 @@ function RecipesList() {
             {isLoadingData && <p>loading...</p>}
             {!isLoadingData && <ul className={styles.list}>
             {recipes.map(recipe => {
-                return (
-                    <li key={recipe.id}>
-                        <p>{recipe.id}</p>
-                        <p>{recipe.name}</p>
-                        <p>{recipe.description}</p>
-                        <p>{recipe.instruction}</p>
-                        <p>{recipe.prepTime}</p>
-                        <p>{recipe.yields}</p>
-                        <img src={recipe.image} alt={`${recipe.name}`}></img>
-                    </li>
-                )
-            })}
+                return <RecipeItem 
+                            key={recipe.id} 
+                            id={recipe.id} 
+                            name={recipe.name} 
+                            description={recipe.description} 
+                            instruction={recipe.instruction} 
+                            prepTime={recipe.prepTime}
+                            imageUrl={recipe.imageUrl}
+                            yields={recipe.yields}
+                        />
+                    }
+                )}
             </ul>}
         </div>
     );

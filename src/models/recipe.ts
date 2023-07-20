@@ -4,7 +4,7 @@ interface Recipe {
     description: string,
     instruction: [],
     prepTime: number,
-    image: string,
+    imageUrl: string,
     yields: string,
 };
 
