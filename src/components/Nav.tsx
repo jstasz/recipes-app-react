@@ -17,7 +17,7 @@ const Nav: React.FC = () => {
                     className={({isActive}) => isActive ? `${navLinkClasses} ${styles.active}` : navLinkClasses}>ramen_dining
                 </NavLink>
                 <NavLink 
-                    to="/auth" 
+                    to="/auth?authMode=login" 
                     className={({isActive}) => isActive ? `${navLinkClasses} ${styles.active}` :    navLinkClasses}>account_circle
                 </NavLink>
             </div>

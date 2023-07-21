@@ -21,7 +21,7 @@ const RecipeDetails: React.FC = () => {
                     {activeRecipe?.ingredients.map(ingredient => 
                     <li key={ingredient}>{ingredient}</li>)}
                 </ul>
-                <Button className={styles['button-add']}>Add to shopping list</Button>
+                <Button type="button" className={styles['button-add']}>Add to shopping list</Button>
             </div>
             <div className={styles['recipe-img']} style={{backgroundImage: `url(${activeRecipe?.imageUrl})`}}></div>
             <div className={styles['recipe-instruction']}><p>{activeRecipe?.instruction}</p></div>
