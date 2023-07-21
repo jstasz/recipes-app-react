@@ -9,7 +9,6 @@ function RecipesList() {
     const { recipes, setRecipes }: RecipesContextType = useContext(RecipesContext);
     const { isLoadingRecipes, setIsLoadingRecipes } = useContext(RecipesContext);
 
-
     const GetRecipes = useCallback(async () => {
         setIsLoadingRecipes(true);
         setError(null);
@@ -33,7 +32,6 @@ function RecipesList() {
 	        const data = await response.json();
             const loadedRecipes = [];
 
-
             for(const key in data.results) {
 
                 const ingredientsList: string[] = [];
@@ -54,11 +52,8 @@ function RecipesList() {
                 loadedRecipes.push({
                     id: data.results[key].id,
                     name: data.results[key].name,
-                    description: data.results[key].description,
                     instruction: instructionList.join(' '),
-                    prepTime: data.results[key].cook_time_minutes,
                     imageUrl: data.results[key].thumbnail_url,
-                    yields: data.results[key].num_servings,
                     ingredients: ingredientsList
                 })
             };
@@ -95,9 +90,9 @@ function RecipesList() {
             <div className={styles.wrapper}>
                 {error && <p>{error}</p>}
                 {isLoadingRecipes && <p>loading...</p>}
-                {!isLoadingRecipes && 
+                {!isLoadingRecipes && <>
                     <div className={styles.recipes}>
-                        <p className={styles.icon} onClick={() => handleScroll('right', 215)}>
+                        <p className={styles.icon} onClick={() => handleScroll('left', 215)}>
                             <span className="material-symbols-outlined">arrow_back_ios</span>
                         </p>
                         <ul className={styles['recipes-list']} ref={scrollContainerRef}>
@@ -106,17 +101,16 @@ function RecipesList() {
                                         key={recipe.id} 
                                         id={recipe.id} 
                                         name={recipe.name}  
-                                        prepTime={recipe.prepTime}
                                         imageUrl={recipe.imageUrl}
-                                        yields={recipe.yields}
                                     />
                                 }
                             )}
                         </ul>
-                        <p className={styles.icon} onClick={() => handleScroll('left', 215)}>
+                        <p className={styles.icon} onClick={() => handleScroll('right', 215)}>
                             <span className="material-symbols-outlined">arrow_forward_ios</span>
                         </p>
                     </div>
+                    </>
                 }
             </div>
         </div>

@@ -1,3 +1,9 @@
+.wrapper {
+    margin: 2em auto;
+    width: 100%;
+    max-width: 1400px;
+}
+
 .recipes {
     display: flex;
 }
@@ -14,10 +20,4 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
-}
-
-.wrapper {
-    margin: 2em auto;
-    width: 100%;
-    max-width: 1400px;
 }

@@ -4,8 +4,6 @@ import styles from './RecipeItem.module.css';
 const RecipeItem: React.FC<{
         id: number, 
         name: string, 
-        prepTime: number, 
-        yields: string, 
         imageUrl: string}> = (props) => {
 
     const navigate = useNavigate();

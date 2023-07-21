@@ -10,14 +10,11 @@ function RecipesPage() {
 
     return (
         <RecipesProvider>
-        <HeroImage imageUrl="https://asianinspirations.com.au/wp-content/uploads/2019/07/Chinese-Cooking-Hacks.jpg">
-            <div>
-                <div></div>
+            <HeroImage imageUrl="https://asianinspirations.com.au/wp-content/uploads/2019/07/Chinese-Cooking-Hacks.jpg">
+                <RecipesList />
                 {params.mode === 'new' && <NewRecipe />}
                 {params.mode === 'details' && <RecipeDetails />}
-                <RecipesList />
-            </div>
-        </HeroImage>
+            </HeroImage>
         </RecipesProvider>
     );
 };
