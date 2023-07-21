@@ -1,8 +1,9 @@
-import Auth from "../components/Auth";
+import AuthForm from "../components/AuthForm";
+import HeroImage from "../components/HeroImage";
 
 function AuthPage() {
     return (
-        <Auth />
+            <AuthForm />
     );
 };
 
