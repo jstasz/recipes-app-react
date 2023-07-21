@@ -1,15 +1,16 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import styles from './RecipesList.module.css'
-import Recipe from "../models/recipe";
 import RecipeItem from "./RecipeItem";
+import { RecipesContext, RecipesContextType } from "./store/recipes-context";
 
 function RecipesList() {
-    const [recipes, setRecipes] = useState<Recipe[]>([]);
-    const [isLoadingData, setIsLoadingData] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
+    const { recipes, setRecipes }: RecipesContextType = useContext(RecipesContext);
+    const { isLoadingRecipes, setIsLoadingRecipes } = useContext(RecipesContext);
+
     const GetRecipes = useCallback(async () => {
-        setIsLoadingData(true);
+        setIsLoadingRecipes(true);
         setError(null);
 
         const url = 'https://tasty.p.rapidapi.com/recipes/list';
@@ -31,19 +32,29 @@ function RecipesList() {
 	        const data = await response.json();
             const loadedRecipes = [];
 
-            console.log(data)
-
-
             for(const key in data.results) {
+
+                const ingredientsList: string[] = [];
+                const ingredientsComponent = data.results[key].sections[0].components;
+                ingredientsComponent.forEach((el: {raw_text: string}) => {
+                    const ingredient = el.raw_text;
+                    ingredientsList.push(ingredient)
+                })
+
+                const instructionList: string[] = [];
+                const instructionsComponent = data.results[key].instructions;
+                console.log(instructionsComponent)
+                instructionsComponent.forEach((el: {display_text: string}) => {
+                    const instruction = el.display_text;
+                    instructionList.push(instruction);
+                })
+
                 loadedRecipes.push({
                     id: data.results[key].id,
                     name: data.results[key].name,
-                    description: data.results[key].description,
-                    instruction: data.results[key].instruction,
-                    prepTime: data.results[key].cook_time_minutes,
+                    instruction: instructionList.join(' '),
                     imageUrl: data.results[key].thumbnail_url,
-                    yields: data.results[key].num_servings,
-                    ingredients: data.results[key].sections[0].components
+                    ingredients: ingredientsList
                 })
             };
 
@@ -57,8 +68,8 @@ function RecipesList() {
             }
         }
 
-        setIsLoadingData(false);
-    }, []);
+        setIsLoadingRecipes(false);
+    }, [setIsLoadingRecipes, setRecipes]);
 
     useEffect(() => {
         GetRecipes();
@@ -78,10 +89,10 @@ function RecipesList() {
         <div>
             <div className={styles.wrapper}>
                 {error && <p>{error}</p>}
-                {isLoadingData && <p>loading...</p>}
-                {!isLoadingData && 
+                {isLoadingRecipes && <p>loading...</p>}
+                {!isLoadingRecipes && <>
                     <div className={styles.recipes}>
-                        <p className={styles.icon} onClick={() => handleScroll('right', 215)}>
+                        <p className={styles.icon} onClick={() => handleScroll('left', 215)}>
                             <span className="material-symbols-outlined">arrow_back_ios</span>
                         </p>
                         <ul className={styles['recipes-list']} ref={scrollContainerRef}>
@@ -90,17 +101,16 @@ function RecipesList() {
                                         key={recipe.id} 
                                         id={recipe.id} 
                                         name={recipe.name}  
-                                        prepTime={recipe.prepTime}
                                         imageUrl={recipe.imageUrl}
-                                        yields={recipe.yields}
                                     />
                                 }
                             )}
                         </ul>
-                        <p className={styles.icon} onClick={() => handleScroll('left', 215)}>
+                        <p className={styles.icon} onClick={() => handleScroll('right', 215)}>
                             <span className="material-symbols-outlined">arrow_forward_ios</span>
                         </p>
                     </div>
+                    </>
                 }
             </div>
         </div>

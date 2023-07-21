@@ -8,9 +8,18 @@ const Nav: React.FC = () => {
     return (
         <div className={styles.nav}>
             <div className={styles['nav-links']}>
-                <NavLink to="/" className={({isActive}) => isActive ? `${navLinkClasses} ${styles.active}` :    navLinkClasses} end>home</NavLink>
-                <NavLink to="recipes" className={({isActive}) => isActive ? `${navLinkClasses} ${styles.active}` :    navLinkClasses}>ramen_dining</NavLink>
-                <NavLink to="/auth" className={({isActive}) => isActive ? `${navLinkClasses} ${styles.active}` :    navLinkClasses}>account_circle</NavLink>
+                <NavLink 
+                    to="/" 
+                    className={({isActive}) => isActive ? `${navLinkClasses} ${styles.active}` : navLinkClasses} end>home
+                </NavLink>
+                <NavLink 
+                    to="recipes/details/0" 
+                    className={({isActive}) => isActive ? `${navLinkClasses} ${styles.active}` : navLinkClasses}>ramen_dining
+                </NavLink>
+                <NavLink 
+                    to="/auth" 
+                    className={({isActive}) => isActive ? `${navLinkClasses} ${styles.active}` :    navLinkClasses}>account_circle
+                </NavLink>
             </div>
         </div>
     );
