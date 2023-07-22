@@ -17,13 +17,18 @@ const AuthForm = () => {
 
     const { loggedUser, setLoggedUser } = useContext(AuthContext);
 
+    let errorMes = 'Something went wrong!'
+
     const signIn = () => {
         signInWithEmailAndPassword(auth, email, password)
         .then(() => {
                 setLoggedUser(email);
         }).catch((error) => {
-            if(error.message === 'Firebase: Error (auth/wrong-password).') {}
-            setErrorMessage('Wrong password! Try again!')
+            if(error.message === 'Firebase: Error (auth/wrong-password).') {
+                setErrorMessage('Wrong password! Try again!')
+            } else {
+                setErrorMessage(errorMes);
+            }
         });
     };
 
@@ -32,8 +37,11 @@ const AuthForm = () => {
         .then(() => {
             setLoggedUser(email);
         }).catch((error) => {
-            if(error.message === 'Firebase: Error (auth/email-already-in-use).')
-            setErrorMessage('User with this email already exists!')
+            if(error.message === 'Firebase: Error (auth/email-already-in-use).') {
+                setErrorMessage('User with this email already exists!')
+            } else {
+                setErrorMessage(errorMes);
+            }
         });
     };
 
