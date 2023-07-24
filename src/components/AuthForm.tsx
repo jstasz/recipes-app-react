@@ -1,4 +1,4 @@
-import { Form, Link, useSearchParams} from 'react-router-dom';
+import { Link, useSearchParams} from 'react-router-dom';
 import { auth } from '../firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { useContext, useEffect, useState } from 'react';
@@ -6,6 +6,7 @@ import { AuthContext } from './store/auth-context';
 import Button from './Button';
 import useInput from '../hooks/use-input';
 import styles from './AuthForm.module.css';
+import MainForm from './Form';
 
 const AuthForm = () => {
     const [searchParams] = useSearchParams();
@@ -97,7 +98,7 @@ const AuthForm = () => {
 
     const form = <> 
         {authError && <p className={styles['error-text']}>{authError}</p>}
-        <Form className={styles.form} onSubmit={formSubmitHandler} >
+        <MainForm className={styles.form} onSubmit={formSubmitHandler}>
             <h1>{isLoginMode ? 'Log in' : 'Create new user'}</h1>
             <p>
                 <label htmlFor="email">email</label>
@@ -125,13 +126,13 @@ const AuthForm = () => {
                 />
                  {passwordInputHasError && <p className={styles['invalid-text']}>Please enter valid password! Min 6!</p>}
             </p>
-            <div className={styles.actions}>
-              <Link to={`?authMode=${isLoginMode ? 'signup' : 'login'}`}>
+            <div className="actions">
+              <Link to={`?authMode=${isLoginMode ? 'signup' : 'login'}`} className={styles.link}>
                 {isLoginMode ? 'Create new user': 'Login'}
               </Link>
               <Button type="submit" disabled={!formIsValid}>Save</Button>
             </div>
-        </Form>
+        </MainForm>
         </>
 
   return (

@@ -1,0 +1,8 @@
+.error-text,
+.invalid-text {
+  color: rgb(224, 99, 99);
+} 
+
+.invalid-text {
+  font-size: 1.3rem;
+}  

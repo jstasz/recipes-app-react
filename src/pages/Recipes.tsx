@@ -9,9 +9,11 @@ function RecipesPage() {
 
     return (
         <RecipesProvider>
-                <RecipesList />
                 {params.mode === 'new' && <NewRecipe />}
-                {params.mode === 'details' && <RecipeDetails />}
+                {params.mode === 'details' && <>
+                    <RecipesList />
+                    <RecipeDetails />
+                </>}
         </RecipesProvider>
     );
 };

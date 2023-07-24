@@ -32,9 +32,9 @@ const RecipeDetails: React.FC = () => {
         {!isLoadingRecipes ? (
           <>
             {recipeId === '0' ? <p className={styles['select-recipe']}>select a recipe to view details or</p> : recipeDetails}
+            <Button type='button' className={styles['add-recipe']} navigationPath="/recipes/new"> + Add new recipe </Button>
           </>
         ) : null}
-        <Button type='button' className={styles['add-recipe']} navigationPath="/recipes/new"> + Add new recipe </Button>
        </>
     );
 }
