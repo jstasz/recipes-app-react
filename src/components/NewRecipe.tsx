@@ -38,7 +38,6 @@ const NewRecipe: React.FC = () => {
     
     const { 
         value: enteredIngredient, 
-        // isValid: enteredIngredientsIsValid,
         hasError: ingredientsInputHasError, 
         valueBlurHandler: ingredientsBlurHandler, 
         valueChangeHandler: ingredientsChangeHandler,
@@ -55,15 +54,15 @@ const NewRecipe: React.FC = () => {
         resetEnteredName();
         resetEnteredInstruction();
         resetEnteredImageUrl();
-        resetEnteredIngredient()
+        resetEnteredIngredient();
 
         addRecipe();
-    }
+    };
 
     const [ingredients, setIngredients] = useState<{id: number, name: string}[]>([]);
 
     const addIngredient = (ingredient: string) => {
-        const newIngredient = {id: Math.floor(Math.random() * 100000), name: ingredient}
+        const newIngredient = {id: Math.floor(Math.random() * 100000), name: ingredient};
 
         if(ingredient === '') {
             return;
@@ -72,6 +71,11 @@ const NewRecipe: React.FC = () => {
         setIngredients(prevIngr => [...prevIngr, newIngredient]);
         resetEnteredIngredient();
     };
+
+    const removeIngredient = (id: number) => {
+        const newIngredients = ingredients.filter(ingredient => ingredient.id !== id);
+        setIngredients(newIngredients);
+    }
 
     const addRecipe = () => {
         const id = Math.floor(Math.random() * 100000);
@@ -83,19 +87,18 @@ const NewRecipe: React.FC = () => {
             ingredients: ingredients
         }
         setIngredients([]);
-        console.log(newRecipe);
     };
 
     useEffect(() => {
         if(enteredNameIsValid && enteredInstructionIsValid && enteredImageUrlIsValid && ingredients.length > 0) {
-          setFormIsValid(true)
+          setFormIsValid(true);
         } else {
-          setFormIsValid(false)
+          setFormIsValid(false);
         }
     }, [enteredNameIsValid, enteredInstructionIsValid, enteredImageUrlIsValid, ingredients]);
 
     return (
-        <MainForm onSubmit={addRecipeHandler} >
+        <MainForm onSubmit={addRecipeHandler}>
         <h1>Add new recipe</h1>
         <div>
             <label htmlFor="name">name</label>
@@ -146,20 +149,28 @@ const NewRecipe: React.FC = () => {
                     onChange={ingredientsChangeHandler} 
                     onBlur={ingredientsBlurHandler} 
                 />
-                <span className={`material-symbols-outlined ${styles['add-icon']} ${styles.icon}`} onClick={() => addIngredient(enteredIngredient)}>add_circle</span>
+                <span 
+                    className={`material-symbols-outlined ${styles['add-icon']} ${styles.icon}`} 
+                    onClick={() => addIngredient(enteredIngredient)}>add_circle
+                </span>
             </div>
-            {ingredients.length < 1 && ingredientsInputHasError && <p className={styles['invalid-text']}>Please enter at least one ingredient!</p>}
+            {ingredients.length < 1 && ingredientsInputHasError && 
+            <p className={styles['invalid-text']}>Please enter at least one ingredient!</p>
+            }
         </div>
-       {ingredients && <><ul className={styles['ingredients-list']}>
+        <div className={styles['ingredients-list']}>
+            {ingredients.length > 0 ? 
+            <ul>
             {ingredients.map((ingredient) => 
-                <li key={ingredient.id}>{ingredient.name} 
-                    <span className={`material-symbols-outlined ${styles['remove-icon']} ${styles.icon}`}>cancel</span>
+                <li key={ingredient.id} className={styles.ingredient}>{ingredient.name} 
+                    <span onClick={() => removeIngredient(ingredient.id)} 
+                        className={`material-symbols-outlined ${styles['remove-icon']} ${styles.icon}`}>cancel
+                    </span>
                 </li>
             )}
-        </ul></>}
-        <div className="actions">
-          <Button type="submit" disabled={!formIsValid}>Save</Button>
+            </ul> : <p>ingredients list</p>}
         </div>
+        <Button type="submit" disabled={!formIsValid}>Save</Button>
     </MainForm>
     )
 }

@@ -20,9 +20,10 @@
     font-size: 1.5rem;
     background-color: rgba(0, 0, 0, 0.7);
     padding: 0.5em;
+    color: grey;
 }
 
-li {
+.ingredient {
     display: flex;
     justify-content: space-between;
     border-bottom: thin solid rgb(46, 46, 46);
