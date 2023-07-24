@@ -19,7 +19,7 @@ const RecipeDetails: React.FC = () => {
                 <ul className={styles['recipe-ingredients-list']}>
                     <p className={styles['ingredients-title']}>Ingredients</p>
                     {activeRecipe?.ingredients.map(ingredient => 
-                    <li key={ingredient}>{ingredient}</li>)}
+                    <li key={ingredient.id}>{ingredient.name}</li>)}
                 </ul>
                 <Button type="button" className={styles['add-to-shopping-list']}>Add to shopping list</Button>
             </div>

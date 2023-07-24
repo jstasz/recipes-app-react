@@ -34,10 +34,10 @@ function RecipesList() {
 
             for(const key in data.results) {
 
-                const ingredientsList: string[] = [];
+                const ingredientsList: {id: number, name: string}[] = [];
                 const ingredientsComponent = data.results[key].sections[0].components;
                 ingredientsComponent.forEach((el: {raw_text: string}) => {
-                    const ingredient = el.raw_text;
+                    const ingredient = {id: Math.floor(Math.random() * 100000), name: el.raw_text};
                     ingredientsList.push(ingredient)
                 })
 

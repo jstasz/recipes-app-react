@@ -38,7 +38,7 @@ const NewRecipe: React.FC = () => {
     
     const { 
         value: enteredIngredient, 
-        isValid: enteredIngredientsIsValid,
+        // isValid: enteredIngredientsIsValid,
         hasError: ingredientsInputHasError, 
         valueBlurHandler: ingredientsBlurHandler, 
         valueChangeHandler: ingredientsChangeHandler,
@@ -60,14 +60,16 @@ const NewRecipe: React.FC = () => {
         addRecipe();
     }
 
-    const [ingredients, setIngredients] = useState<string[]>([]);
+    const [ingredients, setIngredients] = useState<{id: number, name: string}[]>([]);
 
     const addIngredient = (ingredient: string) => {
+        const newIngredient = {id: Math.floor(Math.random() * 100000), name: ingredient}
+
         if(ingredient === '') {
             return;
-        } 
+        };
 
-        setIngredients(prevIngr => [...prevIngr, ingredient])
+        setIngredients(prevIngr => [...prevIngr, newIngredient]);
         resetEnteredIngredient();
     };
 
@@ -149,11 +151,10 @@ const NewRecipe: React.FC = () => {
             {ingredients.length < 1 && ingredientsInputHasError && <p className={styles['invalid-text']}>Please enter at least one ingredient!</p>}
         </div>
        {ingredients && <><ul className={styles['ingredients-list']}>
-            {ingredients.map((ingredient) => <>
-                <li key={ingredient}>{ingredient} 
-                <span className={`material-symbols-outlined ${styles['remove-icon']} ${styles.icon}`}>cancel</span>
+            {ingredients.map((ingredient) => 
+                <li key={ingredient.id}>{ingredient.name} 
+                    <span className={`material-symbols-outlined ${styles['remove-icon']} ${styles.icon}`}>cancel</span>
                 </li>
-                </>
             )}
         </ul></>}
         <div className="actions">
