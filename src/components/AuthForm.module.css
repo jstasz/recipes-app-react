@@ -1,0 +1,60 @@
+.form {
+    max-width: 40rem;
+    margin: 3em auto;
+    font-size: 2rem;
+  }
+  
+  .form label,
+  .form input {
+    display: block;
+    width: 100%;
+    margin: 0.5em 0;
+  }
+  
+  .form input {
+    font: inherit;
+    padding: 0.25rem;
+    background-color: rgb(202, 202, 202);
+    border-radius: 5px;
+  }
+  
+  .actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  
+  .actions button {
+    font: inherit;
+    padding: 0.5rem 1.5rem;
+    border-radius: 4px;
+  }
+  
+  .actions a {
+    text-decoration: none;
+    background-color: transparent;
+    color: grey;
+  }
+  
+  .actions a:hover {
+    color: white;
+  }
+
+  .logout {
+    color: rgb(169, 169, 255);
+    cursor: pointer;
+  }
+
+  .logout:hover {
+    color: rgb(128, 128, 255);
+  }
+
+  .error-text,
+  .invalid-text {
+    color: rgb(224, 99, 99);
+  }
+
+  .invalid-text {
+    font-size: 1.3rem;
+  }

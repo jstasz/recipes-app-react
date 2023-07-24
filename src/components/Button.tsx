@@ -4,7 +4,10 @@ import styles from './Button.module.css';
 const Button: React.FC<{
     children: ReactNode, 
     className?: string; 
-    onNavigate?: () => void, }> = (props) => {
+    type: "button" | "submit" | "reset" | undefined;
+    disabled?: boolean,
+    onNavigate?: () => void,
+    onClick?: () => void, }> = (props) => {
 
     const navigateHandler = () => {
         if(props.onNavigate) {
@@ -13,7 +16,7 @@ const Button: React.FC<{
     };
 
     return (
-        <button className={`${styles.button} ${props.className}`} onClick={navigateHandler}>
+        <button className={`${styles.button} ${props.className}`} onClick={navigateHandler} type={props.type} disabled={props.disabled}>
             {props.children}
         </button>
     );

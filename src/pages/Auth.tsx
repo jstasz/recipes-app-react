@@ -1,8 +1,8 @@
-import Auth from "../components/Auth";
+import AuthForm from "../components/AuthForm";
 
 function AuthPage() {
     return (
-        <Auth />
+            <AuthForm />
     );
 };
 

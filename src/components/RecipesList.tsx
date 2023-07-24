@@ -43,7 +43,6 @@ function RecipesList() {
 
                 const instructionList: string[] = [];
                 const instructionsComponent = data.results[key].instructions;
-                console.log(instructionsComponent)
                 instructionsComponent.forEach((el: {display_text: string}) => {
                     const instruction = el.display_text;
                     instructionList.push(instruction);

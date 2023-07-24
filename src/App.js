@@ -3,6 +3,7 @@ import RootLayout from './pages/RootLayout';
 import HomePage from './pages/Home';
 import RecipesPage from './pages/Recipes';
 import AuthPage from "./pages/Auth";
+import { AuthProvider } from "./components/store/auth-context";
 
 const router = createBrowserRouter([
   {
@@ -18,7 +19,12 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />
+  return (
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </ AuthProvider>
+  )
+  
 };
 
 export default App;
