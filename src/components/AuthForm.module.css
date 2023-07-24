@@ -49,3 +49,12 @@
   .logout:hover {
     color: rgb(128, 128, 255);
   }
+
+  .error-text,
+  .invalid-text {
+    color: rgb(224, 99, 99);
+  }
+
+  .invalid-text {
+    font-size: 1.3rem;
+  }

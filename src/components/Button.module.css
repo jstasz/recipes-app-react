@@ -13,6 +13,16 @@
     box-shadow: 0px 0px 15px 0px rgb(169, 169, 255);
 }
 
+.button:disabled {
+    border: 1px solid rgb(176, 176, 176);
+    color: rgb(176, 176, 176);
+    cursor:auto;
+}
+
+.button:disabled:hover {
+    box-shadow: none;
+}
+ 
 @media (min-width: 576px) {
     .button {
         font-size: 2rem;

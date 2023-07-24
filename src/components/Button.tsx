@@ -5,6 +5,7 @@ const Button: React.FC<{
     children: ReactNode, 
     className?: string; 
     type: "button" | "submit" | "reset" | undefined;
+    disabled?: boolean,
     onNavigate?: () => void,
     onClick?: () => void, }> = (props) => {
 
@@ -15,7 +16,7 @@ const Button: React.FC<{
     };
 
     return (
-        <button className={`${styles.button} ${props.className}`} onClick={navigateHandler} type={props.type}>
+        <button className={`${styles.button} ${props.className}`} onClick={navigateHandler} type={props.type} disabled={props.disabled}>
             {props.children}
         </button>
     );

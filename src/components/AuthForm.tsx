@@ -1,59 +1,90 @@
 import { Form, Link, useSearchParams} from 'react-router-dom';
-import styles from './AuthForm.module.css';
-import Button from './Button';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase';
-import { useContext, useState } from 'react';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from './store/auth-context';
+import Button from './Button';
+import useInput from '../hooks/use-input';
+import styles from './AuthForm.module.css';
+
 
 
 const AuthForm = () => {
     const [searchParams] = useSearchParams();
     const isLoginMode = searchParams.get('authMode') === 'login';
-
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
-
     const { loggedUser, setLoggedUser } = useContext(AuthContext);
 
-    let errorMes = 'Something went wrong!'
+    const [formIsValid, setFormIsValid] = useState(false);
+    const [authError, setAuthError] = useState('');
+
+    let errorMessage = 'Something went wrong!'
+
+    const { 
+        value: enteredEmail, 
+        isValid: enteredEmailIsValid,
+        hasError: emailInputHasError, 
+        valueBlurHandler: emailBlurHandler, 
+        valueChangeHandler: emailChangeHandler,
+        resetValue: resetEnteredEmail
+      } = useInput(value => value.trim() !== '' && value.includes('@'));
+
+    const { 
+        value: enteredPassword, 
+        isValid: enteredPasswordIsValid,
+        hasError: passwordInputHasError, 
+        valueBlurHandler: passwordBlurHandler, 
+        valueChangeHandler: passwordChangeHandler,
+        resetValue: resetEnteredPassword
+      } = useInput(value => value.trim().length > 6);
 
     const signIn = () => {
-        signInWithEmailAndPassword(auth, email, password)
+        signInWithEmailAndPassword(auth, enteredEmail, enteredPassword)
         .then(() => {
-                setLoggedUser(email);
+                setLoggedUser(enteredEmail);
         }).catch((error) => {
             if(error.message === 'Firebase: Error (auth/wrong-password).') {
-                setErrorMessage('Wrong password! Try again!')
+                setAuthError('Wrong pasword! Try again!');
             } else {
-                setErrorMessage(errorMes);
+                setAuthError(errorMessage);
             }
         });
     };
 
     const signUp = () => {
-        createUserWithEmailAndPassword(auth, email, password)
+        createUserWithEmailAndPassword(auth, enteredEmail, enteredPassword)
         .then(() => {
-            setLoggedUser(email);
+            setLoggedUser(enteredEmail);
         }).catch((error) => {
             if(error.message === 'Firebase: Error (auth/email-already-in-use).') {
-                setErrorMessage('User with this email already exists!')
+                setAuthError('User with this email already exists!')
             } else {
-                setErrorMessage(errorMes);
+                setAuthError(errorMessage);
             }
         });
     };
 
     const formSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+
+        if(!formIsValid) {
+            return
+        }
+
         isLoginMode ? signIn() : signUp();
-        setEmail('');
-        setPassword('');
+        resetEnteredEmail();
+        resetEnteredPassword();
     };
 
+    useEffect(() => {
+        if(enteredEmailIsValid && enteredPasswordIsValid) {
+          setFormIsValid(true)
+        } else {
+          setFormIsValid(false)
+        }
+      }, [enteredEmailIsValid, enteredPasswordIsValid])
+
     const form = <> 
-        {errorMessage && <p>{errorMessage}</p>}
+        {authError && <p className={styles['error-text']}>{authError}</p>}
         <Form className={styles.form} onSubmit={formSubmitHandler} >
             <h1>{isLoginMode ? 'Log in' : 'Create new user'}</h1>
             <p>
@@ -62,10 +93,12 @@ const AuthForm = () => {
                     id="email" 
                     type="email" 
                     name="email" 
-                    value={email} 
-                    onChange={(e) => setEmail(e.target.value)} 
+                    value={enteredEmail} 
+                    onChange={emailChangeHandler} 
+                    onBlur={emailBlurHandler}
                     required 
                 />
+                 {emailInputHasError && <p className={styles['invalid-text']}>Please enter valid email!</p>}
             </p>
             <p>
                 <label htmlFor="password">password</label>
@@ -73,16 +106,18 @@ const AuthForm = () => {
                     id="password" 
                     type="password" 
                     name="password" 
-                    value={password} 
-                    onChange={(e) => setPassword(e.target.value)} 
+                    value={enteredPassword} 
+                    onChange={passwordChangeHandler} 
+                    onBlur={passwordBlurHandler}
                     required 
                 />
+                 {passwordInputHasError && <p className={styles['invalid-text']}>Please enter valid password! Min 6!</p>}
             </p>
             <div className={styles.actions}>
               <Link to={`?authMode=${isLoginMode ? 'signup' : 'login'}`}>
                 {isLoginMode ? 'Create new user': 'Login'}
               </Link>
-              <Button type="submit">Save</Button>
+              <Button type="submit" disabled={!formIsValid}>Save</Button>
             </div>
         </Form>
         </>
