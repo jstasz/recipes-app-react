@@ -21,7 +21,7 @@ const RecipeDetails: React.FC = () => {
                     {activeRecipe?.ingredients.map(ingredient => 
                     <li key={ingredient}>{ingredient}</li>)}
                 </ul>
-                <Button type="button" className={styles['button-add']}>Add to shopping list</Button>
+                <Button type="button" className={styles['add-to-shopping-list']}>Add to shopping list</Button>
             </div>
             <div className={styles['recipe-img']} style={{backgroundImage: `url(${activeRecipe?.imageUrl})`}}></div>
             <div className={styles['recipe-instruction']}><p>{activeRecipe?.instruction}</p></div>
@@ -31,10 +31,10 @@ const RecipeDetails: React.FC = () => {
         <>
         {!isLoadingRecipes ? (
           <>
-            {recipeId === '0' ? <p className={styles['select-recipe']}>select a recipe to view details</p> : recipeDetails}
+            {recipeId === '0' ? <p className={styles['select-recipe']}>select a recipe to view details or</p> : recipeDetails}
           </>
         ) : null}
-
+        <Button type='button' className={styles['add-recipe']} navigationPath="/recipes/new"> + Add new recipe </Button>
        </>
     );
 }

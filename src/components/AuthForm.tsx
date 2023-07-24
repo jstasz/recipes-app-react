@@ -7,8 +7,6 @@ import Button from './Button';
 import useInput from '../hooks/use-input';
 import styles from './AuthForm.module.css';
 
-
-
 const AuthForm = () => {
     const [searchParams] = useSearchParams();
     const isLoginMode = searchParams.get('authMode') === 'login';
@@ -42,10 +40,17 @@ const AuthForm = () => {
         .then(() => {
                 setLoggedUser(enteredEmail);
         }).catch((error) => {
-            if(error.message === 'Firebase: Error (auth/wrong-password).') {
-                setAuthError('Wrong pasword! Try again!');
-            } else {
-                setAuthError(errorMessage);
+            if(error) {
+                switch (error.message) {
+                    case 'Firebase: Error (auth/wrong-password).':
+                        setAuthError('Wrong pasword! Try again!');
+                        break;
+                    case 'Firebase: Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later. (auth/too-many-requests).' :
+                        setAuthError('Too many failed login attempts. Try again later!');
+                        break;
+                    default:
+                        setAuthError(errorMessage);
+                }
             }
         });
     };
@@ -55,10 +60,17 @@ const AuthForm = () => {
         .then(() => {
             setLoggedUser(enteredEmail);
         }).catch((error) => {
-            if(error.message === 'Firebase: Error (auth/email-already-in-use).') {
-                setAuthError('User with this email already exists!')
-            } else {
-                setAuthError(errorMessage);
+            if(error) {
+                switch(error.message) {
+                    case 'Firebase: Error (auth/email-already-in-use).':
+                        setAuthError('User with this email already exists!');
+                        break;
+                    case 'Firebase: Error (auth/user-not-found).':
+                        setAuthError('User not found!');
+                        break;
+                    default:
+                        setAuthError(errorMessage);
+                }
             }
         });
     };

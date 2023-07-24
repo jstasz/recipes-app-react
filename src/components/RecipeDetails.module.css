@@ -49,7 +49,7 @@
     margin-bottom: 1.5em;
 }
 
-.button-add {
+.add-to-shopping-list {
     font-size: 1.5rem;
     margin: 1em auto 0;
 }
@@ -62,5 +62,9 @@
 
 .select-recipe {
     padding: 1em;
+}
+
+.add-recipe {
+    font-size: 1.7rem; 
 }
 
