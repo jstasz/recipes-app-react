@@ -1,4 +1,4 @@
-import { Form, Link, useSearchParams} from 'react-router-dom';
+import { Link, useSearchParams} from 'react-router-dom';
 import { auth } from '../firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { useContext, useEffect, useState } from 'react';
@@ -6,14 +6,13 @@ import { AuthContext } from './store/auth-context';
 import Button from './Button';
 import useInput from '../hooks/use-input';
 import styles from './AuthForm.module.css';
-
-
+import MainForm from './Form';
 
 const AuthForm = () => {
     const [searchParams] = useSearchParams();
     const isLoginMode = searchParams.get('authMode') === 'login';
     const { loggedUser, setLoggedUser } = useContext(AuthContext);
-
+    
     const [formIsValid, setFormIsValid] = useState(false);
     const [authError, setAuthError] = useState('');
 
@@ -35,17 +34,25 @@ const AuthForm = () => {
         valueBlurHandler: passwordBlurHandler, 
         valueChangeHandler: passwordChangeHandler,
         resetValue: resetEnteredPassword
-      } = useInput(value => value.trim().length > 6);
+      } = useInput(value => value.trim().length > 5);
 
     const signIn = () => {
         signInWithEmailAndPassword(auth, enteredEmail, enteredPassword)
         .then(() => {
-                setLoggedUser(enteredEmail);
-        }).catch((error) => {
-            if(error.message === 'Firebase: Error (auth/wrong-password).') {
-                setAuthError('Wrong pasword! Try again!');
-            } else {
-                setAuthError(errorMessage);
+            setLoggedUser(enteredEmail);
+        })
+        .catch((error) => {
+            if(error) {
+                switch (error.message) {
+                    case 'Firebase: Error (auth/wrong-password).':
+                        setAuthError('Wrong pasword! Try again!');
+                        break;
+                    case 'Firebase: Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later. (auth/too-many-requests).' :
+                        setAuthError('Too many failed login attempts. Try again later!');
+                        break;
+                    default:
+                        setAuthError(errorMessage);
+                }
             }
         });
     };
@@ -55,10 +62,17 @@ const AuthForm = () => {
         .then(() => {
             setLoggedUser(enteredEmail);
         }).catch((error) => {
-            if(error.message === 'Firebase: Error (auth/email-already-in-use).') {
-                setAuthError('User with this email already exists!')
-            } else {
-                setAuthError(errorMessage);
+            if(error) {
+                switch(error.message) {
+                    case 'Firebase: Error (auth/email-already-in-use).':
+                        setAuthError('User with this email already exists!');
+                        break;
+                    case 'Firebase: Error (auth/user-not-found).':
+                        setAuthError('User not found!');
+                        break;
+                    default:
+                        setAuthError(errorMessage);
+                }
             }
         });
     };
@@ -85,9 +99,9 @@ const AuthForm = () => {
 
     const form = <> 
         {authError && <p className={styles['error-text']}>{authError}</p>}
-        <Form className={styles.form} onSubmit={formSubmitHandler} >
+        <MainForm className={styles.form} onSubmit={formSubmitHandler}>
             <h1>{isLoginMode ? 'Log in' : 'Create new user'}</h1>
-            <p>
+            <div>
                 <label htmlFor="email">email</label>
                 <input 
                     id="email" 
@@ -99,8 +113,8 @@ const AuthForm = () => {
                     required 
                 />
                  {emailInputHasError && <p className={styles['invalid-text']}>Please enter valid email!</p>}
-            </p>
-            <p>
+            </div>
+            <div>
                 <label htmlFor="password">password</label>
                 <input 
                     id="password" 
@@ -111,15 +125,15 @@ const AuthForm = () => {
                     onBlur={passwordBlurHandler}
                     required 
                 />
-                 {passwordInputHasError && <p className={styles['invalid-text']}>Please enter valid password! Min 6!</p>}
-            </p>
-            <div className={styles.actions}>
-              <Link to={`?authMode=${isLoginMode ? 'signup' : 'login'}`}>
+                 {passwordInputHasError && <p className={styles['invalid-text']}>Please enter valid password! Min 5!</p>}
+            </div>
+            <div className="actions">
+              <Link to={`?authMode=${isLoginMode ? 'signup' : 'login'}`} className={styles.link}>
                 {isLoginMode ? 'Create new user': 'Login'}
               </Link>
               <Button type="submit" disabled={!formIsValid}>Save</Button>
             </div>
-        </Form>
+        </MainForm>
         </>
 
   return (
@@ -132,7 +146,7 @@ const AuthForm = () => {
                 </p>
                 </> 
             : form}
-        </>
+        </> 
     );
 }
 

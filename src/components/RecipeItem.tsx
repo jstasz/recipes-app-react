@@ -12,7 +12,7 @@ const RecipeItem: React.FC<{
     };
 
     return (
-        <li key={props.id} className={styles.recipe} onClick={navigateToPathHandler}>
+        <li className={styles.recipe} onClick={navigateToPathHandler}>
             <div className={styles['recipe-img']} style={{backgroundImage: `url(${props.imageUrl})`}}></div>
             <div className={styles['recipe-name']}>
                 <p>{props.name.length > 20 ? `${props.name.slice(0, 20)}...` : props.name}</p>

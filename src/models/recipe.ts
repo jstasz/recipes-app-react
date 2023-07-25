@@ -3,7 +3,7 @@ interface Recipe {
     name: string,
     instruction: string,
     imageUrl: string,
-    ingredients: string[]
+    ingredients: {id: number, name: string}[]
 };
 
 export default Recipe;
