@@ -1,5 +1,5 @@
-import Button from "./Button";
-import HeroImage from "./HeroImage";
+import Button from "./UI/Button";
+import HeroImage from "./UI/HeroImage";
 
 const MainPage = () => {
 

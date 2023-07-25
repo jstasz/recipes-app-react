@@ -1,6 +1,6 @@
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import styles from './RecipesList.module.css'
-import RecipeItem from "./RecipeItem";
+import RecipeItem from "./RecipeListItem";
 import { RecipesContext, RecipesContextType } from "./store/recipes-context";
 import { AuthContext } from "./store/auth-context";
 

@@ -1,8 +1,8 @@
 import styles from './NewRecipe.module.css'
 import useInput from '../hooks/use-input';
-import Button from './Button';
+import Button from './UI/Button';
 import { useContext, useEffect, useState } from 'react';
-import MainForm from './Form';
+import MainForm from './UI/Form';
 import Recipe from '../models/recipe';
 import { AuthContext } from './store/auth-context';
 

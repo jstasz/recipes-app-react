@@ -3,10 +3,10 @@ import { auth } from '../firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from './store/auth-context';
-import Button from './Button';
+import Button from './UI/Button';
 import useInput from '../hooks/use-input';
 import styles from './AuthForm.module.css';
-import MainForm from './Form';
+import MainForm from './UI/Form';
 
 const AuthForm = () => {
     const [searchParams] = useSearchParams();
