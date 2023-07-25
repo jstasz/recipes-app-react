@@ -4,6 +4,8 @@ import HomePage from './pages/Home';
 import RecipesPage from './pages/Recipes';
 import AuthPage from "./pages/Auth";
 import { AuthProvider } from "./components/store/auth-context";
+import ShoppingListPage from "./pages/ShoppingList";
+import { ShoppingListProvider } from "./components/store/shopping-list-context";
 
 const router = createBrowserRouter([
   {
@@ -13,7 +15,8 @@ const router = createBrowserRouter([
       {path: '/', element: <HomePage />},
       {path: '/recipes/:mode', element: <RecipesPage />},
       {path: '/recipes/:mode/:recipeId', element: <RecipesPage />},
-      {path: '/auth', element: <AuthPage />}
+      {path: '/auth', element: <AuthPage />},
+      {path: '/shopping-list', element: <ShoppingListPage />}
     ]
   },
 ]);
@@ -21,7 +24,9 @@ const router = createBrowserRouter([
 function App() {
   return (
     <AuthProvider>
-      <RouterProvider router={router} />
+        <ShoppingListProvider>
+          <RouterProvider router={router} />
+        </ShoppingListProvider>
     </ AuthProvider>
   )
   

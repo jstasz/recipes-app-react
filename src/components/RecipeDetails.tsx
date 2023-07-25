@@ -5,6 +5,7 @@ import { useContext, useState } from 'react';
 import { RecipesContext } from './store/recipes-context';
 import { AuthContext } from './store/auth-context';
 import Modal from './UI/Modal';
+import { ShoppingListContext } from './store/shopping-list-context';
 
 const RecipeDetails: React.FC = () => {
 
@@ -20,6 +21,7 @@ const RecipeDetails: React.FC = () => {
     const messageForNotLoggedIn = 'select a recipe to see details';
 
     const [selectedIngredients, setSelectedIngredients] = useState<{id: number, name: string}[]>([]);
+    const { setShoppingListItems } = useContext(ShoppingListContext);
 
     const selectIngredientsHandler = (ingredient: {id: number, name: string}) => {
         const ingredientIsSelected = selectedIngredients.find(ing => ing.id === ingredient.id);
@@ -37,6 +39,7 @@ const RecipeDetails: React.FC = () => {
     };
 
     const addIngredients = () => {
+        setShoppingListItems(prevState => [...prevState, ...selectedIngredients])
         closeModal();
     };
     
@@ -82,7 +85,7 @@ const RecipeDetails: React.FC = () => {
                                     className={`material-symbols-outlined 
                                     ${styles['select-icon']}
                                     ${selectedIngredients.find(ing => ing.id === ingredient.id) ? styles.active : ''}`}>
-                                        {selectedIngredients.find(ing => ing.id === ingredient.id) ? 'add_circle' : 'remove_circle'}
+                                        {selectedIngredients.find(ing => ing.id !== ingredient.id) ? 'add_circle' : 'remove_circle'}
                                 </span> 
                                 <label>{ingredient.name}</label>
                             </li>
