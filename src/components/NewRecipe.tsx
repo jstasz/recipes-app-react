@@ -1,13 +1,15 @@
 import styles from './NewRecipe.module.css'
 import useInput from '../hooks/use-input';
 import Button from './Button';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import MainForm from './Form';
 import Recipe from '../models/recipe';
+import { AuthContext } from './store/auth-context';
 
 const NewRecipe: React.FC = () => {
 
     const [formIsValid, setFormIsValid] = useState(false);
+    const {loggedUser } = useContext(AuthContext);
 
     const { 
         value: enteredName, 
@@ -44,19 +46,39 @@ const NewRecipe: React.FC = () => {
         resetValue: resetEnteredIngredient
     } = useInput(value => value.trim() !== '');
 
-    const addRecipeHandler = (event : React.FormEvent<HTMLFormElement>) => {
+    async function postRecipe(recipe: Recipe) {
+        await fetch(`https://react-recipes-e4b3f-default-rtdb.firebaseio.com/${loggedUser.replace('.', ',')}.json`, {
+          method: 'POST',
+          body: JSON.stringify(recipe),
+          headers: {
+            'Content-Type' : 'aplication/json'
+          }
+        })
+    };
+
+    const addRecipeHandler = async (event : React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         if(!formIsValid) {
             return
         };
 
+        const id = Math.floor(Math.random() * 100000);
+        const newRecipe: Recipe = {
+            id: id, 
+            name: enteredName, 
+            instruction: enteredInstruction, 
+            imageUrl: enteredImageUrl,  
+            ingredients: ingredients
+        };
+
+        postRecipe(newRecipe);
+
         resetEnteredName();
         resetEnteredInstruction();
         resetEnteredImageUrl();
         resetEnteredIngredient();
-
-        addRecipe();
+        setIngredients([]);
     };
 
     const [ingredients, setIngredients] = useState<{id: number, name: string}[]>([]);
@@ -76,18 +98,6 @@ const NewRecipe: React.FC = () => {
         const newIngredients = ingredients.filter(ingredient => ingredient.id !== id);
         setIngredients(newIngredients);
     }
-
-    const addRecipe = () => {
-        const id = Math.floor(Math.random() * 100000);
-        const newRecipe: Recipe = {
-            id: id, 
-            name: enteredName, 
-            instruction: enteredInstruction, 
-            imageUrl: enteredImageUrl,  
-            ingredients: ingredients
-        }
-        setIngredients([]);
-    };
 
     useEffect(() => {
         if(enteredNameIsValid && enteredInstructionIsValid && enteredImageUrlIsValid && ingredients.length > 0) {

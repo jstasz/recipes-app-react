@@ -2,12 +2,22 @@ import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import styles from './RecipesList.module.css'
 import RecipeItem from "./RecipeItem";
 import { RecipesContext, RecipesContextType } from "./store/recipes-context";
+import { AuthContext } from "./store/auth-context";
 
 function RecipesList() {
     const [error, setError] = useState<string | null>(null);
 
-    const { recipes, setRecipes }: RecipesContextType = useContext(RecipesContext);
-    const { isLoadingRecipes, setIsLoadingRecipes } = useContext(RecipesContext);
+    const { 
+        recipes, 
+        setRecipes, 
+        isLoadingRecipes, 
+        setIsLoadingRecipes, 
+        userRecipes, 
+        setUserRecipes }: RecipesContextType = useContext(RecipesContext);
+
+    const {loggedUser } = useContext(AuthContext);
+
+    const allRecipes = [...recipes, ...userRecipes]
 
     const GetRecipes = useCallback(async () => {
         setIsLoadingRecipes(true);
@@ -17,7 +27,7 @@ function RecipesList() {
         const options = {
 	        method: 'GET',
 	        headers: {
-		        'X-RapidAPI-Key': '5ca3d2f9bemsh3d42333e3f065bdp1b24a3jsn7de523f07a5a',
+		        'X-RapidAPI-Key': '8b7217ce7dmshc2fdcaf5c95ffeep151427jsnc81d0dcf9e5d',
 		        'X-RapidAPI-Host': 'tasty.p.rapidapi.com'
 	        }
         };
@@ -70,9 +80,50 @@ function RecipesList() {
         setIsLoadingRecipes(false);
     }, [setIsLoadingRecipes, setRecipes]);
 
+
+
+    const getUserRecipes = useCallback(async () => {
+        if(loggedUser) {
+            try {
+                const response = await fetch(
+                    `https://react-recipes-e4b3f-default-rtdb.firebaseio.com/${loggedUser.replace('.', ',')}.json`);
+    
+                if(!response.ok) {
+                    throw new Error(`Sorry, problem with downloading yourrecipes!`)
+                };
+    
+                const data = await response.json();
+                const loadedUserRecipes = [];
+    
+                for(const key in data) {
+                    loadedUserRecipes.push({
+                        id: data[key].id,
+                        name: data[key].name,
+                        instruction: data[key].instruction,
+                        imageUrl: data[key].imageUrl,
+                        ingredients: data[key].ingredients
+                    })
+                };
+    
+                setUserRecipes(loadedUserRecipes);
+                
+            } catch (error: unknown) {
+                if (error instanceof Error) {
+                    setError(error.message);
+                } else {
+                    setError('Something went wrong!');
+                }
+            }
+        }
+    }, [setUserRecipes, loggedUser]);
+
     useEffect(() => {
         GetRecipes();
     }, [GetRecipes])
+
+    useEffect(() => {
+        getUserRecipes();
+    }, [getUserRecipes])
 
     const scrollContainerRef = useRef<HTMLUListElement>(null);
 
@@ -95,7 +146,7 @@ function RecipesList() {
                             <span className="material-symbols-outlined">arrow_back_ios</span>
                         </p>
                         <ul className={styles['recipes-list']} ref={scrollContainerRef}>
-                        {recipes.map(recipe => {
+                        {allRecipes.map(recipe => {
                             return <RecipeItem 
                                         key={recipe.id} 
                                         id={recipe.id} 

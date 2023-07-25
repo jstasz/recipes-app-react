@@ -12,7 +12,7 @@ const AuthForm = () => {
     const [searchParams] = useSearchParams();
     const isLoginMode = searchParams.get('authMode') === 'login';
     const { loggedUser, setLoggedUser } = useContext(AuthContext);
-
+    
     const [formIsValid, setFormIsValid] = useState(false);
     const [authError, setAuthError] = useState('');
 
@@ -34,13 +34,14 @@ const AuthForm = () => {
         valueBlurHandler: passwordBlurHandler, 
         valueChangeHandler: passwordChangeHandler,
         resetValue: resetEnteredPassword
-      } = useInput(value => value.trim().length > 6);
+      } = useInput(value => value.trim().length > 5);
 
     const signIn = () => {
         signInWithEmailAndPassword(auth, enteredEmail, enteredPassword)
         .then(() => {
-                setLoggedUser(enteredEmail);
-        }).catch((error) => {
+            setLoggedUser(enteredEmail);
+        })
+        .catch((error) => {
             if(error) {
                 switch (error.message) {
                     case 'Firebase: Error (auth/wrong-password).':
@@ -100,7 +101,7 @@ const AuthForm = () => {
         {authError && <p className={styles['error-text']}>{authError}</p>}
         <MainForm className={styles.form} onSubmit={formSubmitHandler}>
             <h1>{isLoginMode ? 'Log in' : 'Create new user'}</h1>
-            <p>
+            <div>
                 <label htmlFor="email">email</label>
                 <input 
                     id="email" 
@@ -112,8 +113,8 @@ const AuthForm = () => {
                     required 
                 />
                  {emailInputHasError && <p className={styles['invalid-text']}>Please enter valid email!</p>}
-            </p>
-            <p>
+            </div>
+            <div>
                 <label htmlFor="password">password</label>
                 <input 
                     id="password" 
@@ -124,8 +125,8 @@ const AuthForm = () => {
                     onBlur={passwordBlurHandler}
                     required 
                 />
-                 {passwordInputHasError && <p className={styles['invalid-text']}>Please enter valid password! Min 6!</p>}
-            </p>
+                 {passwordInputHasError && <p className={styles['invalid-text']}>Please enter valid password! Min 5!</p>}
+            </div>
             <div className="actions">
               <Link to={`?authMode=${isLoginMode ? 'signup' : 'login'}`} className={styles.link}>
                 {isLoginMode ? 'Create new user': 'Login'}
@@ -145,7 +146,7 @@ const AuthForm = () => {
                 </p>
                 </> 
             : form}
-        </>
+        </> 
     );
 }
 

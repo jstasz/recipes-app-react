@@ -3,12 +3,13 @@ import Button from './Button';
 import styles from './RecipeDetails.module.css'
 import { useContext } from 'react';
 import { RecipesContext } from './store/recipes-context';
+import { AuthContext } from './store/auth-context';
 
 const RecipeDetails: React.FC = () => {
 
     const { recipeId } = useParams();
-    const { recipes } = useContext(RecipesContext);
-    const { isLoadingRecipes } = useContext(RecipesContext);
+    const { recipes, isLoadingRecipes } = useContext(RecipesContext);
+    const { loggedUser } = useContext(AuthContext);
 
     const activeRecipe = recipeId ? recipes.find(recipe => recipe.id === +recipeId) : undefined;
     
@@ -31,8 +32,11 @@ const RecipeDetails: React.FC = () => {
         <>
         {!isLoadingRecipes ? (
           <>
-            {recipeId === '0' ? <p className={styles['select-recipe']}>select a recipe to view details or</p> : recipeDetails}
+            {recipeId === '0' ? <p className={styles['select-recipe']}>select a recipe to view details</p> : recipeDetails}
+            {loggedUser && <>
+            <p>or</p>
             <Button type='button' className={styles['add-recipe']} navigationPath="/recipes/new"> + Add new recipe </Button>
+            </>}
           </>
         ) : null}
        </>
