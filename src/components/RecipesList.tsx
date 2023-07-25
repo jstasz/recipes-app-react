@@ -8,8 +8,8 @@ function RecipesList() {
     const [error, setError] = useState<string | null>(null);
 
     const { 
-        recipes, 
-        setRecipes, 
+        loadedRecipes, 
+        setLoadedRecipes, 
         isLoadingRecipes, 
         setIsLoadingRecipes, 
         userRecipes, 
@@ -17,7 +17,7 @@ function RecipesList() {
 
     const {loggedUser } = useContext(AuthContext);
 
-    const allRecipes = [...recipes, ...userRecipes]
+    const allRecipes = [...loadedRecipes, ...userRecipes];
 
     const GetRecipes = useCallback(async () => {
         setIsLoadingRecipes(true);
@@ -67,7 +67,7 @@ function RecipesList() {
                 })
             };
 
-            setRecipes(loadedRecipes);
+            setLoadedRecipes(loadedRecipes);
             
         } catch (error: unknown) {
             if (error instanceof Error) {
@@ -78,9 +78,7 @@ function RecipesList() {
         }
 
         setIsLoadingRecipes(false);
-    }, [setIsLoadingRecipes, setRecipes]);
-
-
+    }, [setIsLoadingRecipes, setLoadedRecipes]);
 
     const getUserRecipes = useCallback(async () => {
         if(loggedUser) {

@@ -2,8 +2,8 @@ import React, { ReactNode, useState, createContext } from "react";
 import Recipe from "../../models/recipe";
 
 export type RecipesContextType = {
-    recipes: Recipe[];
-    setRecipes: React.Dispatch<React.SetStateAction<Recipe[]>>;
+    loadedRecipes: Recipe[];
+    setLoadedRecipes: React.Dispatch<React.SetStateAction<Recipe[]>>;
     userRecipes: Recipe [];
     setUserRecipes: React.Dispatch<React.SetStateAction<Recipe[]>>;
     isLoadingRecipes: boolean;
@@ -11,8 +11,8 @@ export type RecipesContextType = {
   };
   
   const defaultRecipesContext: RecipesContextType = {
-    recipes: [],
-    setRecipes: () => {}, 
+    loadedRecipes: [],
+    setLoadedRecipes: () => {}, 
     userRecipes: [],
     setUserRecipes: () => {},
     isLoadingRecipes: false,
@@ -22,12 +22,12 @@ export type RecipesContextType = {
 export const RecipesContext = createContext(defaultRecipesContext);
 
 export const RecipesProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [recipes, setRecipes] = useState<Recipe[]>([]);
+  const [loadedRecipes, setLoadedRecipes] = useState<Recipe[]>([]);
   const [isLoadingRecipes, setIsLoadingRecipes] = useState<boolean>(false);
   const [userRecipes, setUserRecipes] = useState<Recipe[]>([]);
 
   return (
-    <RecipesContext.Provider value={{ recipes, setRecipes, isLoadingRecipes, setIsLoadingRecipes, userRecipes, setUserRecipes }}>
+    <RecipesContext.Provider value={{ loadedRecipes, setLoadedRecipes, isLoadingRecipes, setIsLoadingRecipes, userRecipes, setUserRecipes }}>
       {children}
     </RecipesContext.Provider>
   );
