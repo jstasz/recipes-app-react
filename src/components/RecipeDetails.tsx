@@ -19,10 +19,26 @@ const RecipeDetails: React.FC = () => {
     const messageForLoggedIn = 'select a recipe to see details or';
     const messageForNotLoggedIn = 'select a recipe to see details';
 
-    const activeModalHandler = () => {
-        setActiveModal(true);
-        console.log(activeModal)
-    }
+    const [selectedIngredients, setSelectedIngredients] = useState<{id: number, name: string}[]>([]);
+
+    const selectIngredientsHandler = (ingredient: {id: number, name: string}) => {
+        const ingredientIsSelected = selectedIngredients.find(ing => ing.id === ingredient.id);
+
+        if(ingredientIsSelected) {
+            setSelectedIngredients(prevState => prevState.filter(ing => ing.id !== ingredient.id));
+        } else {
+            setSelectedIngredients(prevState => [...prevState, ingredient]);
+        }
+    };
+
+    const closeModal = () => {
+        setActiveModal(false);
+        setSelectedIngredients([]);
+    };
+
+    const addIngredients = () => {
+        closeModal();
+    };
     
     return (
         <>
@@ -41,7 +57,7 @@ const RecipeDetails: React.FC = () => {
                         <Button 
                             type="button" 
                             className={styles['add-to-shopping-list']} 
-                            onClick={activeModalHandler}
+                            onClick={() => setActiveModal(true)}
                             >Add to shopping list
                         </Button>}
                     </div>
@@ -55,22 +71,26 @@ const RecipeDetails: React.FC = () => {
             {loggedUser && 
             <Button type='button' className={styles['add-recipe']} navigationPath="/recipes/new"> + Add new recipe </Button>}
             {activeModal && 
-            <Modal onClose={() => setActiveModal(false)}>
+            <Modal onClose={closeModal}>
                 <div className={styles['ingredients-modal']}>
                 <p className={styles['ingredients-title']}>select the ingredients you need</p>
                 <ul className={styles['recipe-ingredients-list']}>
                             {activeRecipe?.ingredients.map(ingredient => 
                             <li key={ingredient.id} className={styles.ingredient}>
                                 <span 
-                                    className={`material-symbols-outlined ${styles['select-icon']} ${styles.active}`}>add_circle
-                                </span>
+                                    onClick={() => selectIngredientsHandler(ingredient)}
+                                    className={`material-symbols-outlined 
+                                    ${styles['select-icon']}
+                                    ${selectedIngredients.find(ing => ing.id === ingredient.id) ? styles.active : ''}`}>
+                                        {selectedIngredients.find(ing => ing.id === ingredient.id) ? 'add_circle' : 'remove_circle'}
+                                </span> 
                                 <label>{ingredient.name}</label>
                             </li>
                         )}
                 </ul>
                 <div className={styles.actions}>
                     <p>add to shopping list </p>
-                    <span className={`material-symbols-outlined ${styles['add-icon']}`}>add_circle</span>
+                    <span className={`material-symbols-outlined ${styles['add-icon']}`} onClick={addIngredients}>add_circle</span>
                 </div>
                 </div>
             </Modal>}

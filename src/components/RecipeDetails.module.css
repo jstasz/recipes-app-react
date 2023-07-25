@@ -76,15 +76,6 @@
     border-bottom: thin solid rgb(165, 165, 165);
 }
 
-.ingredients-modal .add-to-shopping-list {
-    color: rgb(100, 100, 170);
-    border: 1px solid rgb(99, 99, 150);
-}
-
-.ingredients-modal .add-to-shopping-list:hover {
-    box-shadow: 0px 0px 15px 0px rgb(99, 99, 150);
-}
-
 .ingredients-modal .ingredients-title {
     color: rgb(155, 155, 215);
     font-weight: bold;
@@ -93,6 +84,7 @@
 .ingredients-modal .select-icon {
     margin-right: 0.5em;
     color: grey;
+    cursor: pointer;
 }
 
 .ingredients-modal .select-icon.active {
