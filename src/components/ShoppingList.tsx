@@ -2,14 +2,18 @@ import { useContext, useEffect, useState } from 'react';
 import { ShoppingListContext } from './store/shopping-list-context';
 import styles from './ShoppingList.module.css'
 
-const ShoppingList: React.FC = (props) => {
+const ShoppingList: React.FC = () => {
 
-    const { shoppingListItems } = useContext(ShoppingListContext);
+    const { shoppingListItems, setShoppingListItems } = useContext(ShoppingListContext);
     const [displayedItems, setDIsplayeditems] = useState<{id: number, name: string}[]>([]);
 
     useEffect(() => {
         setDIsplayeditems(shoppingListItems)
     }, [shoppingListItems])
+
+    const removeShoppingListItem = (id: number) => {
+        setShoppingListItems(shoppingListItems.filter(item => item.id !== id));
+    }
  
     return (
         <div className={styles['shopping-list-box']}>
@@ -18,11 +22,18 @@ const ShoppingList: React.FC = (props) => {
                 <><ul>
                 {displayedItems.map(item => 
                 <li key={item.id} className={styles['shopping-list-item']}>{item.name}
-                <span className={`material-symbols-outlined ${styles.icon}`}>remove_circle</span></li>
+                <span 
+                    className={`material-symbols-outlined ${styles.icon}`}
+                    onClick={() => removeShoppingListItem(item.id)}
+                    >remove_circle</span></li>
                 )}
                 </ul>
-                <p className={styles['remove-all']}>remove all</p>
-            </>}
+                <p 
+                    className={styles['remove-all']}
+                    onClick={() => setShoppingListItems([])}
+                    >remove all</p>
+                </>
+            }
         </div>
     )
 }
