@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { ShoppingListContext } from './store/shopping-list-context';
+import styles from './ShoppingList.module.css'
 
 const ShoppingList: React.FC = (props) => {
 
@@ -11,7 +12,18 @@ const ShoppingList: React.FC = (props) => {
     }, [shoppingListItems])
  
     return (
-       <div>{displayedItems.map(item => <li key={item.id}>{item.name}</li>)}</div>
+        <div className={styles['shopping-list-box']}>
+            <h1>Shopping list</h1>
+            {displayedItems.length === 0 ? <p>you have no products added to your shopping list</p> :
+                <><ul>
+                {displayedItems.map(item => 
+                <li key={item.id} className={styles['shopping-list-item']}>{item.name}
+                <span className={`material-symbols-outlined ${styles.icon}`}>remove_circle</span></li>
+                )}
+                </ul>
+                <p className={styles['remove-all']}>remove all</p>
+            </>}
+        </div>
     )
 }
 
