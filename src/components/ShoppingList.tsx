@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { ShoppingListContext } from './store/shopping-list-context';
 import styles from './ShoppingList.module.css'
 import { AuthContext } from './store/auth-context';
@@ -14,11 +14,7 @@ const ShoppingList: React.FC = () => {
         setDIsplayeditems(shoppingListItems)
     }, [shoppingListItems])
 
-    const removeShoppingListItem = (id: number) => {
-        setShoppingListItems(shoppingListItems.filter(item => item.id !== id));
-    }
-
-    async function fetchShoppingListFromDatabase(loggedUser: string) {
+    const fetchShoppingListFromDatabase = useCallback( async (loggedUser: string) => {
         try {
           const response = await fetch(
             `https://react-recipes-e4b3f-default-rtdb.firebaseio.com/${loggedUser.replace('.', ',')}/shopping-list.json`
@@ -30,11 +26,36 @@ const ShoppingList: React.FC = () => {
         } catch (error) {
           console.error('Błąd podczas pobierania listy zakupów:', error);
         }
-    }
+    }, [setShoppingListItems])
       
     useEffect(() => {
         fetchShoppingListFromDatabase(loggedUser);
-    }, []);
+    }, [fetchShoppingListFromDatabase, loggedUser]);
+
+    async function updateIngredients(shoppingListItems: {id: number, name: string}[]) {
+        try {
+            await fetch(`https://react-recipes-e4b3f-default-rtdb.firebaseio.com/${loggedUser.replace('.', ',')}/shopping-list.json`, {
+                method: 'PUT',
+                body: JSON.stringify(shoppingListItems),
+                headers: {
+                  'Content-Type' : 'aplication/json'
+                }
+            })
+        } catch (error: unknown) {
+            console.log(error)
+        }
+    };
+
+    const removeShoppingListItem = async (id: number) => {
+        const updatedShoppingListItems = shoppingListItems.filter(item => item.id !== id);
+        setShoppingListItems(updatedShoppingListItems);
+
+        try {
+            await updateIngredients(updatedShoppingListItems);
+        } catch (error: unknown) {
+            console.log(error)
+        }
+    }
 
     return (
         <div className={styles['shopping-list-box']}>

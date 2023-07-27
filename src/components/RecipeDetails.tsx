@@ -38,7 +38,7 @@ const RecipeDetails: React.FC = () => {
         setSelectedIngredients([]);
     };
 
-    async function putIngredients(shoppingListItems: {id: number, name: string}[]) {
+    async function updateIngredients(shoppingListItems: {id: number, name: string}[]) {
         try {
             await fetch(`https://react-recipes-e4b3f-default-rtdb.firebaseio.com/${loggedUser.replace('.', ',')}/shopping-list.json`, {
                 method: 'PUT',
@@ -57,11 +57,10 @@ const RecipeDetails: React.FC = () => {
         setShoppingListItems(updatedShoppingListItems);
 
         try {
-            await putIngredients(updatedShoppingListItems);
+            await updateIngredients(updatedShoppingListItems);
         } catch (error: unknown) {
             console.log(error)
         }
-
         closeModal();
     };
     
