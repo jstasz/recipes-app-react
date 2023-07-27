@@ -106,7 +106,7 @@ const RecipeDetails: React.FC = () => {
                                     className={`material-symbols-outlined 
                                     ${styles['select-icon']}
                                     ${selectedIngredients.find(ing => ing.id === ingredient.id) ? styles.active : ''}`}>
-                                        {selectedIngredients.find(ing => ing.id !== ingredient.id) ? 'add_circle' : 'remove_circle'}
+                                       {selectedIngredients.find(ing => ing.id === ingredient.id) ? 'remove_circle' : 'add_circle'}
                                 </span> 
                                 <label>{ingredient.name}</label>
                             </li>
