@@ -57,6 +57,16 @@ const ShoppingList: React.FC = () => {
         }
     }
 
+    const clearShoppingList = async () => {
+        setShoppingListItems([]);
+
+        try {
+            await updateIngredients([]);
+        } catch (error: unknown) {
+            console.log(error)
+        }
+    }
+
     return (
         <div className={styles['shopping-list-box']}>
             <h1>Shopping list</h1> 
@@ -71,7 +81,7 @@ const ShoppingList: React.FC = () => {
                         >remove_circle</span>
                     </li>)}
                 </ul>
-                <p className={styles['remove-all']} onClick={() => setShoppingListItems([])}>remove all</p>
+                <p className={styles['remove-all']} onClick={() => clearShoppingList()}>remove all</p>
                 </>
             }
         </div>
