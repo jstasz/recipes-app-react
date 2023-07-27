@@ -47,7 +47,7 @@ const NewRecipe: React.FC = () => {
     } = useInput(value => value.trim() !== '');
 
     async function postRecipe(recipe: Recipe) {
-        await fetch(`https://react-recipes-e4b3f-default-rtdb.firebaseio.com/${loggedUser.replace('.', ',')}.json`, {
+        await fetch(`https://react-recipes-e4b3f-default-rtdb.firebaseio.com/${loggedUser.replace('.', ',')}/recipes.json`, {
           method: 'POST',
           body: JSON.stringify(recipe),
           headers: {

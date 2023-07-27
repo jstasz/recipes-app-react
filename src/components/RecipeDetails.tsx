@@ -21,7 +21,7 @@ const RecipeDetails: React.FC = () => {
     const messageForNotLoggedIn = 'select a recipe to see details';
 
     const [selectedIngredients, setSelectedIngredients] = useState<{id: number, name: string}[]>([]);
-    const { setShoppingListItems } = useContext(ShoppingListContext);
+    const { shoppingListItems, setShoppingListItems } = useContext(ShoppingListContext);
 
     const selectIngredientsHandler = (ingredient: {id: number, name: string}) => {
         const ingredientIsSelected = selectedIngredients.find(ing => ing.id === ingredient.id);
@@ -38,8 +38,30 @@ const RecipeDetails: React.FC = () => {
         setSelectedIngredients([]);
     };
 
-    const addIngredients = () => {
-        setShoppingListItems(prevState => [...prevState, ...selectedIngredients])
+    async function putIngredients(shoppingListItems: {id: number, name: string}[]) {
+        try {
+            await fetch(`https://react-recipes-e4b3f-default-rtdb.firebaseio.com/${loggedUser.replace('.', ',')}/shopping-list.json`, {
+                method: 'PUT',
+                body: JSON.stringify(shoppingListItems),
+                headers: {
+                  'Content-Type' : 'aplication/json'
+                }
+            })
+        } catch (error: unknown) {
+            console.log(error)
+        }
+    };
+
+    const addIngredients = async () => {
+        const updatedShoppingListItems = [...shoppingListItems, ...selectedIngredients];
+        setShoppingListItems(updatedShoppingListItems);
+
+        try {
+            await putIngredients(updatedShoppingListItems);
+        } catch (error: unknown) {
+            console.log(error)
+        }
+
         closeModal();
     };
     

@@ -7,11 +7,14 @@ import Button from './UI/Button';
 import useInput from '../hooks/use-input';
 import styles from './AuthForm.module.css';
 import MainForm from './UI/Form';
+import { ShoppingListContext } from './store/shopping-list-context';
 
 const AuthForm = () => {
     const [searchParams] = useSearchParams();
     const isLoginMode = searchParams.get('authMode') === 'login';
+
     const { loggedUser, setLoggedUser } = useContext(AuthContext);
+    const { setShoppingListItems } = useContext(ShoppingListContext);
     
     const [formIsValid, setFormIsValid] = useState(false);
     const [authError, setAuthError] = useState('');
@@ -25,7 +28,7 @@ const AuthForm = () => {
         valueBlurHandler: emailBlurHandler, 
         valueChangeHandler: emailChangeHandler,
         resetValue: resetEnteredEmail
-      } = useInput(value => value.trim() !== '' && value.includes('@'));
+    } = useInput(value => value.trim() !== '' && value.includes('@'));
 
     const { 
         value: enteredPassword, 
@@ -34,7 +37,7 @@ const AuthForm = () => {
         valueBlurHandler: passwordBlurHandler, 
         valueChangeHandler: passwordChangeHandler,
         resetValue: resetEnteredPassword
-      } = useInput(value => value.trim().length > 5);
+    } = useInput(value => value.trim().length > 5);
 
     const signIn = () => {
         signInWithEmailAndPassword(auth, enteredEmail, enteredPassword)
@@ -76,6 +79,15 @@ const AuthForm = () => {
             }
         });
     };
+
+    const logout = async () => {
+        try {
+            setLoggedUser('');
+            setShoppingListItems([]);
+        } catch (error) {
+
+        }
+    }
 
     const formSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -142,7 +154,7 @@ const AuthForm = () => {
             <>
                 <p>{`You are logged in as ${loggedUser}`}</p>
                 <p>If you want to use a different address, please 
-                    <span className={styles.logout} onClick={() => setLoggedUser('')}> log out.</span>
+                    <span className={styles.logout} onClick={logout}> log out.</span>
                 </p>
                 </> 
             : form}
