@@ -1,3 +1,15 @@
+.new-recipe {
+    font-size: 1.5rem;
+    height: 80vh;
+    margin-top: 5em;
+}
+
+.page-title {
+    color: rgb(169, 169, 255);
+    font-weight: bold;
+    font-size: 2.8rem;
+}
+
 .error-text,
 .invalid-text {
   color: rgb(224, 99, 99);
@@ -9,6 +21,7 @@
 
 .ingredients {
     display: flex;
+    align-items: center;
     width: 100%;
 }
 
@@ -16,11 +29,12 @@
     list-style: none;
     height: 100px;
     overflow: scroll;
-    margin: 1em 0;
     font-size: 1.5rem;
     background-color: rgba(0, 0, 0, 0.7);
     padding: 0.5em;
     color: grey;
+    width: 90%;
+    margin: 1em auto;
 }
 
 .ingredient {
@@ -40,11 +54,15 @@
 }
 
 .add-icon {
-    color: rgb(141, 201, 141);
-    font-size: 3rem;
+    color: rgb(169, 169, 255);
 }
 
 .remove-icon {
     color: rgb(198, 114, 114);
     font-size: 2rem;
+}
+
+.form-control {
+    width: 90%;
+    margin: 1em auto;
 }

@@ -10,15 +10,19 @@
   
   .modal {
     position: fixed;
-    top: 20vh;
-    width: 90%;
-    background-color: rgb(202, 202, 202);
-    padding: 1em;
+    /* top: 20vh; */
+    overflow: scroll;
+    top:10%;
+    left: 10%;
+    height: 80%;
+    width: 80%;
+    background-color: rgb(37, 37, 37);
+    /* padding: 1.5em 1em; */
     border-radius: 14px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
     z-index: 1030;
     animation: slide-down 300ms ease-out forwards;
-    color: rgb(30, 30, 30);
+    color: rgb(241, 241, 241);
   }
   
   @media (min-width: 768px) {

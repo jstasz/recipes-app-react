@@ -11,8 +11,8 @@ function RecipesPage() {
         <RecipesProvider>
                 {params.mode === 'new' && <NewRecipe />}
                 {params.mode === 'details' && <>
-                    <RecipesList />
                     <RecipeDetails />
+                    <RecipesList />
                 </>}
         </RecipesProvider>
     );

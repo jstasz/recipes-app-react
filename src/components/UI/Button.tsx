@@ -4,8 +4,9 @@ import { useNavigate } from 'react-router-dom';
 
 const Button: React.FC<{
     children: ReactNode, 
-    className?: string; 
-    type: "button" | "submit" | "reset" | undefined;
+    className?: string,
+    type: "button" | "submit" | "reset" | undefined,
+    icon?: string,
     disabled?: boolean,
     navigationPath?: string,
     onClick?: () => void }> = (props) => {
@@ -23,9 +24,11 @@ const Button: React.FC<{
     };
 
     return (
-        <button className={`${styles.button} ${props.className}`} onClick={clickHandler} type={props.type} disabled={props.disabled}>
-            {props.children}
+        <div className={styles.button}>
+        <button className={`material-symbols-outlined ${styles['button-icon']} ${props.className} `} onClick={clickHandler} type={props.type} disabled={props.disabled}> {props.icon}
         </button>
+        <p className={styles['button-title']}>{props.children}</p>
+        </div>
     );
 };
 

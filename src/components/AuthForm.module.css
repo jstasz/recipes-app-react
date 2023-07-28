@@ -16,6 +16,10 @@
   font-size: 1.3rem;
 }  
 
+.actions {
+  margin-top: 1em;
+}
+
 .link {
   text-decoration: none;
   background-color: transparent;
@@ -25,3 +29,10 @@
 .link:hover {
   color: white;
 } 
+
+.form-control {
+  width: 90%;
+  margin: 0 auto;
+}
+
+

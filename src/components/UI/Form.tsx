@@ -8,7 +8,7 @@ const MainForm : React.FC<{
     onSubmit: (event: React.FormEvent<HTMLFormElement>) => void }>= (props) => {
 
     return (
-    <Form className={styles.form} onSubmit={props.onSubmit}>
+    <Form className={`${styles.form} ${props.className}`} onSubmit={props.onSubmit}>
             {props.children}
     </Form>
     )

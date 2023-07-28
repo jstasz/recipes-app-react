@@ -4,7 +4,6 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    /* background-image: url(../../img/mainImage.jpeg); */
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -27,6 +26,8 @@
     color: white;
     font-size: 1.8rem;
     width: 100%;
+    max-height: 100vh;
+    overflow: scroll;
 }
 
 .image-content h1 {

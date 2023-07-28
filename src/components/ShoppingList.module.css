@@ -1,32 +1,48 @@
+.page-title {
+    color: rgb(169, 169, 255);
+    font-weight: bold;
+    font-size: 2.8rem;
+    padding-bottom: 1em;
+}
+
+.shopping-list {
+    font-size: 1.6rem;
+    width: 100%;
+    margin: 3em auto 0;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
 .shopping-list-box {
-    max-height: 100vh;
+    height: 60vh;
     overflow: scroll;
-    font-size: 2rem;
-    width: 70%;
-    margin: 0 auto;
 }
 
 .shopping-list-item {
-    color: rgb(231, 231, 231);
+    /* color: rgb(231, 231, 231); */
     padding: 0.5em;
     display: flex;
-    justify-content: center;
+    width: 100%;
+    justify-content: space-between;
     align-items: center;
+    text-align: left;
 }
 
-.shopping-list-box .icon {
+.shopping-list .icon {
     margin-left: 1em;
     cursor: pointer;
     padding: 0.1em;
     color: grey;
 }
 
-.shopping-list-box .icon:hover,
-.shopping-list-box .remove-all:hover {
+.shopping-list .icon:hover,
+.shopping-list .remove-all:hover {
     color: rgb(169, 169, 255);
 }
 
-.shopping-list-box .remove-all {
+.shopping-list .remove-all {
     margin-top: 1.5em;
     color: grey;
     cursor: pointer;

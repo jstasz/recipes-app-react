@@ -17,9 +17,6 @@ const RecipeDetails: React.FC = () => {
     const allRecipes = loggedUser ? [...loadedRecipes, ...userRecipes] : loadedRecipes;
     const activeRecipe = recipeId ? allRecipes.find(recipe => recipe.id === +recipeId) : undefined;
 
-    const messageForLoggedIn = 'select a recipe to see details or';
-    const messageForNotLoggedIn = 'select a recipe to see details';
-
     const [ selectedIngredients, setSelectedIngredients ] = useState<{id: number, name: string}[]>([]);
     const { shoppingListItems } = useContext(ShoppingListContext);
 
@@ -74,6 +71,12 @@ const RecipeDetails: React.FC = () => {
         <>
         {!isLoadingRecipes && (
             <>
+            {loggedUser && 
+            <Button type='button' className={styles['add-recipe']} navigationPath="/recipes/new" icon="add"> add new recipe </Button>}
+            {recipeId === '0' && 
+                <p className={styles['select-recipe']}>
+                    Select recipe to see details
+                </p>}
             {recipeId !== '0' && 
                 <div className={styles['recipe-box']}>
                     <div className={styles['recipe-ingredients']}>
@@ -94,12 +97,6 @@ const RecipeDetails: React.FC = () => {
                     <div className={styles['recipe-img']} style={{backgroundImage: `url(${activeRecipe?.imageUrl})`}}></div>
                     <div className={styles['recipe-instruction']}><p>{activeRecipe?.instruction}</p></div>
                 </div>}
-            {recipeId === '0' && 
-                <p className={styles['select-recipe']}>{recipeId === '0' && !loggedUser ? 
-                    messageForNotLoggedIn : messageForLoggedIn}
-                </p>}
-            {loggedUser && 
-            <Button type='button' className={styles['add-recipe']} navigationPath="/recipes/new"> + Add new recipe </Button>}
             {activeModal && 
             <Modal onClose={closeModal}>
                 <div className={styles['ingredients-modal']}>
@@ -119,8 +116,8 @@ const RecipeDetails: React.FC = () => {
                         )}
                 </ul>
                 <div className={styles.actions}>
-                    <p>add to shopping list </p>
-                    <span className={`material-symbols-outlined ${styles['add-icon']}`} onClick={addIngredients}>add_circle</span>
+                    <Button type="button" icon="add" onClick={addIngredients} >Add</Button>
+       
                 </div>
                 </div>
             </Modal>}
