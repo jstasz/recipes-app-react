@@ -20,7 +20,7 @@ const RecipeDetails: React.FC = () => {
     const messageForLoggedIn = 'select a recipe to see details or';
     const messageForNotLoggedIn = 'select a recipe to see details';
 
-    const [selectedIngredients, setSelectedIngredients] = useState<{id: number, name: string}[]>([]);
+    const [ selectedIngredients, setSelectedIngredients ] = useState<{id: number, name: string}[]>([]);
     const { shoppingListItems, setShoppingListItems } = useContext(ShoppingListContext);
 
     const selectIngredientsHandler = (ingredient: {id: number, name: string}) => {
@@ -53,8 +53,14 @@ const RecipeDetails: React.FC = () => {
     };
 
     const addIngredients = async () => {
-        const updatedShoppingListItems = [...shoppingListItems, ...selectedIngredients];
-        setShoppingListItems(updatedShoppingListItems);
+        const updatedShoppingListItems = [...shoppingListItems];
+
+        for (const ingredient of selectedIngredients) {
+            const isDuplicate = shoppingListItems.some(item => item.id === ingredient.id);
+            if (!isDuplicate) {
+                updatedShoppingListItems.push(ingredient);
+            }
+        }
 
         try {
             await updateIngredients(updatedShoppingListItems);
