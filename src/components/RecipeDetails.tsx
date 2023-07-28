@@ -71,13 +71,13 @@ const RecipeDetails: React.FC = () => {
         <>
         {!isLoadingRecipes && (
             <>
-            {loggedUser && 
-            <Button type='button' className={styles['add-recipe']} navigationPath="/recipes/new" icon="add"> add new recipe </Button>}
-            {recipeId === '0' && 
+            {/* {loggedUser && 
+            <Button type='button' className={styles['add-recipe']} navigationPath="/recipes/new" icon="add"> add new recipe </Button>} */}
+            {/* {recipeId === '0' && 
                 <p className={styles['select-recipe']}>
                     Select recipe to see details
-                </p>}
-            {recipeId !== '0' && 
+                </p>} */}
+            {/* {recipeId !== '0' &&  */}
                 <div className={styles['recipe-box']}>
                     <div className={styles['recipe-ingredients']}>
                         <p className={styles.title}>{activeRecipe?.name}</p>
@@ -96,7 +96,7 @@ const RecipeDetails: React.FC = () => {
                     </div>
                     <div className={styles['recipe-img']} style={{backgroundImage: `url(${activeRecipe?.imageUrl})`}}></div>
                     <div className={styles['recipe-instruction']}><p>{activeRecipe?.instruction}</p></div>
-                </div>}
+                </div>
             {activeModal && 
             <Modal onClose={closeModal}>
                 <div className={styles['ingredients-modal']}>

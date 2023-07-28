@@ -16,7 +16,7 @@ const Nav: React.FC = () => {
                     className={({isActive}) => isActive ? `${navLinkClasses} ${styles.active}` : navLinkClasses} end>home
                 </NavLink>
                 <NavLink 
-                    to="recipes/details/0" 
+                    to="recipes/list" 
                     className={({isActive}) => isActive ? `${navLinkClasses} ${styles.active}` : navLinkClasses}>ramen_dining
                 </NavLink>
                 {loggedUser && <NavLink 

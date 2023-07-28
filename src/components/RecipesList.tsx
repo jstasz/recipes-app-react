@@ -3,6 +3,7 @@ import styles from './RecipesList.module.css'
 import { RecipesContext, RecipesContextType } from "./store/recipes-context";
 import { AuthContext } from "./store/auth-context";
 import RecipeListItem from "./RecipeListItem";
+import Button from "./UI/Button";
 
 function RecipesList() {
     const [error, setError] = useState<string | null>(null);
@@ -136,8 +137,11 @@ function RecipesList() {
     return (
         <div>
             <div className={styles.wrapper}>
+            {loggedUser && 
+                 <div className={styles['add-action']}>
+            <Button type='button' className={styles['add-recipe']} navigationPath="/recipes/new" icon="add"> add new recipe </Button></div>} 
                 {error && <p>{error}</p>}
-                {isLoadingRecipes && <p>loading...</p>}
+                {isLoadingRecipes && <p className={styles['recipes-loading']}>loading...</p>}
                 {!isLoadingRecipes && <>
                     <div className={styles.recipes}>
                         <p className={styles.icon} onClick={() => handleScroll('left', 215)}>
