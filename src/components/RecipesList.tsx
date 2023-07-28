@@ -1,8 +1,8 @@
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import styles from './RecipesList.module.css'
-import RecipeItem from "./RecipeItem";
 import { RecipesContext, RecipesContextType } from "./store/recipes-context";
 import { AuthContext } from "./store/auth-context";
+import RecipeListItem from "./RecipeListItem";
 
 function RecipesList() {
     const [error, setError] = useState<string | null>(null);
@@ -27,7 +27,7 @@ function RecipesList() {
         const options = {
 	        method: 'GET',
 	        headers: {
-		        'X-RapidAPI-Key': '8b7217ce7dmshc2fdcaf5c95ffeep151427jsnc81d0dcf9e5d',
+		        'X-RapidAPI-Key': '41c65bbbfemshce1a1320e84303dp115474jsn487cf7012410',
 		        'X-RapidAPI-Host': 'tasty.p.rapidapi.com'
 	        }
         };
@@ -84,10 +84,10 @@ function RecipesList() {
         if(loggedUser) {
             try {
                 const response = await fetch(
-                    `https://react-recipes-e4b3f-default-rtdb.firebaseio.com/${loggedUser.replace('.', ',')}.json`);
+                    `https://react-recipes-e4b3f-default-rtdb.firebaseio.com/${loggedUser.replace('.', ',')}/recipes.json`);
     
                 if(!response.ok) {
-                    throw new Error(`Sorry, problem with downloading yourrecipes!`)
+                    throw new Error(`Sorry, problem with downloading your recipes!`)
                 };
     
                 const data = await response.json();
@@ -145,7 +145,7 @@ function RecipesList() {
                         </p>
                         <ul className={styles['recipes-list']} ref={scrollContainerRef}>
                         {allRecipes.map(recipe => {
-                            return <RecipeItem 
+                            return <RecipeListItem 
                                         key={recipe.id} 
                                         id={recipe.id} 
                                         name={recipe.name}  

@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import styles from './RecipeItem.module.css';
+import styles from './RecipeListItem.module.css';
 
-const RecipeItem: React.FC<{
+const RecipeListItem: React.FC<{
         id: number, 
         name: string, 
         imageUrl: string}> = (props) => {
@@ -21,4 +21,4 @@ const RecipeItem: React.FC<{
     )
 }
 
-export default RecipeItem;
+export default RecipeListItem;

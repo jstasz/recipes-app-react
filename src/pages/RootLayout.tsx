@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Nav from "../components/Nav";
-import HeroImage from "../components/HeroImage";
+import HeroImage from "../components/UI/HeroImage";
 
 function RootLayout() {
     return (

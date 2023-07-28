@@ -21,44 +21,33 @@
 }
 
 .recipe-ingredients {
-    width: 100%;
     overflow: scroll;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 0.5em;
-    height: 100%;
+    margin: 1em;
+    padding-right: 1em;
 }
 
 .recipe-ingredients-list {
-    height: 70%;
     list-style: none;
-    overflow: scroll;
     padding-right: 1em;
+    margin-bottom: 1em;
 }
 
 .recipe-ingredients .title {
     font-size: 2.2rem;
     color: rgb(142, 142, 143);
     font-weight: bold;
-    margin-right: 1em;
 }
 
-.recipe-ingredients .ingredients-title {
+.ingredients-title {
     color: grey;
     font-size: 1.8rem;
-    margin-bottom: 1.2em;
-}
-
-.add-to-shopping-list {
-    font-size: 1.5rem;
-    margin: 1em auto 0;
+    margin: 0.5em 0 0.2em 0;
+    text-align: center;
 }
 
 .recipe-instruction {
-    margin: 1em 2em 2em 2em;
-    padding: 1em;
+    margin: 1em;
+    padding-left: 1em;
     overflow: scroll;
 }
 
@@ -68,5 +57,52 @@
 
 .add-recipe {
     font-size: 1.7rem; 
+}
+
+.ingredients-modal {
+    overflow: scroll;
+    max-height: 100vh;
+}
+
+.ingredients-modal .recipe-ingredients-list {
+    margin: 2em 0;
+}
+
+.ingredients-modal .ingredient {
+    line-height: 1.4;
+    display: flex;
+    align-items: center;
+    padding: 0.5em 0;
+    border-bottom: thin solid rgb(165, 165, 165);
+}
+
+.ingredients-modal .ingredients-title {
+    color: rgb(155, 155, 215);
+    font-weight: bold;
+}
+
+.ingredients-modal .select-icon {
+    margin-right: 0.5em;
+    color: grey;
+    cursor: pointer;
+}
+
+.ingredients-modal .select-icon.active {
+    color: rgb(155, 155, 215);
+}
+
+.ingredients-modal .actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: grey;
+}
+
+.ingredients-modal .add-icon {
+    color: rgb(126, 126, 203);
+    font-size: 4.5rem;
+    margin-left: 0.2em;
+    font-variation-settings: 'FILL' 1;
+    cursor: pointer;
 }
 

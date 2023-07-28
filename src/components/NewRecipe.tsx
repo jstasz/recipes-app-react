@@ -1,8 +1,8 @@
 import styles from './NewRecipe.module.css'
 import useInput from '../hooks/use-input';
-import Button from './Button';
+import Button from './UI/Button';
 import { useContext, useEffect, useState } from 'react';
-import MainForm from './Form';
+import MainForm from './UI/Form';
 import Recipe from '../models/recipe';
 import { AuthContext } from './store/auth-context';
 
@@ -47,7 +47,7 @@ const NewRecipe: React.FC = () => {
     } = useInput(value => value.trim() !== '');
 
     async function postRecipe(recipe: Recipe) {
-        await fetch(`https://react-recipes-e4b3f-default-rtdb.firebaseio.com/${loggedUser.replace('.', ',')}.json`, {
+        await fetch(`https://react-recipes-e4b3f-default-rtdb.firebaseio.com/${loggedUser.replace('.', ',')}/recipes.json`, {
           method: 'POST',
           body: JSON.stringify(recipe),
           headers: {
