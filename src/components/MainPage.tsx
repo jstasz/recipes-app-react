@@ -11,7 +11,7 @@ const MainPage = () => {
             <p>get inspired with our</p>
             <Button 
                 type="button" 
-                navigationPath="recipes/details/0"
+                navigationPath="recipes/list"
                 icon='format_list_bulleted'>Recipes List
             </Button>
             <p>or</p>

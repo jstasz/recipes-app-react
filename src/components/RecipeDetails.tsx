@@ -10,7 +10,7 @@ import { ShoppingListContext } from './store/shopping-list-context';
 const RecipeDetails: React.FC = () => {
 
     const { recipeId } = useParams();
-    const { loadedRecipes, isLoadingRecipes, userRecipes } = useContext(RecipesContext);
+    const { loadedRecipes, userRecipes } = useContext(RecipesContext);
     const { loggedUser } = useContext(AuthContext);
     const [activeModal, setActiveModal] = useState(false);
 
@@ -69,32 +69,33 @@ const RecipeDetails: React.FC = () => {
     
     return (
         <>
-        {!isLoadingRecipes && (
-            <>
-            {/* {loggedUser && 
-            <Button type='button' className={styles['add-recipe']} navigationPath="/recipes/new" icon="add"> add new recipe </Button>} */}
-            {/* {recipeId === '0' && 
-                <p className={styles['select-recipe']}>
-                    Select recipe to see details
-                </p>} */}
-            {/* {recipeId !== '0' &&  */}
+                <div className={styles['back-action']}>
+                    <Button 
+                    type="button" 
+                    icon="arrow_back"
+                    navigationPath="/recipes/list"
+                    >Back to list</Button>
+                </div>
                 <div className={styles['recipe-box']}>
+                <p className={styles.title}>{activeRecipe?.name}</p>
+                <div className={styles['recipe-img']} style={{backgroundImage: `url(${activeRecipe?.imageUrl})`}}></div>
                     <div className={styles['recipe-ingredients']}>
-                        <p className={styles.title}>{activeRecipe?.name}</p>
+                       
                         <ul className={styles['recipe-ingredients-list']}>
-                            <p className={styles['ingredients-title']}>ingredients list</p>
+                            <p className={styles['ingredients-title']}>ingredients</p>
                             {activeRecipe?.ingredients.map(ingredient => 
                             <li key={ingredient.id}>{ingredient.name}</li>)}
                         </ul>
                         {loggedUser && 
                         <Button 
                             type="button" 
+                            icon="add"
                             className={styles['add-to-shopping-list']} 
                             onClick={() => setActiveModal(true)}
-                            >Add to shopping list
+                            >Add to list
                         </Button>}
                     </div>
-                    <div className={styles['recipe-img']} style={{backgroundImage: `url(${activeRecipe?.imageUrl})`}}></div>
+                    
                     <div className={styles['recipe-instruction']}><p>{activeRecipe?.instruction}</p></div>
                 </div>
             {activeModal && 
@@ -122,9 +123,10 @@ const RecipeDetails: React.FC = () => {
                 </div>
             </Modal>}
           </>
-        )}
-       </>
-    );
-}
+        )
+        }
+    //    </>
+    // );
+// }
 
 export default RecipeDetails;
