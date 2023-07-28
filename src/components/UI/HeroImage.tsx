@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react'
 import styles from './HeroImage.module.css';
 
 const HeroImage: React.FC<{children: ReactNode, imageUrl: string}> = (props) => {

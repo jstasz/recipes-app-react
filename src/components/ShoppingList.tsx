@@ -9,9 +9,12 @@ const ShoppingList: React.FC = () => {
     const { shoppingListItems, setShoppingListItems } = useContext(ShoppingListContext);
     const { loggedUser } = useContext(AuthContext);
     const [ displayedItems, setDIsplayeditems ] = useState<{id: number, name: string}[]>([]);
+    const [ shoppingListIsLoading, setShoppingListIsLoading] = useState(false);
 
     useEffect(() => {
-        setDIsplayeditems(shoppingListItems)
+        setShoppingListIsLoading(true);
+        setDIsplayeditems(shoppingListItems);
+        setShoppingListIsLoading(false);
     }, [shoppingListItems])
 
     const fetchShoppingListFromDatabase = useCallback( async (loggedUser: string) => {
@@ -68,7 +71,9 @@ const ShoppingList: React.FC = () => {
     }
 
     return (
-        <div className={styles['shopping-list-box']}>
+        <>
+        {shoppingListIsLoading && <p>Loading Shopping List</p>}
+        {!shoppingListIsLoading && <div className={styles['shopping-list-box']}>
             <h1>Shopping list</h1> 
             {displayedItems.length === 0 ? <p>you have no products added to your shopping list</p> :
                 <>
@@ -84,7 +89,8 @@ const ShoppingList: React.FC = () => {
                 <p className={styles['remove-all']} onClick={() => clearShoppingList()}>remove all</p>
                 </>
             }
-        </div>
+        </div>}
+        </>
     )
 }
 

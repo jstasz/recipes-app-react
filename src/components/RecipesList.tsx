@@ -27,7 +27,7 @@ function RecipesList() {
         const options = {
 	        method: 'GET',
 	        headers: {
-		        'X-RapidAPI-Key': '8b7217ce7dmshc2fdcaf5c95ffeep151427jsnc81d0dcf9e5d',
+		        'X-RapidAPI-Key': '41c65bbbfemshce1a1320e84303dp115474jsn487cf7012410',
 		        'X-RapidAPI-Host': 'tasty.p.rapidapi.com'
 	        }
         };
