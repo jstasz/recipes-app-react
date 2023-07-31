@@ -1,19 +1,37 @@
+import { useContext } from "react";
 import Button from "./UI/Button";
-// import HeroImage from "./UI/HeroImage";
+import { AuthContext } from "./store/auth-context";
 
 const MainPage = () => {
+    const { loggedUser } = useContext(AuthContext);
 
     return (
         <>
-        {/* // <HeroImage imageUrl="https://asianinspirations.com.au/wp-content/uploads/2019/07/Chinese-Cooking-Hacks.jpg"> */}
             <h1>Recipes App</h1>
             <p>get inspired with our</p>
-            <Button type="button" navigationPath="recipes/details/0">Recipes List</Button>
+            <Button 
+                type="button" 
+                navigationPath="recipes/list"
+                icon='format_list_bulleted'>Recipes List
+            </Button>
             <p>or</p>
-            <Button type="button" navigationPath="/auth">Login</Button>
+            {!loggedUser && <>
+            <Button 
+                type="button" 
+                navigationPath="/auth" 
+                icon='login'>Login
+            </Button>
             <p>to add your own recipes</p>
             <p>and create a shopping list</p>
-        {/* // </HeroImage> */}
+            </>}
+            {loggedUser && <>
+            <Button 
+                type="button" 
+                navigationPath="/recipes/new" 
+                icon='add'>Add recipe
+            </Button>
+            <p>and create your shopping list</p>
+            </>}
     
     </>
     )

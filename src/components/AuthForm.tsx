@@ -112,8 +112,8 @@ const AuthForm = () => {
     const form = <> 
         {authError && <p className={styles['error-text']}>{authError}</p>}
         <MainForm className={styles.form} onSubmit={formSubmitHandler}>
-            <h1>{isLoginMode ? 'Log in' : 'Create new user'}</h1>
-            <div>
+            <h1>{isLoginMode ? 'Log In' : 'Create User'}</h1>
+            <div className={styles['form-control']}>
                 <label htmlFor="email">email</label>
                 <input 
                     id="email" 
@@ -126,7 +126,7 @@ const AuthForm = () => {
                 />
                  {emailInputHasError && <p className={styles['invalid-text']}>Please enter valid email!</p>}
             </div>
-            <div>
+            <div className={styles['form-control']}>
                 <label htmlFor="password">password</label>
                 <input 
                     id="password" 
@@ -139,11 +139,11 @@ const AuthForm = () => {
                 />
                  {passwordInputHasError && <p className={styles['invalid-text']}>Please enter valid password! Min 5!</p>}
             </div>
-            <div className="actions">
+            <div className={styles.actions}>
               <Link to={`?authMode=${isLoginMode ? 'signup' : 'login'}`} className={styles.link}>
                 {isLoginMode ? 'Create new user': 'Login'}
               </Link>
-              <Button type="submit" disabled={!formIsValid}>Save</Button>
+              <Button type="submit" disabled={!formIsValid} icon="check">Save</Button>
             </div>
         </MainForm>
         </>

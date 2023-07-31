@@ -1,5 +1,5 @@
 .wrapper {
-    margin: 2em auto;
+    margin: 3em auto;
     width: 100%;
     max-width: 1400px;
 }
@@ -8,16 +8,83 @@
     display: flex;
 }
 
-.recipes-list {
-    display: flex;
-    overflow-x: auto; 
-    white-space: nowrap;
-}
-
-.recipes .icon {
-    padding: 0.5em;
+.add-action {
+    position: fixed;
+    top: 6vh;
+    right: 0;
     display: flex;
     justify-content: center;
-    align-items: center;
+    padding: 1em;
+    width: 100%;
+    z-index: 1;
+    background-color: #242424cc;
+}
+
+.add-action .not-logged-in {
+    margin-top: 1em;
+    padding: 1em;
+    font-size: 1.5rem;
+    color: #7e7e7e;
+}
+
+.add-action .not-logged-in span {
+    color: #c9c9ff;
     cursor: pointer;
+}
+
+.recipes-list {
+    display: flex;
+    flex-direction: column;
+    margin-top: 9em;
+    width: 100%;
+}
+
+.recipes-loading {
+    margin-top: 3em;
+}
+
+@media (min-width: 576px) {
+    .recipes-loading {
+        font-size: 2rem
+    }
+
+    .wrapper {
+        width: 80%;
+    }
+}
+
+@media (min-width: 768px) {
+    .recipes-loading {
+        font-size: 2.3rem
+    }
+
+    .wrapper {
+        width: 70%;
+    }
+
+    .add-action .not-logged-in {
+        font-size: 1.8rem;
+    }
+}
+
+@media (min-width: 976px) {
+    .wrapper {
+        width: 100%;
+        max-width: 1400px;
+    }
+
+    .recipes-list {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+}
+
+@media (min-width: 1200px) {
+    .recipes-loading {
+        font-size: 2.5rem
+    }
+
+    .add-action .not-logged-in {
+        font-size: 2rem;
+    }
 }

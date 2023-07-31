@@ -1,54 +1,55 @@
-.recipe-box {
-    width: 1200px;
-    margin: 1em auto 2em;
-    height: 450px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    background-color: rgba(1, 1, 1,0.7);
+.back-action {
+    position: fixed;
+    top: 6vh;
+    right: 0;
+    display: flex;
+    justify-content: center;
     padding: 1em;
+    width: 100%;
+    background-color: #242424b3;
+    z-index: 1;
+}
+
+.recipe-box {
+    display: flex;
+    flex-direction: column;
+    margin-top: 16em;
+    padding: 1em;
+    width: 100%;
+    max-width: 1400px;
     font-size: 1.5rem;
     line-height: 1.8;
     border-radius: 10px;
 }
 
-.recipe-img {
+.recipe-box .title {
+    margin: 0.5em;
     width: 100%;
-    height: 100%;
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #8e8e8f;
+}
+
+.recipe-img {
+    margin: 1em 0;
+    height: 300px;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     border-radius: 10px;
 }
 
-.recipe-ingredients {
-    overflow: scroll;
-    margin: 1em;
-    padding-right: 1em;
-}
-
 .recipe-ingredients-list {
-    list-style: none;
-    padding-right: 1em;
     margin-bottom: 1em;
+    list-style: none;
 }
 
-.recipe-ingredients .title {
-    font-size: 2.2rem;
-    color: rgb(142, 142, 143);
+.section-title {
+    margin: 0.5em 0;
+    font-size: 2rem;
     font-weight: bold;
-}
-
-.ingredients-title {
-    color: grey;
-    font-size: 1.8rem;
-    margin: 0.5em 0 0.2em 0;
+    color: #808080;
     text-align: center;
-}
-
-.recipe-instruction {
-    margin: 1em;
-    padding-left: 1em;
-    overflow: scroll;
 }
 
 .select-recipe {
@@ -56,53 +57,121 @@
 }
 
 .add-recipe {
-    font-size: 1.7rem; 
+    order: -1;
 }
 
 .ingredients-modal {
-    overflow: scroll;
-    max-height: 100vh;
-}
-
-.ingredients-modal .recipe-ingredients-list {
-    margin: 2em 0;
-}
-
-.ingredients-modal .ingredient {
-    line-height: 1.4;
-    display: flex;
-    align-items: center;
-    padding: 0.5em 0;
-    border-bottom: thin solid rgb(165, 165, 165);
+   position: absolute;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   padding: 1em;
+   width: 100%;
+   height: 100%;
 }
 
 .ingredients-modal .ingredients-title {
-    color: rgb(155, 155, 215);
     font-weight: bold;
+    font-size: 1.7rem;
+    text-align: center;
+    color: #9b9bd7;
+}
+
+.ingredients-modal .recipe-ingredients-list {
+    margin: 2em 0 0 0;
+    height: 40vh;
+    overflow: scroll;
+}
+
+.ingredients-modal .ingredient {
+    display: flex;
+    align-items: center;
+    padding: 0.5em 0;
+    line-height: 1.4;
+    border-bottom: thin solid #434343;
 }
 
 .ingredients-modal .select-icon {
     margin-right: 0.5em;
-    color: grey;
+    color: #808080;
     cursor: pointer;
 }
 
 .ingredients-modal .select-icon.active {
-    color: rgb(155, 155, 215);
+    color: #9b9bd7;
 }
 
 .ingredients-modal .actions {
     display: flex;
     justify-content: flex-end;
-    align-items: center;
-    color: grey;
+    text-align: center;
+    margin-top: 1.5em;
+} 
+
+@media (min-width: 768px) {
+    .recipe-box .title {
+        margin: 0.5em 0 1em 0;
+        font-size: 2.4rem;
+    }
+
+    .recipe-box {
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin: 16em auto 0 auto;
+        width: 90%;
+        font-size: 1.6rem;
+    }
+
+    .recipe-img {
+        padding: 1em;
+        width: 50%;
+        height: 400px;
+    }
+
+    .recipe-ingredients {
+        margin: 1em 0;
+        padding: 1em;
+        width: 50%;
+        height: 400px;
+        overflow: scroll;
+    }
+
+    .recipe-instruction {
+        margin: 1em auto;
+        width: 80%;
+    }
+
+    .section-title {
+        font-size: 2.2rem;
+    }
+
+    .ingredients-modal .ingredients-title {
+        font-size: 1.8rem;
+    }
+
 }
 
-.ingredients-modal .add-icon {
-    color: rgb(126, 126, 203);
-    font-size: 4.5rem;
-    margin-left: 0.2em;
-    font-variation-settings: 'FILL' 1;
-    cursor: pointer;
+@media (min-width: 976px) {
+    .recipe-box {
+        font-size: 1.8rem;
+    }
 }
 
+
+@media (min-width: 1200px) {
+    .recipe-box .title {
+        font-size: 3rem;
+    }
+
+    .section-title {
+        font-size: 2.4rem;
+    }
+
+    .recipe-box {
+        width: 80%;
+    }
+
+    .ingredients-modal .ingredients-title {
+        font-size: 2rem;
+    }
+}

@@ -1,12 +1,12 @@
 .recipe {
-    margin: 1em;
+    position: relative;
+    flex-shrink: 0;
+    margin: 1.5em auto;
+    width: 80%;
+    height: 200px;
+    font-size: 0.8rem;
     overflow: hidden;
     cursor: pointer;
-    font-size: 0.8rem;
-    flex-shrink: 0;
-    width: 200px;
-    height: 200px;
-    position: relative;
 }
 
 .recipe-img {
@@ -20,19 +20,43 @@
 }
 
 .recipe-name {
-    background-color: rgba(5, 5, 5, 0.8);
-    font-size: 1.5rem;
     position: absolute;
     bottom: 5%;
-    width: 100%;
     padding: 0.5em;
+    width: 100%;
     height: auto;
+    font-size: 1.5rem;
+    background-color: #050505cc;
 }
 
 .recipe:hover .recipe-img {
     transform: scale(1.2);
 } 
 
-.modal label {
-    color: red
+@media (min-width: 576px) {
+    .recipe-name {
+        font-size: 1.8rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .recipe-name {
+        font-size: 2rem;
+    }
+
+    .recipe {
+        height: 300px;
+    }
+}
+
+@media (min-width: 976px) {
+    .recipe {
+        width: 45%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .recipe {
+        width: 30%;
+    }
 }

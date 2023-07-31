@@ -108,9 +108,12 @@ const NewRecipe: React.FC = () => {
     }, [enteredNameIsValid, enteredInstructionIsValid, enteredImageUrlIsValid, ingredients]);
 
     return (
-        <MainForm onSubmit={addRecipeHandler}>
-        <h1>Add new recipe</h1>
-        <div>
+        <>
+
+        <MainForm onSubmit={addRecipeHandler} className={styles['new-recipe']}>
+        <p className={styles['page-title']}>New Recipe</p>
+        <div className={styles['new-recipe-form']}>
+        <div className={styles['form-control']}>
             <label htmlFor="name">name</label>
             <input 
                 id="name" 
@@ -123,7 +126,7 @@ const NewRecipe: React.FC = () => {
             />
             {nameInputHasError && <p className={styles['invalid-text']}>Please enter valid name!</p>}
         </div>
-        <div>
+        <div className={styles['form-control']}>
             <label htmlFor="instruction">instruction</label>
             <textarea 
                 id="instruction" 
@@ -135,7 +138,7 @@ const NewRecipe: React.FC = () => {
             />
             {instructionInputHasError && <p className={styles['invalid-text']}>Please enter valid instruction!</p>}
         </div>
-        <div>
+        <div className={styles['form-control']}>
             <label htmlFor="image url">image url</label>
             <input 
                 id="imageUrl" 
@@ -148,7 +151,7 @@ const NewRecipe: React.FC = () => {
             />
             {imageUrlInputHasError && <p className={styles['invalid-text']}>Please enter valid image url!</p>}
         </div>
-        <div>
+        <div className={styles['form-control']}>
             <label htmlFor="ingredients">ingredient</label>
             <div className={styles.ingredients}>
                 <input 
@@ -180,8 +183,10 @@ const NewRecipe: React.FC = () => {
             )}
             </ul> : <p>ingredients list</p>}
         </div>
-        <Button type="submit" disabled={!formIsValid}>Save</Button>
+        <Button type="submit" className='button' disabled={!formIsValid} icon="add">Save</Button>
+        </div>
     </MainForm>
+    </>
     )
 }
 

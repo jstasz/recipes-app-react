@@ -73,11 +73,11 @@ const ShoppingList: React.FC = () => {
     return (
         <>
         {shoppingListIsLoading && <p>Loading Shopping List</p>}
-        {!shoppingListIsLoading && <div className={styles['shopping-list-box']}>
-            <h1>Shopping list</h1> 
+        {!shoppingListIsLoading && <div className={styles['shopping-list']}>
+            <p className={styles['page-title']}>Shopping list</p> 
             {displayedItems.length === 0 ? <p>you have no products added to your shopping list</p> :
                 <>
-                <ul>
+                <ul className={styles['shopping-list-box']}>
                 {displayedItems.map(item => 
                     <li key={item.id} className={styles['shopping-list-item']}>{item.name}
                         <span 

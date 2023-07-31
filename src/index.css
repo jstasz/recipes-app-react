@@ -20,6 +20,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: rgb(1, 1, 1);
   color: white;
+  font-size: 1.6rem;
 }
 
 code {
@@ -30,5 +31,17 @@ code {
 @media (min-width: 768px) {
   body {
       font-size: 1.4rem;
+  }
+}
+
+@media (min-width: 976px) {
+  body {
+      font-size: 1.6rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  body {
+      font-size: 1.8rem;
   }
 }

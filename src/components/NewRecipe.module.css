@@ -1,6 +1,18 @@
+.new-recipe {
+    margin-top: 5em;
+    height: 80vh;
+}
+
+.page-title {
+    margin: 1em 0;
+    font-weight: bold;
+    font-size: 2.8rem;
+    color: #a9a9ff;
+}
+
 .error-text,
 .invalid-text {
-  color: rgb(224, 99, 99);
+  color: #e06363;
 } 
 
 .invalid-text {
@@ -9,42 +21,98 @@
 
 .ingredients {
     display: flex;
+    align-items: center;
     width: 100%;
 }
 
 .ingredients-list {
-    list-style: none;
-    height: 100px;
-    overflow: scroll;
-    margin: 1em 0;
-    font-size: 1.5rem;
-    background-color: rgba(0, 0, 0, 0.7);
+    margin: 1em auto;
     padding: 0.5em;
-    color: grey;
+    width: 90%;
+    height: 100px;
+    font-size: 1.5rem;
+    color: #808080;
+    background-color: #000000b3;
+    list-style: none;
+    overflow: scroll;
 }
 
 .ingredient {
     display: flex;
     justify-content: space-between;
-    border-bottom: thin solid rgb(46, 46, 46);
     padding: 0.5em;
+    border-bottom: thin solid #2e2e2e;
 }
 
 .icon {
-    padding-left: 0.3em;
-    cursor: pointer;
-    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-left: 0.3em;
+    height: 100%;
+    cursor: pointer;
 }
 
 .add-icon {
-    color: rgb(141, 201, 141);
-    font-size: 3rem;
+    color: #a9a9ff;
 }
 
 .remove-icon {
-    color: rgb(198, 114, 114);
-    font-size: 2rem;
+    color: #c67272;
+}
+
+.new-recipe-form {
+    margin-top: 2em;
+}
+
+.form-control {
+    margin: 1em auto;
+    width: 90%;
+}
+
+@media (min-width: 576px) {
+    .icon {
+        font-size: 2.5rem;
+    }
+
+    .page-title {
+        font-size: 3rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .icon {
+        font-size: 2.7rem;
+    }
+
+    .page-title {
+        font-size: 3.2rem;
+    }
+
+    .ingredient {
+        font-size: 1.8rem;
+    }
+
+    .invalid-text {
+        font-size: 1.4rem;
+    }  
+
+}
+
+@media (min-width: 1200px) {
+    .icon {
+        font-size: 2.9rem;
+    }
+
+    .add-icon {
+        font-size: 3.2rem;
+    }
+
+    .page-title {
+        font-size: 3.5rem;
+    }
+
+    .invalid-text {
+        font-size: 1.5rem;
+    } 
 }

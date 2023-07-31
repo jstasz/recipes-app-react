@@ -1,25 +1,40 @@
 .button {
-    background-color: transparent;
-    color: rgb(169, 169, 255);
-    margin: 1em;
+    margin: 1em 0;
     padding: 0.5em 1em;
-    border-radius: 5px;
-    border: 1px solid rgb(169, 169, 255);
     font-size: 1.5rem;
+}
+
+.button-icon {
+    margin: 0.5em 0;
+    width: 50px;
+    height: 50px;
+    color: #000000;
+    background-color: #a9a9ff;
+    border: 1px solid #a9a9ff;
+    border-radius: 50%;
     cursor: pointer;
 }
 
-.button:hover {
-    box-shadow: 0px 0px 15px 0px rgb(169, 169, 255);
+.button-title {
+    font-size: 1.3rem;
+    color:#a9a9ff;
 }
 
-.button:disabled {
-    border: 1px solid rgb(176, 176, 176);
-    color: rgb(176, 176, 176);
-    cursor:auto;
+.button-icon:hover {
+    box-shadow: 0px 0px 15px 0px #a9a9ff;
 }
 
-.button:disabled:hover {
+.button-icon:disabled {
+    background-color: #c9c9ff;
+    border: 1px solid #b0b0b0;
+    cursor: auto;
+}
+
+.button-icon:disabled + .button-title {
+    color: #808080;
+}
+
+.button-icon:disabled:hover {
     box-shadow: none;
 }
  
@@ -27,10 +42,24 @@
     .button {
         font-size: 2rem;
     }
+
+    .button-title {
+        font-size: 1.5rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .button {
+        font-size: 2rem;
+    }
+
+    .button-title {
+        font-size: 1.8rem;
+    }
 }
 
 @media (min-width: 1200px) {
-    .button {
-        font-size: 2.5rem;
+    .button-title {
+        font-size: 2rem;
     }
 }

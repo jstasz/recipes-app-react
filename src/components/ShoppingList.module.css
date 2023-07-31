@@ -1,34 +1,96 @@
+.page-title {
+    padding-bottom: 1em;
+    font-size: 2.8rem;
+    font-weight: bold;
+    color: #a9a9ff;
+}
+
+.shopping-list {
+    display: flex;
+    flex-direction: column;
+    margin: 3em auto 0;
+    width: 90%;
+    height: 80vh;
+    font-size: 1.6rem;
+}
+
 .shopping-list-box {
-    max-height: 100vh;
+    height: 60vh;
     overflow: scroll;
-    font-size: 2rem;
-    width: 70%;
-    margin: 0 auto;
 }
 
 .shopping-list-item {
-    color: rgb(231, 231, 231);
-    padding: 0.5em;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    padding: 0.5em;
+    width: 100%;
+    text-align: left;
 }
 
-.shopping-list-box .icon {
+.shopping-list .icon {
     margin-left: 1em;
-    cursor: pointer;
     padding: 0.1em;
-    color: grey;
-}
-
-.shopping-list-box .icon:hover,
-.shopping-list-box .remove-all:hover {
-    color: rgb(169, 169, 255);
-}
-
-.shopping-list-box .remove-all {
-    margin-top: 1.5em;
-    color: grey;
+    color: #808080;
     cursor: pointer;
+}
+
+.shopping-list .icon:hover,
+.shopping-list .remove-all:hover {
+    color: #a9a9ff
+}
+
+.shopping-list .remove-all {
     display: inline-block;
+    margin-top: 1.5em;
+    font-size: 2rem;
+    color: #808080;
+    cursor: pointer;
+}
+
+@media (min-width: 576px) {
+    .page-title,
+    .shopping-list .icon  {
+        font-size: 3rem;
+    }
+
+    .shopping-list {
+        width: 70%;
+    }
+
+    .shopping-list .remove-all {
+        font-size: 2rem
+    }
+}
+
+@media (min-width: 768px) {
+    .page-title,
+    .shopping-list .icon  {
+        font-size: 3.2rem;
+    }
+
+    .shopping-list {
+        width: 50%;
+        font-size: 1.8rem;
+    }
+
+    .shopping-list .remove-all {
+        font-size: 2.3rem
+    }
+}
+
+@media (min-width: 1200px) {
+    .page-title,
+    .shopping-list .icon  {
+        font-size: 3.5rem;
+    }
+
+    .shopping-list {
+        width: 30%;
+        font-size: 2rem;
+    }
+
+    .shopping-list .remove-all {
+        font-size: 2.5rem
+    }
 }
