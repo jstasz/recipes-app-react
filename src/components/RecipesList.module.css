@@ -9,43 +9,34 @@
 }
 
 .add-action {
+    position: fixed;
+    top: 6vh;
+    right: 0;
     display: flex;
     justify-content: center;
-    position: fixed;
-    right: 0;
-    top: 6vh;
-    z-index: 1;
-    background-color: rgba(36, 36, 36, 0.8);
-    width: 100%;
     padding: 1em;
+    width: 100%;
+    z-index: 1;
+    background-color: #242424cc;
 }
 
 .add-action .not-logged-in {
-    padding: 1em;
-    color: rgb(126, 126, 126);
-    font-size: 1.5rem;
     margin-top: 1em;
+    padding: 1em;
+    font-size: 1.5rem;
+    color: #7e7e7e;
 }
 
 .add-action .not-logged-in span {
-    color: rgb(201, 201, 255);
+    color: #c9c9ff;
     cursor: pointer;
 }
 
 .recipes-list {
     display: flex;
     flex-direction: column;
-    width: 100%;
     margin-top: 9em;
-}
-
-.recipes .icon {
-    padding: 0.5em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    display: none;
+    width: 100%;
 }
 
 .recipes-loading {

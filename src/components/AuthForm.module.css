@@ -1,15 +1,15 @@
 .logout {
-  color: rgb(169, 169, 255);
+  color: #a9a9ff;
   cursor: pointer;
 }
 
 .logout:hover {
-  color: rgb(128, 128, 255);
+  color: #8080ff;
 }
 
 .error-text,
 .invalid-text {
-  color: rgb(224, 99, 99);
+  color: #e06363;
 } 
 
 .invalid-text {
@@ -21,18 +21,18 @@
 }
 
 .link {
-  text-decoration: none;
+  color: #808080;
   background-color: transparent;
-  color: grey;
+  text-decoration: none;
 }
 
 .link:hover {
-  color: white;
+  color: #ffffff;
 } 
 
 .form-control {
-  width: 90%;
   margin: 0 auto;
+  width: 90%;
 }
 
 

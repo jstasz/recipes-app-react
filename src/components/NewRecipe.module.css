@@ -1,18 +1,18 @@
 .new-recipe {
-    height: 80vh;
     margin-top: 5em;
+    height: 80vh;
 }
 
 .page-title {
-    color: rgb(169, 169, 255);
+    margin: 1em 0;
     font-weight: bold;
     font-size: 2.8rem;
-    margin: 1em 0;
+    color: #a9a9ff;
 }
 
 .error-text,
 .invalid-text {
-  color: rgb(224, 99, 99);
+  color: #e06363;
 } 
 
 .invalid-text {
@@ -26,39 +26,39 @@
 }
 
 .ingredients-list {
-    list-style: none;
-    height: 100px;
-    overflow: scroll;
-    font-size: 1.5rem;
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 0.5em;
-    color: grey;
-    width: 90%;
     margin: 1em auto;
+    padding: 0.5em;
+    width: 90%;
+    height: 100px;
+    font-size: 1.5rem;
+    color: #808080;
+    background-color: #000000b3;
+    list-style: none;
+    overflow: scroll;
 }
 
 .ingredient {
     display: flex;
     justify-content: space-between;
-    border-bottom: thin solid rgb(46, 46, 46);
     padding: 0.5em;
+    border-bottom: thin solid #2e2e2e;
 }
 
 .icon {
-    padding-left: 0.3em;
-    cursor: pointer;
-    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-left: 0.3em;
+    height: 100%;
+    cursor: pointer;
 }
 
 .add-icon {
-    color: rgb(169, 169, 255);
+    color: #a9a9ff;
 }
 
 .remove-icon {
-    color: rgb(198, 114, 114);
+    color: #c67272;
 }
 
 .new-recipe-form {
@@ -66,8 +66,8 @@
 }
 
 .form-control {
-    width: 90%;
     margin: 1em auto;
+    width: 90%;
 }
 
 @media (min-width: 576px) {

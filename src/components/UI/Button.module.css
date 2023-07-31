@@ -5,33 +5,33 @@
 }
 
 .button-icon {
-    background-color: rgb(169, 169, 255);
     margin: 0.5em 0;
-    cursor: pointer;
     width: 50px;
     height: 50px;
+    color: #000000;
+    background-color: #a9a9ff;
+    border: 1px solid #a9a9ff;
     border-radius: 50%;
-    border: 1px solid rgb(169, 169, 255);
-    color: black;
+    cursor: pointer;
 }
 
 .button-title {
-    color:rgb(169, 169, 255);
     font-size: 1.3rem;
+    color:#a9a9ff;
 }
 
 .button-icon:hover {
-    box-shadow: 0px 0px 15px 0px rgb(169, 169, 255);
+    box-shadow: 0px 0px 15px 0px #a9a9ff;
 }
 
 .button-icon:disabled {
-    border: 1px solid rgb(176, 176, 176);
-    background-color: rgb(201, 201, 255);;
+    background-color: #c9c9ff;
+    border: 1px solid #b0b0b0;
     cursor: auto;
 }
 
 .button-icon:disabled + .button-title {
-    color: grey;
+    color: #808080;
 }
 
 .button-icon:disabled:hover {
