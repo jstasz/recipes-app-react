@@ -1,31 +1,21 @@
 .back-action {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     position: fixed;
     right: 0;
     top: 6vh;
     z-index: 1;
     background-color: rgba(36, 36, 36, 0.7);
     width: 100%;
+    padding: 1em;
 }
 
-/* .recipe-details {
-    margin-top: 5em;
-} */
-
 .recipe-box {
-    /* width: 1200px; */
-    /* margin-top: 5em; */
     width: 100%;
-    /* margin: 0 auto; */
+    max-width: 1400px;
     display: flex;
     flex-direction: column;
-    /* width: 100%; */
-    margin-top: 12em;
-    /* height: 70vh; */
-    /* display: grid; */
-    /* grid-template-columns: repeat(3, 1fr); */
-    /* background-color: rgba(1, 1, 1,0.7); */
+    margin-top: 16em;
     padding: 1em;
     font-size: 1.5rem;
     line-height: 1.8;
@@ -36,11 +26,11 @@
     font-size: 2.2rem;
     color: rgb(142, 142, 143);
     font-weight: bold;
-    /* margin-bottom: 1em; */
+    margin: 0.5em;
+    width: 100%;
 }
 
 .recipe-img {
-    /* width: 100%; */
     height: 300px;
     background-size: cover;
     background-position: center;
@@ -49,33 +39,18 @@
     margin: 1em 0;
 }
 
-/* .recipe-ingredients { */
-    /* overflow: scroll; */
-    /* margin: 1em; */
-    /* padding-right: 1em; */
-    /* width: 100%; */
-/* } */
-
 .recipe-ingredients-list {
     list-style: none;
-    /* padding-right: 1em; */
     margin-bottom: 1em;
 }
 
-.ingredients-title {
+.section-title {
     color: grey;
     font-size: 2rem;
     font-weight: bold;
     margin: 0.5em 0;
     text-align: center;
 }
-
-/* .recipe-instruction { */
-    /* margin: 1em; */
-    /* padding-left: 1em; */
-    /* overflow: scroll; */
-    /* width: 100%; */
-/* } */
 
 .select-recipe {
     padding-top: 1em;
@@ -85,28 +60,22 @@
     order: -1;
 }
 
- .ingredients-modal {
-    height: 100%;
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-    width: 100%;
-    padding: 1em;
- }
-
-/* .ingredients-modal {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: stretch;
-    height: 100%;
-} */
+.ingredients-modal {
+   height: 100%;
+   position: absolute;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   height: 100%;
+   width: 100%;
+   padding: 1em;
+}
 
 .ingredients-modal .ingredients-title {
     color: rgb(155, 155, 215);
     font-weight: bold;
+    font-size: 1.7rem;
+    text-align: center;
 }
 
 .ingredients-modal .recipe-ingredients-list {
@@ -138,21 +107,72 @@
     justify-content: flex-end;
     text-align: center;
     margin-top: 1.5em;
-    /* height: 10vh; */
 } 
 
-/* .ingredients-modal .actions {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    color: grey;
-} */
-/* 
-.ingredients-modal .add-icon {
-    color: rgb(126, 126, 203);
-    font-size: 4.5rem;
-    margin-left: 0.2em;
-    font-variation-settings: 'FILL' 1;
-    cursor: pointer;
-} */
+@media (min-width: 768px) {
+    .recipe-box .title {
+        margin: 0.5em 0 1em 0;
+        font-size: 2.4rem;
+    }
 
+    .recipe-box {
+        font-size: 1.6rem;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 90%;
+        margin: 16em auto 0 auto;
+    }
+
+    .recipe-img {
+        height: 400px;
+        width: 50%;
+        padding: 1em;
+    }
+
+    .recipe-ingredients {
+        width: 50%;
+        height: 400px;
+        overflow: scroll;
+        padding: 1em;
+        margin: 1em 0;
+    }
+
+    .recipe-instruction {
+        width: 80%;
+        margin: 1em auto;
+    }
+
+    .section-title {
+        font-size: 2.2rem;
+    }
+
+    .ingredients-modal .ingredients-title {
+        font-size: 1.8rem;
+    }
+
+}
+
+@media (min-width: 976px) {
+    .recipe-box {
+        font-size: 1.8rem;
+    }
+}
+
+
+@media (min-width: 1200px) {
+    .recipe-box .title {
+        font-size: 3rem;
+    }
+
+    .section-title {
+        font-size: 2.4rem;
+    }
+
+    .recipe-box {
+        width: 80%;
+    }
+
+    .ingredients-modal .ingredients-title {
+        font-size: 2rem;
+    }
+}

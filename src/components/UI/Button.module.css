@@ -42,10 +42,24 @@
     .button {
         font-size: 2rem;
     }
+
+    .button-title {
+        font-size: 1.5rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .button {
+        font-size: 2rem;
+    }
+
+    .button-title {
+        font-size: 1.8rem;
+    }
 }
 
 @media (min-width: 1200px) {
-    .button {
-        font-size: 2.5rem;
+    .button-title {
+        font-size: 2rem;
     }
 }

@@ -1,5 +1,4 @@
 .new-recipe {
-    font-size: 1.5rem;
     height: 80vh;
     margin-top: 5em;
 }
@@ -8,6 +7,7 @@
     color: rgb(169, 169, 255);
     font-weight: bold;
     font-size: 2.8rem;
+    margin: 1em 0;
 }
 
 .error-text,
@@ -59,10 +59,60 @@
 
 .remove-icon {
     color: rgb(198, 114, 114);
-    font-size: 2rem;
+}
+
+.new-recipe-form {
+    margin-top: 2em;
 }
 
 .form-control {
     width: 90%;
     margin: 1em auto;
+}
+
+@media (min-width: 576px) {
+    .icon {
+        font-size: 2.5rem;
+    }
+
+    .page-title {
+        font-size: 3rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .icon {
+        font-size: 2.7rem;
+    }
+
+    .page-title {
+        font-size: 3.2rem;
+    }
+
+    .ingredient {
+        font-size: 1.8rem;
+    }
+
+    .invalid-text {
+        font-size: 1.4rem;
+    }  
+
+}
+
+@media (min-width: 1200px) {
+    .icon {
+        font-size: 2.9rem;
+    }
+
+    .add-icon {
+        font-size: 3.2rem;
+    }
+
+    .page-title {
+        font-size: 3.5rem;
+    }
+
+    .invalid-text {
+        font-size: 1.5rem;
+    } 
 }

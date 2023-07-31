@@ -69,35 +69,35 @@ const RecipeDetails: React.FC = () => {
     
     return (
         <>
-                <div className={styles['back-action']}>
-                    <Button 
+            <div className={styles['back-action']}>
+                <Button 
+                type="button" 
+                icon="arrow_back"
+                navigationPath="/recipes/list"
+                >Back to list</Button>
+            </div>
+            <div className={styles['recipe-box']}>
+            <p className={styles.title}>{activeRecipe?.name}</p>
+            <div className={styles['recipe-img']} style={{backgroundImage: `url(${activeRecipe?.imageUrl})`}}></div>
+            <div className={styles['recipe-ingredients']}>
+                <ul className={styles['recipe-ingredients-list']}>
+                    <p className={styles['section-title']}>ingredients</p>
+                    {activeRecipe?.ingredients.map(ingredient => 
+                    <li key={ingredient.id}>{ingredient.name}</li>)}
+                </ul>
+                {loggedUser && 
+                <Button 
                     type="button" 
-                    icon="arrow_back"
-                    navigationPath="/recipes/list"
-                    >Back to list</Button>
-                </div>
-                <div className={styles['recipe-box']}>
-                <p className={styles.title}>{activeRecipe?.name}</p>
-                <div className={styles['recipe-img']} style={{backgroundImage: `url(${activeRecipe?.imageUrl})`}}></div>
-                    <div className={styles['recipe-ingredients']}>
-                       
-                        <ul className={styles['recipe-ingredients-list']}>
-                            <p className={styles['ingredients-title']}>ingredients</p>
-                            {activeRecipe?.ingredients.map(ingredient => 
-                            <li key={ingredient.id}>{ingredient.name}</li>)}
-                        </ul>
-                        {loggedUser && 
-                        <Button 
-                            type="button" 
-                            icon="add"
-                            className={styles['add-to-shopping-list']} 
-                            onClick={() => setActiveModal(true)}
-                            >Add to list
-                        </Button>}
-                    </div>
-                    
-                    <div className={styles['recipe-instruction']}><p>{activeRecipe?.instruction}</p></div>
-                </div>
+                    icon="add"
+                    className={styles['add-to-shopping-list']} 
+                    onClick={() => setActiveModal(true)}
+                    >Add to list
+                </Button>}
+            </div>
+            <div className={styles['recipe-instruction']}>
+                <p className={styles['section-title']}>instruction</p> 
+                <p>{activeRecipe?.instruction}</p></div>
+            </div>
             {activeModal && 
             <Modal onClose={closeModal}>
                 <div className={styles['ingredients-modal']}>
@@ -124,9 +124,6 @@ const RecipeDetails: React.FC = () => {
             </Modal>}
           </>
         )
-        }
-    //    </>
-    // );
-// }
+    }
 
 export default RecipeDetails;

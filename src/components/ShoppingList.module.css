@@ -7,12 +7,11 @@
 
 .shopping-list {
     font-size: 1.6rem;
-    width: 100%;
+    width: 90%;
     margin: 3em auto 0;
     height: 80vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
 }
 
 .shopping-list-box {
@@ -21,7 +20,6 @@
 }
 
 .shopping-list-item {
-    /* color: rgb(231, 231, 231); */
     padding: 0.5em;
     display: flex;
     width: 100%;
@@ -47,4 +45,52 @@
     color: grey;
     cursor: pointer;
     display: inline-block;
+    font-size: 2rem;
+}
+
+@media (min-width: 576px) {
+    .page-title,
+    .shopping-list .icon  {
+        font-size: 3rem;
+    }
+
+    .shopping-list {
+        width: 70%;
+    }
+
+    .shopping-list .remove-all {
+        font-size: 2rem
+    }
+}
+
+@media (min-width: 768px) {
+    .page-title,
+    .shopping-list .icon  {
+        font-size: 3.2rem;
+    }
+
+    .shopping-list {
+        font-size: 1.8rem;
+        width: 50%;
+    }
+
+    .shopping-list .remove-all {
+        font-size: 2.3rem
+    }
+}
+
+@media (min-width: 1200px) {
+    .page-title,
+    .shopping-list .icon  {
+        font-size: 3.5rem;
+    }
+
+    .shopping-list {
+        font-size: 2rem;
+        width: 30%;
+    }
+
+    .shopping-list .remove-all {
+        font-size: 2.5rem
+    }
 }

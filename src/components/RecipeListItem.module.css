@@ -4,10 +4,6 @@
     cursor: pointer;
     font-size: 0.8rem;
     flex-shrink: 0;
-    /* width: 100%; */
-    /* margin: 0 auto; */
-    /* width: 200px; */
-    /* width: 70vw; */
     height: 200px;
     width: 80%;
     position: relative;
@@ -40,4 +36,32 @@
 
 .modal label {
     color: red
+}
+
+@media (min-width: 576px) {
+    .recipe-name {
+        font-size: 1.8rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .recipe-name {
+        font-size: 2rem;
+    }
+
+    .recipe {
+        height: 300px;
+    }
+}
+
+@media (min-width: 976px) {
+    .recipe {
+        width: 45%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .recipe {
+        width: 30%;
+    }
 }

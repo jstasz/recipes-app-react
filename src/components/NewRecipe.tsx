@@ -112,7 +112,6 @@ const NewRecipe: React.FC = () => {
 
         <MainForm onSubmit={addRecipeHandler} className={styles['new-recipe']}>
         <p className={styles['page-title']}>New Recipe</p>
-        <Button type="submit" disabled={!formIsValid} icon="add">Save</Button>
         <div className={styles['new-recipe-form']}>
         <div className={styles['form-control']}>
             <label htmlFor="name">name</label>
@@ -184,8 +183,8 @@ const NewRecipe: React.FC = () => {
             )}
             </ul> : <p>ingredients list</p>}
         </div>
+        <Button type="submit" className='button' disabled={!formIsValid} icon="add">Save</Button>
         </div>
-
     </MainForm>
     </>
     )

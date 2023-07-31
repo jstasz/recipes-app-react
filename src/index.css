@@ -33,3 +33,15 @@ code {
       font-size: 1.4rem;
   }
 }
+
+@media (min-width: 976px) {
+  body {
+      font-size: 1.6rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  body {
+      font-size: 1.8rem;
+  }
+}

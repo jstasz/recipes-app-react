@@ -2,10 +2,6 @@
     margin: 3em auto;
     width: 100%;
     max-width: 1400px;
-    /* min-height: 80vh; */
-    /* display: flex;
-    flex-direction: column;
-    justify-content: center; */
 }
 
 .recipes {
@@ -14,22 +10,33 @@
 
 .add-action {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     position: fixed;
     right: 0;
     top: 6vh;
     z-index: 1;
-    background-color: rgba(36, 36, 36, 0.7);
+    background-color: rgba(36, 36, 36, 0.8);
     width: 100%;
+    padding: 1em;
+}
+
+.add-action .not-logged-in {
+    padding: 1em;
+    color: rgb(126, 126, 126);
+    font-size: 1.5rem;
+    margin-top: 1em;
+}
+
+.add-action .not-logged-in span {
+    color: rgb(201, 201, 255);
+    cursor: pointer;
 }
 
 .recipes-list {
     display: flex;
     flex-direction: column;
     width: 100%;
-    margin-top: 7em;
-    /* overflow-x: auto;  */
-    /* white-space: nowrap; */
+    margin-top: 9em;
 }
 
 .recipes .icon {
@@ -43,4 +50,50 @@
 
 .recipes-loading {
     margin-top: 3em;
+}
+
+@media (min-width: 576px) {
+    .recipes-loading {
+        font-size: 2rem
+    }
+
+    .wrapper {
+        width: 80%;
+    }
+}
+
+@media (min-width: 768px) {
+    .recipes-loading {
+        font-size: 2.3rem
+    }
+
+    .wrapper {
+        width: 70%;
+    }
+
+    .add-action .not-logged-in {
+        font-size: 1.8rem;
+    }
+}
+
+@media (min-width: 976px) {
+    .wrapper {
+        width: 100%;
+        max-width: 1400px;
+    }
+
+    .recipes-list {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+}
+
+@media (min-width: 1200px) {
+    .recipes-loading {
+        font-size: 2.5rem
+    }
+
+    .add-action .not-logged-in {
+        font-size: 2rem;
+    }
 }

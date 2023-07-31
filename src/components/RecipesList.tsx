@@ -1,9 +1,10 @@
-import { useCallback, useContext, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import styles from './RecipesList.module.css'
 import { RecipesContext, RecipesContextType } from "./store/recipes-context";
 import { AuthContext } from "./store/auth-context";
 import RecipeListItem from "./RecipeListItem";
 import Button from "./UI/Button";
+import { useNavigate } from "react-router-dom";
 
 function RecipesList() {
     const [error, setError] = useState<string | null>(null);
@@ -118,52 +119,50 @@ function RecipesList() {
 
     useEffect(() => {
         GetRecipes();
-    }, [GetRecipes])
+    }, [GetRecipes]);
 
     useEffect(() => {
         getUserRecipes();
-    }, [getUserRecipes])
+    }, [getUserRecipes]);
 
-    const scrollContainerRef = useRef<HTMLUListElement>(null);
+    const navigate = useNavigate();
 
-    const handleScroll: (direction: 'right' | 'left', distance: number) => void = (direction, distance) => {
-        const container = scrollContainerRef.current;
-        if (container) {
-            const scrollDistance = `${direction === 'right' ? '' : '-'}${distance}`;
-            container.scrollLeft += +scrollDistance;
-        }
+    const navigateHandler = (path: string) => {
+        navigate(path)
     };
     
     return (
         <div>
+            {error && <p>{error}</p>}
             <div className={styles.wrapper}>
-            {loggedUser && 
-                 <div className={styles['add-action']}>
-            <Button type='button' className={styles['add-recipe']} navigationPath="/recipes/new" icon="add"> add new recipe </Button></div>} 
-                {error && <p>{error}</p>}
-                {isLoadingRecipes && <p className={styles['recipes-loading']}>loading...</p>}
-                {!isLoadingRecipes && <>
-                    <div className={styles.recipes}>
-                        <p className={styles.icon} onClick={() => handleScroll('left', 215)}>
-                            <span className="material-symbols-outlined">arrow_back_ios</span>
-                        </p>
-                        <ul className={styles['recipes-list']} ref={scrollContainerRef}>
-                        {allRecipes.map(recipe => {
-                            return <RecipeListItem 
-                                        key={recipe.id} 
-                                        id={recipe.id} 
-                                        name={recipe.name}  
-                                        imageUrl={recipe.imageUrl}
-                                    />
-                                }
-                            )}
-                        </ul>
-                        <p className={styles.icon} onClick={() => handleScroll('right', 215)}>
-                            <span className="material-symbols-outlined">arrow_forward_ios</span>
-                        </p>
-                    </div>
-                    </>
-                }
+                <div className={styles['add-action']}>
+                    {!loggedUser && 
+                        <p className={styles['not-logged-in']}><span onClick={() => navigateHandler('/auth?authMode=login')}>Log in</span> to add new recipe and create yor shopping list.</p>}
+                    {loggedUser && 
+                        <Button 
+                            type='button' 
+                            className={styles['add-recipe']} 
+                            navigationPath="/recipes/new" 
+                            icon="add"> add new recipe
+                        </Button>
+                    }
+            </div>
+            {isLoadingRecipes && <p className={styles['recipes-loading']}>loading...</p>}
+            {!isLoadingRecipes && <>
+                <div className={styles.recipes}>
+                    <ul className={styles['recipes-list']}>
+                    {allRecipes.map(recipe => {
+                        return <RecipeListItem 
+                                    key={recipe.id} 
+                                    id={recipe.id} 
+                                    name={recipe.name}  
+                                    imageUrl={recipe.imageUrl}
+                                />
+                            }
+                        )}
+                    </ul>
+                </div></>
+            }
             </div>
         </div>
     );
