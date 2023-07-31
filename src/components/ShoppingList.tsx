@@ -1,8 +1,8 @@
+import React from 'react';
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { ShoppingListContext } from './store/shopping-list-context';
-import styles from './ShoppingList.module.css'
 import { AuthContext } from './store/auth-context';
-import React from 'react';
+import styles from './ShoppingList.module.css'
 
 const ShoppingList: React.FC = () => {
 
@@ -10,6 +10,7 @@ const ShoppingList: React.FC = () => {
     const { loggedUser } = useContext(AuthContext);
     const [ displayedItems, setDIsplayeditems ] = useState<{id: number, name: string}[]>([]);
     const [ shoppingListIsLoading, setShoppingListIsLoading] = useState(false);
+    const [ error, setError ] = useState('');
 
     useEffect(() => {
         setShoppingListIsLoading(true);
@@ -27,7 +28,7 @@ const ShoppingList: React.FC = () => {
             setShoppingListItems(data);
           }
         } catch (error) {
-          console.error('Błąd podczas pobierania listy zakupów:', error);
+          setError('Sorry, problem with fetching your shopping list! Try again later!');
         }
     }, [setShoppingListItems])
       
@@ -45,7 +46,7 @@ const ShoppingList: React.FC = () => {
                 }
             })
         } catch (error: unknown) {
-            console.log(error)
+            setError('Sorry, problem with updating your shopping list! Try again later!');
         }
     };
 
@@ -56,7 +57,7 @@ const ShoppingList: React.FC = () => {
         try {
             await updateIngredients(updatedShoppingListItems);
         } catch (error: unknown) {
-            console.log(error)
+            setError('Sorry, problem with removing your shopping list item! Try again later!');
         }
     }
 
@@ -66,12 +67,13 @@ const ShoppingList: React.FC = () => {
         try {
             await updateIngredients([]);
         } catch (error: unknown) {
-            console.log(error)
+            setError('Sorry, problem with removing your shopping list! Try again later!');
         }
     }
 
     return (
         <>
+        {error && <p>{error}</p>}
         {shoppingListIsLoading && <p>Loading Shopping List</p>}
         {!shoppingListIsLoading && <div className={styles['shopping-list']}>
             <p className={styles['page-title']}>Shopping list</p> 

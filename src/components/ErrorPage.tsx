@@ -1,7 +1,6 @@
 import Button from "./UI/Button";
 
 const ErrorPage = () => {
-
     return (
         <div style={{textAlign: 'center'}}>
             <p>The page you are looking for does not exist!</p>

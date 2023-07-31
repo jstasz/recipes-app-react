@@ -71,6 +71,7 @@
 }
 
 .ingredients-modal .ingredients-title {
+    margin: 0.5em;
     font-weight: bold;
     font-size: 1.7rem;
     text-align: center;

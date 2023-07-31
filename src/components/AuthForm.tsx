@@ -3,11 +3,11 @@ import { auth } from '../firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from './store/auth-context';
+import { ShoppingListContext } from './store/shopping-list-context';
 import Button from './UI/Button';
+import MainForm from './UI/Form';
 import useInput from '../hooks/use-input';
 import styles from './AuthForm.module.css';
-import MainForm from './UI/Form';
-import { ShoppingListContext } from './store/shopping-list-context';
 
 const AuthForm = () => {
     const [searchParams] = useSearchParams();
