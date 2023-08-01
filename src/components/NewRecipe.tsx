@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import useInput from '../hooks/use-input';
 import Button from './UI/Button';
 import MainForm from './UI/Form';
@@ -12,7 +11,6 @@ const NewRecipe: React.FC = () => {
 
     const [ formIsValid, setFormIsValid ] = useState(false);
     const { loggedUser } = useContext(AuthContext);
-    const navigate = useNavigate();
     const [ error, setError ] = useState('');
 
     const { 
@@ -82,7 +80,6 @@ const NewRecipe: React.FC = () => {
             setError('Sorry, problem with saving new recipe! Try again later!')
         }
 
-        navigate("/recipes/list")
         resetEnteredName();
         resetEnteredInstruction();
         resetEnteredImageUrl();
