@@ -1,24 +1,27 @@
 import { useParams } from 'react-router-dom';
-import Button from './UI/Button';
-import styles from './RecipeDetails.module.css'
 import { useContext, useState } from 'react';
+import Button from './UI/Button';
+import Modal from './UI/Modal';
 import { RecipesContext } from './store/recipes-context';
 import { AuthContext } from './store/auth-context';
-import Modal from './UI/Modal';
 import { ShoppingListContext } from './store/shopping-list-context';
+import styles from './RecipeDetails.module.css'
+
 
 const RecipeDetails: React.FC = () => {
 
     const { recipeId } = useParams();
     const { loadedRecipes, userRecipes } = useContext(RecipesContext);
     const { loggedUser } = useContext(AuthContext);
-    const [activeModal, setActiveModal] = useState(false);
+    const [ activeModal, setActiveModal ] = useState(false);
 
     const allRecipes = loggedUser ? [...loadedRecipes, ...userRecipes] : loadedRecipes;
     const activeRecipe = recipeId ? allRecipes.find(recipe => recipe.id === +recipeId) : undefined;
 
     const [ selectedIngredients, setSelectedIngredients ] = useState<{id: number, name: string}[]>([]);
     const { shoppingListItems } = useContext(ShoppingListContext);
+
+    const [error, setError] = useState('');
 
     const selectIngredientsHandler = (ingredient: {id: number, name: string}) => {
         const ingredientIsSelected = selectedIngredients.find(ing => ing.id === ingredient.id);
@@ -45,7 +48,7 @@ const RecipeDetails: React.FC = () => {
                 }
             })
         } catch (error: unknown) {
-            console.log(error)
+            setError('Sorry, problem with updating ingredients! try again later!')
         }
     };
 
@@ -62,12 +65,15 @@ const RecipeDetails: React.FC = () => {
         try {
             await updateIngredients(updatedShoppingListItems);
         } catch (error: unknown) {
-            console.log(error)
+            setError('Sorry, problem with updating ingredients! try again later!');
         }
         closeModal();
     };
     
     return (
+        <>
+        {error && <p>{error}</p>}
+        {!error && 
         <>
             <div className={styles['back-action']}>
                 <Button 
@@ -98,6 +104,7 @@ const RecipeDetails: React.FC = () => {
                 <p className={styles['section-title']}>instruction</p> 
                 <p>{activeRecipe?.instruction}</p></div>
             </div>
+           
             {activeModal && 
             <Modal onClose={closeModal}>
                 <div className={styles['ingredients-modal']}>
@@ -117,11 +124,11 @@ const RecipeDetails: React.FC = () => {
                         )}
                 </ul>
                 <div className={styles.actions}>
-                    <Button type="button" icon="add" onClick={addIngredients} >Add</Button>
-       
+                    <Button type="button" icon="add" onClick={addIngredients} disabled={selectedIngredients.length < 1}>Add</Button>
                 </div>
                 </div>
             </Modal>}
+            </>}
           </>
         )
     }

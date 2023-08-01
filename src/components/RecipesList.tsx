@@ -1,10 +1,11 @@
 import { useCallback, useContext, useEffect, useState } from "react";
-import styles from './RecipesList.module.css'
+import { useNavigate } from "react-router-dom";
 import { RecipesContext, RecipesContextType } from "./store/recipes-context";
 import { AuthContext } from "./store/auth-context";
 import RecipeListItem from "./RecipeListItem";
 import Button from "./UI/Button";
-import { useNavigate } from "react-router-dom";
+import styles from './RecipesList.module.css'
+
 
 function RecipesList() {
     const [error, setError] = useState<string | null>(null);
@@ -29,7 +30,7 @@ function RecipesList() {
         const options = {
 	        method: 'GET',
 	        headers: {
-		        'X-RapidAPI-Key': '41c65bbbfemshce1a1320e84303dp115474jsn487cf7012410',
+		        'X-RapidAPI-Key': '1435f069bamsh6f780de4be2feddp120826jsndafd53f0c53b',
 		        'X-RapidAPI-Host': 'tasty.p.rapidapi.com'
 	        }
         };

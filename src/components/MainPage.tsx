@@ -1,5 +1,5 @@
-import { useContext } from "react";
 import Button from "./UI/Button";
+import { useContext } from "react";
 import { AuthContext } from "./store/auth-context";
 
 const MainPage = () => {

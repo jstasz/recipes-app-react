@@ -1,15 +1,19 @@
-import styles from './NewRecipe.module.css'
+import { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import useInput from '../hooks/use-input';
 import Button from './UI/Button';
-import { useContext, useEffect, useState } from 'react';
 import MainForm from './UI/Form';
 import Recipe from '../models/recipe';
 import { AuthContext } from './store/auth-context';
+import styles from './NewRecipe.module.css'
+
 
 const NewRecipe: React.FC = () => {
 
-    const [formIsValid, setFormIsValid] = useState(false);
-    const {loggedUser } = useContext(AuthContext);
+    const [ formIsValid, setFormIsValid ] = useState(false);
+    const { loggedUser } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const [ error, setError ] = useState('');
 
     const { 
         value: enteredName, 
@@ -72,8 +76,13 @@ const NewRecipe: React.FC = () => {
             ingredients: ingredients
         };
 
-        postRecipe(newRecipe);
+        try {
+            postRecipe(newRecipe);
+        } catch (error) {
+            setError('Sorry, problem with saving new recipe! Try again later!')
+        }
 
+        navigate("/recipes/list")
         resetEnteredName();
         resetEnteredInstruction();
         resetEnteredImageUrl();
@@ -109,8 +118,8 @@ const NewRecipe: React.FC = () => {
 
     return (
         <>
-
-        <MainForm onSubmit={addRecipeHandler} className={styles['new-recipe']}>
+        {error && <p>{error}</p>}
+        {!error && <MainForm onSubmit={addRecipeHandler} className={styles['new-recipe']}>
         <p className={styles['page-title']}>New Recipe</p>
         <div className={styles['new-recipe-form']}>
         <div className={styles['form-control']}>
@@ -186,6 +195,7 @@ const NewRecipe: React.FC = () => {
         <Button type="submit" className='button' disabled={!formIsValid} icon="add">Save</Button>
         </div>
     </MainForm>
+    }
     </>
     )
 }

@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
-import styles from './Button.module.css';
 import { useNavigate } from 'react-router-dom';
+import styles from './Button.module.css';
 
 const Button: React.FC<{
     children: ReactNode, 
@@ -25,9 +25,14 @@ const Button: React.FC<{
 
     return (
         <div className={styles.button}>
-        <button className={`material-symbols-outlined ${styles['button-icon']} ${props.className} `} onClick={clickHandler} type={props.type} disabled={props.disabled}> {props.icon}
-        </button>
-        <p className={styles['button-title']}>{props.children}</p>
+            <button 
+                className={`material-symbols-outlined ${styles['button-icon']} ${props.className} `}
+                onClick={clickHandler} 
+                type={props.type} 
+                disabled={props.disabled}> 
+                    {props.icon}
+            </button>
+            <p className={styles['button-title']}>{props.children}</p>
         </div>
     );
 };
