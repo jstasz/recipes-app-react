@@ -29,10 +29,6 @@
 }
 
 @media (min-width: 768px) {
-    .nav {
-        padding: 1.6em 1.2em;
-    }
-
     .nav-links {
         width: 70%;
     }

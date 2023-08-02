@@ -8,26 +8,14 @@
     display: flex;
 }
 
-.add-action {
-    position: fixed;
-    top: 6vh;
-    right: 0;
-    display: flex;
-    justify-content: center;
-    padding: 1em;
-    width: 100%;
-    z-index: 1;
-    background-color: #242424cc;
-}
-
-.add-action .not-logged-in {
+.not-logged-in {
     margin-top: 1em;
     padding: 1em;
     font-size: 1.5rem;
     color: #7e7e7e;
 }
 
-.add-action .not-logged-in span {
+.not-logged-in span {
     color: #c9c9ff;
     cursor: pointer;
 }
@@ -62,7 +50,7 @@
         width: 70%;
     }
 
-    .add-action .not-logged-in {
+    .not-logged-in {
         font-size: 1.8rem;
     }
 }
@@ -84,7 +72,7 @@
         font-size: 2.5rem
     }
 
-    .add-action .not-logged-in {
+    .not-logged-in {
         font-size: 2rem;
     }
 }

@@ -6,6 +6,7 @@ import { RecipesContext } from './store/recipes-context';
 import { AuthContext } from './store/auth-context';
 import { ShoppingListContext } from './store/shopping-list-context';
 import styles from './RecipeDetails.module.css'
+import PageAction from './UI/PageAction';
 
 
 const RecipeDetails: React.FC = () => {
@@ -75,13 +76,13 @@ const RecipeDetails: React.FC = () => {
         {error && <p>{error}</p>}
         {!error && 
         <>
-            <div className={styles['back-action']}>
+            <PageAction >
                 <Button 
                 type="button" 
                 icon="arrow_back"
                 navigationPath="/recipes/list"
                 >Back to list</Button>
-            </div>
+            </PageAction>
             <div className={styles['recipe-box']}>
             <p className={styles.title}>{activeRecipe?.name}</p>
             <div className={styles['recipe-img']} style={{backgroundImage: `url(${activeRecipe?.imageUrl})`}}></div>

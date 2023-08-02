@@ -63,6 +63,7 @@
 
 .new-recipe-form {
     margin-top: 2em;
+    width: 100%;
 }
 
 .form-control {
@@ -77,6 +78,11 @@
 
     .page-title {
         font-size: 3rem;
+    }
+
+    .form-control,
+    .ingredients-list {
+        width: 80%;
     }
 }
 
@@ -97,7 +103,19 @@
         font-size: 1.4rem;
     }  
 
+    .form-control,
+    .ingredients-list {
+        width: 60%;
+    }
 }
+
+@media (min-width: 976px) {
+    .form-control,
+    .ingredients-list {
+        width: 50%;
+    }
+}
+
 
 @media (min-width: 1200px) {
     .icon {
@@ -115,4 +133,9 @@
     .invalid-text {
         font-size: 1.5rem;
     } 
+
+    .form-control,
+    .ingredients-list {
+        width: 40%;
+    }
 }
