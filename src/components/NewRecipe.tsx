@@ -5,6 +5,7 @@ import MainForm from './UI/Form';
 import Recipe from '../models/recipe';
 import { AuthContext } from './store/auth-context';
 import styles from './NewRecipe.module.css'
+import { useNavigate } from 'react-router-dom';
 
 
 const NewRecipe: React.FC = () => {
@@ -12,6 +13,7 @@ const NewRecipe: React.FC = () => {
     const [ formIsValid, setFormIsValid ] = useState(false);
     const { loggedUser } = useContext(AuthContext);
     const [ error, setError ] = useState('');
+    const [ recipeAdded, setRecipeAdded ] = useState(false);
 
     const { 
         value: enteredName, 
@@ -80,11 +82,13 @@ const NewRecipe: React.FC = () => {
             setError('Sorry, problem with saving new recipe! Try again later!')
         }
 
+        setRecipeAdded(true);
+        setIngredients([]);
+
         resetEnteredName();
         resetEnteredInstruction();
         resetEnteredImageUrl();
         resetEnteredIngredient();
-        setIngredients([]);
     };
 
     const [ingredients, setIngredients] = useState<{id: number, name: string}[]>([]);
@@ -112,6 +116,14 @@ const NewRecipe: React.FC = () => {
           setFormIsValid(false);
         }
     }, [enteredNameIsValid, enteredInstructionIsValid, enteredImageUrlIsValid, ingredients]);
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if(recipeAdded) {
+            navigate('/recipes/list');
+        } 
+    }, [recipeAdded, navigate])
 
     return (
         <>

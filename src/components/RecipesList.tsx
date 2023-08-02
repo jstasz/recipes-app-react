@@ -5,6 +5,7 @@ import { AuthContext } from "./store/auth-context";
 import RecipeListItem from "./RecipeListItem";
 import Button from "./UI/Button";
 import styles from './RecipesList.module.css'
+import PageAction from "./UI/PageAction";
 
 
 function RecipesList() {
@@ -136,7 +137,7 @@ function RecipesList() {
         <div>
             {error && <p>{error}</p>}
             <div className={styles.wrapper}>
-                <div className={styles['add-action']}>
+                <PageAction>
                     {!loggedUser && 
                         <p className={styles['not-logged-in']}><span onClick={() => navigateHandler('/auth?authMode=login')}>Log in</span> to add new recipe and create yor shopping list.</p>}
                     {loggedUser && 
@@ -144,10 +145,10 @@ function RecipesList() {
                             type='button' 
                             className={styles['add-recipe']} 
                             navigationPath="/recipes/new" 
-                            icon="add"> add new recipe
+                            icon="add">New recipe
                         </Button>
                     }
-            </div>
+            </PageAction>
             {isLoadingRecipes && <p className={styles['recipes-loading']}>loading...</p>}
             {!isLoadingRecipes && <>
                 <div className={styles.recipes}>
