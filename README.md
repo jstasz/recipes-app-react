@@ -1,3 +1,61 @@
+<h1 align="center">Recipes App React</h1>
+
+<br>
+
+<p align="center">available at https://justyna-bronisz.netlify.app/</p>
+<br>
+<br>
+
+## Project Overview 🎉
+
+"Recipe Shopping App" is a responsive web application built with React and TypeScript that allows users to browse culinary recipes fetched from the Tasty API. Once logged in, users can add their own recipes or create shopping lists based on recipe ingredients. Both user recipes and shopping lists are stored in Firebase.
+
+#### Browsing Recipes
+
+Upon accessing the main page, users are presented with recipes fetched from the Tasty API. Each recipe includes a name, description, and image. Users can scroll through the list of recipes and click on a recipe to view its full description and list of ingredients.
+
+#### Login and Registration
+
+The application allows users to log in or register using their email and password.
+
+#### Adding Recipes
+
+Once logged in, users can add their own recipes.
+To add a recipe, users need to provide its name, description, ingredients, and an image.
+After adding a recipe, it will be available in the list of recipes for that user.
+
+#### Creating Shopping Lists
+
+Once logged in, users can create shopping lists based on recipe ingredients.
+Users can select a recipe from the available list, and the app will automatically generate a shopping list containing the required ingredients.
+Users can add and remove items from the shopping list.
+The shopping list is saved and available upon re-logging.
+
+<br>
+
+## Tech used 🔧
+
+|                                                   | 
+| ------------------------------------------------------- |
+| HTML                         
+| CSS
+| React 
+| TypeScript
+| Firebase (Database, Authentication)
+
+<br>
+
+## Installation 💾</h1>
+
+1. Clone this repository: <i>git clone https://github.com/jstasz/recipes-app-react.git</i> and avigate to the project directory
+2. Install the dependencies: <i>npm install</i>
+3. Build the app: <i>npm start</i>
+4. Start the app at http://localhost:3000
+
+
+
+### React 
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
