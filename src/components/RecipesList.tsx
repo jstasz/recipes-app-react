@@ -7,7 +7,6 @@ import Button from "./UI/Button";
 import styles from './RecipesList.module.css'
 import PageAction from "./UI/PageAction";
 
-
 function RecipesList() {
     const [error, setError] = useState<string | null>(null);
 
