@@ -2,7 +2,7 @@
 
 <br>
 
-<p align="center">available at https://justyna-bronisz.netlify.app/</p>
+<p align="center">available at https://recipes-app-react-jb.netlify.app/</p>
 <br>
 <br>
 
