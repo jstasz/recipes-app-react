@@ -77,18 +77,19 @@ const NewRecipe: React.FC = () => {
         };
 
         try {
-            postRecipe(newRecipe);
+            await postRecipe(newRecipe);
+            setRecipeAdded(true);
         } catch (error) {
             setError('Sorry, problem with saving new recipe! Try again later!')
         }
 
-        setRecipeAdded(true);
         setIngredients([]);
-
+    
         resetEnteredName();
         resetEnteredInstruction();
         resetEnteredImageUrl();
         resetEnteredIngredient();
+       
     };
 
     const [ingredients, setIngredients] = useState<{id: number, name: string}[]>([]);
@@ -128,83 +129,82 @@ const NewRecipe: React.FC = () => {
     return (
         <>
         {error && <p>{error}</p>}
-        {!error && <MainForm onSubmit={addRecipeHandler} className={styles['new-recipe']}>
-        <p className={styles['page-title']}>New Recipe</p>
-        <div className={styles['new-recipe-form']}>
-        <div className={styles['form-control']}>
-            <label htmlFor="name">name</label>
-            <input 
-                id="name" 
-                type="text" 
-                name="name" 
-                value={enteredName} 
-                onChange={nameChangeHandler} 
-                onBlur={nameBlurHandler}
-                required 
-            />
-            {nameInputHasError && <p className={styles['invalid-text']}>Please enter valid name!</p>}
-        </div>
-        <div className={styles['form-control']}>
-            <label htmlFor="instruction">instruction</label>
-            <textarea 
-                id="instruction" 
-                name="instruction" 
-                value={enteredInstruction} 
-                onChange={instructionChangeHandler} 
-                onBlur={instructionBlurHandler}
-                required 
-            />
-            {instructionInputHasError && <p className={styles['invalid-text']}>Please enter valid instruction!</p>}
-        </div>
-        <div className={styles['form-control']}>
-            <label htmlFor="image url">image url</label>
-            <input 
-                id="imageUrl" 
-                type="text" 
-                name="imageUrl" 
-                value={enteredImageUrl} 
-                onChange={imageUrlChangeHandler} 
-                onBlur={imageUrlBlurHandler}
-                required 
-            />
-            {imageUrlInputHasError && <p className={styles['invalid-text']}>Please enter valid image url!</p>}
-        </div>
-        <div className={styles['form-control']}>
-            <label htmlFor="ingredients">ingredient</label>
-            <div className={styles.ingredients}>
-                <input 
-                    id="ingredients" 
-                    type="text" 
-                    name="ingredients" 
-                    value={enteredIngredient} 
-                    onChange={ingredientsChangeHandler} 
-                    onBlur={ingredientsBlurHandler} 
-                />
-                <span 
-                    className={`material-symbols-outlined ${styles['add-icon']} ${styles.icon}`} 
-                    onClick={() => addIngredient(enteredIngredient)}>add_circle
-                </span>
+        <MainForm onSubmit={addRecipeHandler} className={styles['new-recipe']}>
+            <p className={styles['page-title']}>New Recipe</p>
+            <div className={styles['new-recipe-form']}>
+                <div className={styles['form-control']}>
+                    <label htmlFor="name">name</label>
+                    <input 
+                        id="name" 
+                        type="text" 
+                        name="name" 
+                        value={enteredName} 
+                        onChange={nameChangeHandler} 
+                        onBlur={nameBlurHandler}
+                        required 
+                    />
+                    {nameInputHasError && <p className={styles['invalid-text']}>Please enter valid name!</p>}
+                </div>
+                <div className={styles['form-control']}>
+                    <label htmlFor="instruction">instruction</label>
+                    <textarea 
+                        id="instruction" 
+                        name="instruction" 
+                        value={enteredInstruction} 
+                        onChange={instructionChangeHandler} 
+                        onBlur={instructionBlurHandler}
+                        required 
+                    />
+                    {instructionInputHasError && <p className={styles['invalid-text']}>Please enter valid instruction!</p>}
+                </div>
+                <div className={styles['form-control']}>
+                    <label htmlFor="image url">image url</label>
+                    <input 
+                        id="imageUrl" 
+                        type="text" 
+                        name="imageUrl" 
+                        value={enteredImageUrl} 
+                        onChange={imageUrlChangeHandler} 
+                        onBlur={imageUrlBlurHandler}
+                        required 
+                    />
+                    {imageUrlInputHasError && <p className={styles['invalid-text']}>Please enter valid image url!</p>}
+                </div>
+                <div className={styles['form-control']}>
+                    <label htmlFor="ingredients">ingredient</label>
+                    <div className={styles.ingredients}>
+                        <input 
+                            id="ingredients" 
+                            type="text" 
+                            name="ingredients" 
+                            value={enteredIngredient} 
+                            onChange={ingredientsChangeHandler} 
+                            onBlur={ingredientsBlurHandler} 
+                        />
+                        <span 
+                            className={`material-symbols-outlined ${styles['add-icon']} ${styles.icon}`} 
+                            onClick={() => addIngredient(enteredIngredient)}>add_circle
+                        </span>
+                    </div>
+                    {ingredients.length < 1 && ingredientsInputHasError && 
+                    <p className={styles['invalid-text']}>Please enter at least one ingredient!</p>
+                    }
+                </div>
+                <div className={styles['ingredients-list']}>
+                    {ingredients.length > 0 ? 
+                    <ul>
+                    {ingredients.map((ingredient) => 
+                        <li key={ingredient.id} className={styles.ingredient}>{ingredient.name} 
+                            <span onClick={() => removeIngredient(ingredient.id)} 
+                                className={`material-symbols-outlined ${styles['remove-icon']} ${styles.icon}`}>cancel
+                            </span>
+                        </li>
+                    )}
+                    </ul> : <p>ingredients list</p>}
+                </div>
+                <Button type="submit" className='button' disabled={!formIsValid} icon="add">Save</Button>
             </div>
-            {ingredients.length < 1 && ingredientsInputHasError && 
-            <p className={styles['invalid-text']}>Please enter at least one ingredient!</p>
-            }
-        </div>
-        <div className={styles['ingredients-list']}>
-            {ingredients.length > 0 ? 
-            <ul>
-            {ingredients.map((ingredient) => 
-                <li key={ingredient.id} className={styles.ingredient}>{ingredient.name} 
-                    <span onClick={() => removeIngredient(ingredient.id)} 
-                        className={`material-symbols-outlined ${styles['remove-icon']} ${styles.icon}`}>cancel
-                    </span>
-                </li>
-            )}
-            </ul> : <p>ingredients list</p>}
-        </div>
-        <Button type="submit" className='button' disabled={!formIsValid} icon="add">Save</Button>
-        </div>
-    </MainForm>
-    }
+        </MainForm>
     </>
     )
 }
