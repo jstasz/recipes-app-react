@@ -9,6 +9,7 @@
 
 .error-text,
 .invalid-text {
+  margin-top: 0.5em;
   color: #e06363;
 } 
 

@@ -46,12 +46,16 @@ const AuthForm = () => {
         })
         .catch((error) => {
             if(error) {
+                console.log(error.message)
                 switch (error.message) {
                     case 'Firebase: Error (auth/wrong-password).':
                         setAuthError('Wrong pasword! Try again!');
                         break;
                     case 'Firebase: Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later. (auth/too-many-requests).' :
                         setAuthError('Too many failed login attempts. Try again later!');
+                        break;
+                    case 'Firebase: Error (auth/user-not-found).':
+                        setAuthError('User not found!');
                         break;
                     default:
                         setAuthError(errorMessage);
@@ -66,12 +70,10 @@ const AuthForm = () => {
             setLoggedUser(enteredEmail);
         }).catch((error) => {
             if(error) {
+                console.log(error)
                 switch(error.message) {
                     case 'Firebase: Error (auth/email-already-in-use).':
                         setAuthError('User with this email already exists!');
-                        break;
-                    case 'Firebase: Error (auth/user-not-found).':
-                        setAuthError('User not found!');
                         break;
                     default:
                         setAuthError(errorMessage);
@@ -110,9 +112,9 @@ const AuthForm = () => {
       }, [enteredEmailIsValid, enteredPasswordIsValid])
 
     const form = <> 
-        {authError && <p className={styles['error-text']}>{authError}</p>}
         <MainForm className={styles.form} onSubmit={formSubmitHandler}>
             <h1>{isLoginMode ? 'Log In' : 'Create User'}</h1>
+            {authError && <p className={styles['error-text']}>{authError}</p>}
             <div className={styles['form-control']}>
                 <label htmlFor="email">email</label>
                 <input 
