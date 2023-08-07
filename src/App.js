@@ -25,11 +25,11 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <AuthProvider>
-        <ShoppingListProvider>
-          <RouterProvider router={router} />
-        </ShoppingListProvider>
-    </ AuthProvider>
+      <AuthProvider>
+          <ShoppingListProvider>
+            <RouterProvider router={router} />
+          </ShoppingListProvider>
+      </ AuthProvider>
   )
   
 };

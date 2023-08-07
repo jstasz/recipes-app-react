@@ -19,7 +19,8 @@ const MainPage = () => {
             <Button 
                 type="button" 
                 navigationPath="/auth" 
-                icon='login'>Login
+                icon='login'
+                >Login
             </Button>
             <p>to add your own recipes</p>
             <p>and create a shopping list</p>
