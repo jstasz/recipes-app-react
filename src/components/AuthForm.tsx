@@ -2,19 +2,21 @@ import { Link, useSearchParams} from 'react-router-dom';
 import { auth } from '../firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { useContext, useEffect, useState } from 'react';
-import { AuthContext } from './store/auth-context';
 import { ShoppingListContext } from './store/shopping-list-context';
 import Button from './UI/Button';
 import MainForm from './UI/Form';
 import useInput from '../hooks/use-input';
 import styles from './AuthForm.module.css';
+import { useSelector, useDispatch } from 'react-redux';
 
 const AuthForm = () => {
     const [searchParams] = useSearchParams();
     const isLoginMode = searchParams.get('authMode') === 'login';
 
-    const { loggedUser, setLoggedUser } = useContext(AuthContext);
     const { setShoppingListItems } = useContext(ShoppingListContext);
+
+    const loggedUser = useSelector((state: any) => state.logginUser);
+    const dispatch = useDispatch();
     
     const [formIsValid, setFormIsValid] = useState(false);
     const [authError, setAuthError] = useState('');
@@ -42,7 +44,7 @@ const AuthForm = () => {
     const signIn = () => {
         signInWithEmailAndPassword(auth, enteredEmail, enteredPassword)
         .then(() => {
-            setLoggedUser(enteredEmail);
+            dispatch({type: 'login', user: enteredEmail})
         })
         .catch((error) => {
             if(error) {
@@ -67,7 +69,7 @@ const AuthForm = () => {
     const signUp = () => {
         createUserWithEmailAndPassword(auth, enteredEmail, enteredPassword)
         .then(() => {
-            setLoggedUser(enteredEmail);
+            dispatch({type: 'login', user: enteredEmail})
         }).catch((error) => {
             if(error) {
                 console.log(error)
@@ -84,7 +86,7 @@ const AuthForm = () => {
 
     const logout = async () => {
         try {
-            setLoggedUser('');
+            dispatch({type: 'logout'})
             setShoppingListItems([]);
         } catch (error) {
 
@@ -152,7 +154,7 @@ const AuthForm = () => {
 
   return (
         <>
-        {loggedUser !== '' ? 
+        {loggedUser ? 
             <>
                 <p>{`You are logged in as ${loggedUser}`}</p>
                 <p>If you want to use a different address, please 

@@ -3,17 +3,18 @@ import { useContext, useState } from 'react';
 import Button from './UI/Button';
 import Modal from './UI/Modal';
 import { RecipesContext } from './store/recipes-context';
-import { AuthContext } from './store/auth-context';
 import { ShoppingListContext } from './store/shopping-list-context';
 import styles from './RecipeDetails.module.css'
 import PageAction from './UI/PageAction';
+import { useSelector } from 'react-redux';
+
 
 
 const RecipeDetails: React.FC = () => {
 
     const { recipeId } = useParams();
     const { loadedRecipes, userRecipes } = useContext(RecipesContext);
-    const { loggedUser } = useContext(AuthContext);
+    const loggedUser = useSelector((state: any) => state.logginUser);
     const [ activeModal, setActiveModal ] = useState(false);
 
     const allRecipes = loggedUser ? [...loadedRecipes, ...userRecipes] : loadedRecipes;

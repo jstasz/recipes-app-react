@@ -1,13 +1,14 @@
 import React from 'react';
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { ShoppingListContext } from './store/shopping-list-context';
-import { AuthContext } from './store/auth-context';
-import styles from './ShoppingList.module.css'
+import styles from './ShoppingList.module.css';
+import { useSelector } from 'react-redux';
+
 
 const ShoppingList: React.FC = () => {
 
     const { shoppingListItems, setShoppingListItems } = useContext(ShoppingListContext);
-    const { loggedUser } = useContext(AuthContext);
+    const loggedUser = useSelector((state: any) => state.logginUser);
     const [ displayedItems, setDIsplayeditems ] = useState<{id: number, name: string}[]>([]);
     const [ shoppingListIsLoading, setShoppingListIsLoading] = useState(false);
     const [ error, setError ] = useState('');

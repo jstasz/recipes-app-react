@@ -1,17 +1,18 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import useInput from '../hooks/use-input';
 import Button from './UI/Button';
 import MainForm from './UI/Form';
 import Recipe from '../models/recipe';
-import { AuthContext } from './store/auth-context';
 import styles from './NewRecipe.module.css'
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
 
 
 const NewRecipe: React.FC = () => {
 
     const [ formIsValid, setFormIsValid ] = useState(false);
-    const { loggedUser } = useContext(AuthContext);
+    const loggedUser = useSelector((state: any) => state.logginUser);
     const [ error, setError ] = useState('');
     const [ recipeAdded, setRecipeAdded ] = useState(false);
 

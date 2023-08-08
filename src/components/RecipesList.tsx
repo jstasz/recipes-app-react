@@ -1,11 +1,11 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { RecipesContext, RecipesContextType } from "./store/recipes-context";
-import { AuthContext } from "./store/auth-context";
 import RecipeListItem from "./RecipeListItem";
 import Button from "./UI/Button";
 import styles from './RecipesList.module.css'
 import PageAction from "./UI/PageAction";
+import { useSelector } from 'react-redux';
 
 function RecipesList() {
     const [error, setError] = useState<string | null>(null);
@@ -18,7 +18,7 @@ function RecipesList() {
         userRecipes, 
         setUserRecipes }: RecipesContextType = useContext(RecipesContext);
 
-    const {loggedUser } = useContext(AuthContext);
+    const loggedUser = useSelector((state: any) => state.logginUser);
 
     const allRecipes = [...loadedRecipes, ...userRecipes];
 
