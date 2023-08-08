@@ -13,7 +13,6 @@ const ShoppingList: React.FC = () => {
 
     useEffect(() => {
         setDisplayedItems(shoppingListItems);
-        setShoppingListIsLoading(false);
     }, [shoppingListItems])
 
     const fetchShoppingListFromDatabase = useCallback( async (loggedUser: string) => {
@@ -28,6 +27,7 @@ const ShoppingList: React.FC = () => {
         } catch (error) {
           setError('Sorry, problem with fetching your shopping list! Try again later!');
         }
+        setShoppingListIsLoading(false);
     }, [dispatch])
       
     useEffect(() => {

@@ -1,29 +1,26 @@
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { RecipesContext, RecipesContextType } from "./store/recipes-context";
 import RecipeListItem from "./RecipeListItem";
 import Button from "./UI/Button";
 import styles from './RecipesList.module.css'
 import PageAction from "./UI/PageAction";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 function RecipesList() {
     const [error, setError] = useState<string | null>(null);
+    const dispatch = useDispatch();
 
-    const { 
-        loadedRecipes, 
-        setLoadedRecipes, 
-        isLoadingRecipes, 
-        setIsLoadingRecipes, 
-        userRecipes, 
-        setUserRecipes }: RecipesContextType = useContext(RecipesContext);
-
+    const userRecipes = useSelector((state: any) => state.recipes.userRecipes);
+    const loadedRecipes = useSelector((state: any) => state.recipes.loadedRecipes);
+    const isLoadingRecipes = useSelector((state: any) => state.recipes.uisLoadingRecipes);
+    
     const loggedUser = useSelector((state: any) => state.auth.loggedUser);
 
     const allRecipes = [...loadedRecipes, ...userRecipes];
 
     const GetRecipes = useCallback(async () => {
-        setIsLoadingRecipes(true);
+
+        dispatch({type: 'RECIPES_LOADING'})
         setError(null);
 
         const url = 'https://tasty.p.rapidapi.com/recipes/list';
@@ -69,8 +66,7 @@ function RecipesList() {
                     ingredients: ingredientsList
                 })
             };
-
-            setLoadedRecipes(loadedRecipes);
+            dispatch({type: 'SET_LOADED_RECIPES', recipes: loadedRecipes})
             
         } catch (error: unknown) {
             if (error instanceof Error) {
@@ -80,8 +76,8 @@ function RecipesList() {
             }
         }
 
-        setIsLoadingRecipes(false);
-    }, [setIsLoadingRecipes, setLoadedRecipes]);
+        dispatch({type: 'RECIPES_LOADED'})
+    }, [dispatch]);
 
     const getUserRecipes = useCallback(async () => {
         if(loggedUser) {
@@ -106,7 +102,7 @@ function RecipesList() {
                     })
                 };
     
-                setUserRecipes(loadedUserRecipes);
+                dispatch({type: 'SET_USER_RECIPES', recipes: loadedUserRecipes})
                 
             } catch (error: unknown) {
                 if (error instanceof Error) {
@@ -116,7 +112,7 @@ function RecipesList() {
                 }
             }
         }
-    }, [setUserRecipes, loggedUser]);
+    }, [dispatch, loggedUser]);
 
     useEffect(() => {
         GetRecipes();

@@ -82,6 +82,7 @@ const AuthForm = () => {
         try {
             dispatch({type: 'LOGOUT'})
             dispatch({type: 'CLEAR_SHOPPING_LIST'})
+            dispatch({type: 'CLEAR_USER_RECIPES'})
         } catch (error) {
             dispatch({type: 'AUTH_FAILURE', errorMessage: errorMessage})
         }

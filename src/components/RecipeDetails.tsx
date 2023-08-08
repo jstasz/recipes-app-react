@@ -1,23 +1,22 @@
 import { useParams } from 'react-router-dom';
-import { useContext, useState } from 'react';
 import Button from './UI/Button';
 import Modal from './UI/Modal';
-import { RecipesContext } from './store/recipes-context';
 import styles from './RecipeDetails.module.css'
 import PageAction from './UI/PageAction';
 import { useSelector } from 'react-redux';
-
-
+import { useState } from 'react';
+import Recipe from '../models/recipe';
 
 const RecipeDetails: React.FC = () => {
 
     const { recipeId } = useParams();
-    const { loadedRecipes, userRecipes } = useContext(RecipesContext);
+    const loadedRecipes = useSelector((state: any) => state.recipes.loadedRecipes);
+    const userRecipes = useSelector((state: any) => state.recipes.userRecipes);
     const loggedUser = useSelector((state: any) => state.auth.loggedUser);
     const [ activeModal, setActiveModal ] = useState(false);
 
     const allRecipes = loggedUser ? [...loadedRecipes, ...userRecipes] : loadedRecipes;
-    const activeRecipe = recipeId ? allRecipes.find(recipe => recipe.id === +recipeId) : undefined;
+    const activeRecipe = recipeId ? allRecipes.find((recipe: Recipe) => recipe.id === +recipeId) : undefined;
 
     const [ selectedIngredients, setSelectedIngredients ] = useState<{id: number, name: string}[]>([]);
     const shoppingListItems = useSelector((state: any) => state.shoppingList.shoppingListItems)
@@ -89,7 +88,7 @@ const RecipeDetails: React.FC = () => {
             <div className={styles['recipe-ingredients']}>
                 <ul className={styles['recipe-ingredients-list']}>
                     <p className={styles['section-title']}>ingredients</p>
-                    {activeRecipe?.ingredients.map(ingredient => 
+                    {activeRecipe?.ingredients.map((ingredient: {id: number, name: string}) => 
                     <li key={ingredient.id}>{ingredient.name}</li>)}
                 </ul>
                 {loggedUser && 
@@ -111,7 +110,7 @@ const RecipeDetails: React.FC = () => {
                 <div className={styles['ingredients-modal']}>
                 <p className={styles['ingredients-title']}>select the ingredients you need</p>
                 <ul className={styles['recipe-ingredients-list']}>
-                            {activeRecipe?.ingredients.map(ingredient => 
+                            {activeRecipe?.ingredients.map((ingredient: {id: number, name: string}) => 
                             <li key={ingredient.id} className={styles.ingredient}>
                                 <span 
                                     onClick={() => selectIngredientsHandler(ingredient)}
