@@ -12,7 +12,7 @@ import { useSelector } from 'react-redux';
 const NewRecipe: React.FC = () => {
 
     const [ formIsValid, setFormIsValid ] = useState(false);
-    const loggedUser = useSelector((state: any) => state.logginUser);
+    const loggedUser = useSelector((state: any) => state.auth.loggedUser);
     const [ error, setError ] = useState('');
     const [ recipeAdded, setRecipeAdded ] = useState(false);
 

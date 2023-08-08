@@ -18,7 +18,7 @@ function RecipesList() {
         userRecipes, 
         setUserRecipes }: RecipesContextType = useContext(RecipesContext);
 
-    const loggedUser = useSelector((state: any) => state.logginUser);
+    const loggedUser = useSelector((state: any) => state.auth.loggedUser);
 
     const allRecipes = [...loadedRecipes, ...userRecipes];
 

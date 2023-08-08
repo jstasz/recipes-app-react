@@ -1,21 +1,12 @@
-const redux = require('redux');
+import { createStore, combineReducers } from 'redux';
+import authReducer from './authReducer';
+import shoppingListReducer from './shoppingList';
 
-const authReducer = (state = {logginUser: null}, action) => {
-    if(action.type === 'login') {
-        return {
-            logginUser: action.user
-        }
-    }
+const rootReducer = combineReducers({
+  auth: authReducer,
+  shoppingList: shoppingListReducer, 
+});
 
-    if(action.type === 'logout') {
-        return {
-            logginUser: null
-        }
-    }
-
-    return state;
-}
-
-const store = redux.createStore(authReducer);
+const store = createStore(rootReducer);
 
 export default store;

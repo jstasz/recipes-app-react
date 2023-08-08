@@ -1,21 +1,18 @@
 import React from 'react';
-import { useCallback, useContext, useEffect, useState } from 'react';
-import { ShoppingListContext } from './store/shopping-list-context';
+import { useCallback, useEffect, useState } from 'react';
 import styles from './ShoppingList.module.css';
-import { useSelector } from 'react-redux';
-
+import { useSelector, useDispatch } from 'react-redux';
 
 const ShoppingList: React.FC = () => {
-
-    const { shoppingListItems, setShoppingListItems } = useContext(ShoppingListContext);
-    const loggedUser = useSelector((state: any) => state.logginUser);
-    const [ displayedItems, setDIsplayeditems ] = useState<{id: number, name: string}[]>([]);
-    const [ shoppingListIsLoading, setShoppingListIsLoading] = useState(false);
+    const shoppingListItems = useSelector((state: any) => state.shoppingList.shoppingListItems)
+    const loggedUser = useSelector((state: any) => state.auth.loggedUser);
+    const [ displayedItems, setDisplayedItems ] = useState<{id: number, name: string}[]>([]);
+    const [ shoppingListIsLoading, setShoppingListIsLoading] = useState(true);
     const [ error, setError ] = useState('');
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        setShoppingListIsLoading(true);
-        setDIsplayeditems(shoppingListItems);
+        setDisplayedItems(shoppingListItems);
         setShoppingListIsLoading(false);
     }, [shoppingListItems])
 
@@ -26,12 +23,12 @@ const ShoppingList: React.FC = () => {
           );
           const data = await response.json();
           if (data) {
-            setShoppingListItems(data);
+            dispatch({type: 'UPDATE_SHOPPING_LIST', listItems: data })
           }
         } catch (error) {
           setError('Sorry, problem with fetching your shopping list! Try again later!');
         }
-    }, [setShoppingListItems])
+    }, [dispatch])
       
     useEffect(() => {
         fetchShoppingListFromDatabase(loggedUser);
@@ -52,8 +49,8 @@ const ShoppingList: React.FC = () => {
     };
 
     const removeShoppingListItem = async (id: number) => {
-        const updatedShoppingListItems = shoppingListItems.filter(item => item.id !== id);
-        setShoppingListItems(updatedShoppingListItems);
+        const updatedShoppingListItems = shoppingListItems.filter((item: { id: number } )=> item.id !== id);
+        dispatch({type: 'UPDATE_SHOPPING_LIST', listItems: updatedShoppingListItems })
 
         try {
             await updateIngredients(updatedShoppingListItems);
@@ -63,8 +60,7 @@ const ShoppingList: React.FC = () => {
     }
 
     const clearShoppingList = async () => {
-        setShoppingListItems([]);
-
+        dispatch({type: 'CLEAR_SHOPPING_LIST'})
         try {
             await updateIngredients([]);
         } catch (error: unknown) {

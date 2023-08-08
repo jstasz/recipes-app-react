@@ -2,7 +2,7 @@ import Button from "./UI/Button";
 import { useSelector } from 'react-redux';
 
 const MainPage = () => {
-    const loggedUser = useSelector((state: any) => state.logginUser);
+    const loggedUser = useSelector((state: any) => state.auth.loggedUser);
 
     return (
         <>

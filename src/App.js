@@ -4,7 +4,6 @@ import HomePage from './pages/Home';
 import RecipesPage from './pages/Recipes';
 import AuthPage from "./pages/Auth";
 import ShoppingListPage from "./pages/ShoppingList";
-import { ShoppingListProvider } from "./components/store/shopping-list-context";
 import ErrorPage from "./pages/Error";
 
 const router = createBrowserRouter([
@@ -24,9 +23,7 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-        <ShoppingListProvider>
-          <RouterProvider router={router} />
-        </ShoppingListProvider>
+    <RouterProvider router={router} />
   )
 };
 

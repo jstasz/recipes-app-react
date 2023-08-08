@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 const Nav: React.FC = () => {
 
     const navLinkClasses = `material-symbols-outlined ${styles['nav-link']}`
-    const loggedUser = useSelector((state: any) => state.logginUser);
+    const loggedUser = useSelector((state: any) => state.auth.loggedUser);
 
     return (
         <div className={styles.nav}>

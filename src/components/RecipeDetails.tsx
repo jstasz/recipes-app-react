@@ -3,7 +3,6 @@ import { useContext, useState } from 'react';
 import Button from './UI/Button';
 import Modal from './UI/Modal';
 import { RecipesContext } from './store/recipes-context';
-import { ShoppingListContext } from './store/shopping-list-context';
 import styles from './RecipeDetails.module.css'
 import PageAction from './UI/PageAction';
 import { useSelector } from 'react-redux';
@@ -14,14 +13,14 @@ const RecipeDetails: React.FC = () => {
 
     const { recipeId } = useParams();
     const { loadedRecipes, userRecipes } = useContext(RecipesContext);
-    const loggedUser = useSelector((state: any) => state.logginUser);
+    const loggedUser = useSelector((state: any) => state.auth.loggedUser);
     const [ activeModal, setActiveModal ] = useState(false);
 
     const allRecipes = loggedUser ? [...loadedRecipes, ...userRecipes] : loadedRecipes;
     const activeRecipe = recipeId ? allRecipes.find(recipe => recipe.id === +recipeId) : undefined;
 
     const [ selectedIngredients, setSelectedIngredients ] = useState<{id: number, name: string}[]>([]);
-    const { shoppingListItems } = useContext(ShoppingListContext);
+    const shoppingListItems = useSelector((state: any) => state.shoppingList.shoppingListItems)
 
     const [error, setError] = useState('');
 
@@ -58,7 +57,7 @@ const RecipeDetails: React.FC = () => {
         const updatedShoppingListItems = [...shoppingListItems];
 
         for (const ingredient of selectedIngredients) {
-            const isDuplicate = shoppingListItems.some(item => item.id === ingredient.id || item.name === ingredient.name);
+            const isDuplicate = shoppingListItems.some((item: {name:string, id: number}) => item.id === ingredient.id || item.name === ingredient.name);
             if (!isDuplicate) {
                 updatedShoppingListItems.push(ingredient);
             }

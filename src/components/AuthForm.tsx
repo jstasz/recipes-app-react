@@ -1,8 +1,7 @@
 import { Link, useSearchParams} from 'react-router-dom';
 import { auth } from '../firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
-import { useContext, useEffect, useState } from 'react';
-import { ShoppingListContext } from './store/shopping-list-context';
+import { useEffect, useState } from 'react';
 import Button from './UI/Button';
 import MainForm from './UI/Form';
 import useInput from '../hooks/use-input';
@@ -10,17 +9,14 @@ import styles from './AuthForm.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 
 const AuthForm = () => {
-    const [searchParams] = useSearchParams();
+    const [ searchParams ] = useSearchParams();
     const isLoginMode = searchParams.get('authMode') === 'login';
+    const [formIsValid, setFormIsValid] = useState(false);
 
-    const { setShoppingListItems } = useContext(ShoppingListContext);
-
-    const loggedUser = useSelector((state: any) => state.logginUser);
+    const loggedUser = useSelector((state: any) => state.auth.loggedUser);
+    const authError = useSelector((state: any) => state.auth.authError);
     const dispatch = useDispatch();
     
-    const [formIsValid, setFormIsValid] = useState(false);
-    const [authError, setAuthError] = useState('');
-
     let errorMessage = 'Something went wrong!'
 
     const { 
@@ -44,23 +40,22 @@ const AuthForm = () => {
     const signIn = () => {
         signInWithEmailAndPassword(auth, enteredEmail, enteredPassword)
         .then(() => {
-            dispatch({type: 'login', user: enteredEmail})
+            dispatch({type: 'LOGIN', user: enteredEmail})
         })
         .catch((error) => {
             if(error) {
-                console.log(error.message)
                 switch (error.message) {
                     case 'Firebase: Error (auth/wrong-password).':
-                        setAuthError('Wrong pasword! Try again!');
+                    dispatch({type: 'AUTH_FAILURE', errorMessage: 'Wrong pasword! Try again!'})
                         break;
                     case 'Firebase: Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later. (auth/too-many-requests).' :
-                        setAuthError('Too many failed login attempts. Try again later!');
+                        dispatch({type: 'AUTH_FAILURE', errorMessage: 'Too many failed login attempts. Try again later!'})
                         break;
                     case 'Firebase: Error (auth/user-not-found).':
-                        setAuthError('User not found!');
+                        dispatch({type: 'AUTH_FAILURE', errorMessage: 'User not found!'})
                         break;
                     default:
-                        setAuthError(errorMessage);
+                        dispatch({type: 'AUTH_FAILURE', errorMessage: errorMessage})
                 }
             }
         });
@@ -69,16 +64,15 @@ const AuthForm = () => {
     const signUp = () => {
         createUserWithEmailAndPassword(auth, enteredEmail, enteredPassword)
         .then(() => {
-            dispatch({type: 'login', user: enteredEmail})
+            dispatch({type: 'LOGIN', user: enteredEmail})
         }).catch((error) => {
             if(error) {
-                console.log(error)
                 switch(error.message) {
                     case 'Firebase: Error (auth/email-already-in-use).':
-                        setAuthError('User with this email already exists!');
+                        dispatch({type: 'AUTH_FAILURE', errorMessage: 'User with this email already exists!'})
                         break;
                     default:
-                        setAuthError(errorMessage);
+                        dispatch({type: 'AUTH_FAILURE', errorMessage: errorMessage})
                 }
             }
         });
@@ -86,10 +80,10 @@ const AuthForm = () => {
 
     const logout = async () => {
         try {
-            dispatch({type: 'logout'})
-            setShoppingListItems([]);
+            dispatch({type: 'LOGOUT'})
+            dispatch({type: 'CLEAR_SHOPPING_LIST'})
         } catch (error) {
-
+            dispatch({type: 'AUTH_FAILURE', errorMessage: errorMessage})
         }
     }
 
@@ -113,7 +107,7 @@ const AuthForm = () => {
         }
       }, [enteredEmailIsValid, enteredPasswordIsValid])
 
-    const form = <> 
+    const authForm = <> 
         <MainForm className={styles.form} onSubmit={formSubmitHandler}>
             <h1>{isLoginMode ? 'Log In' : 'Create User'}</h1>
             {authError && <p className={styles['error-text']}>{authError}</p>}
@@ -141,7 +135,7 @@ const AuthForm = () => {
                     onBlur={passwordBlurHandler}
                     required 
                 />
-                 {passwordInputHasError && <p className={styles['invalid-text']}>Please enter valid password! Min 5!</p>}
+                 {passwordInputHasError && <p className={styles['invalid-text']}>Please enter valid password! Min 6!</p>}
             </div>
             <div className={styles.actions}>
               <Link to={`?authMode=${isLoginMode ? 'signup' : 'login'}`} className={styles.link}>
@@ -161,7 +155,7 @@ const AuthForm = () => {
                     <span className={styles.logout} onClick={logout}> log out.</span>
                 </p>
                 </> 
-            : form}
+            : authForm}
         </> 
     );
 }
