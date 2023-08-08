@@ -1,12 +1,12 @@
 import { NavLink} from "react-router-dom";
 import styles from './Nav.module.css'
-import { useContext } from "react";
-import { AuthContext } from "./store/auth-context";
+import { useSelector } from 'react-redux';
+
 
 const Nav: React.FC = () => {
 
     const navLinkClasses = `material-symbols-outlined ${styles['nav-link']}`
-    const { loggedUser } = useContext(AuthContext);
+    const loggedUser = useSelector((state: any) => state.auth.loggedUser);
 
     return (
         <div className={styles.nav}>

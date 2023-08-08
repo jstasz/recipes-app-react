@@ -1,9 +1,8 @@
 import Button from "./UI/Button";
-import { useContext } from "react";
-import { AuthContext } from "./store/auth-context";
+import { useSelector } from 'react-redux';
 
 const MainPage = () => {
-    const { loggedUser } = useContext(AuthContext);
+    const loggedUser = useSelector((state: any) => state.auth.loggedUser);
 
     return (
         <>
@@ -32,7 +31,6 @@ const MainPage = () => {
             </Button>
             <p>and create your shopping list</p>
             </>}
-    
     </>
     )
 };
