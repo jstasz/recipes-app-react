@@ -40,6 +40,7 @@ The shopping list is saved and available upon re-logging.
 | HTML                         
 | CSS
 | React 
+| Redux 
 | TypeScript
 | Firebase (Database, Authentication)
 
